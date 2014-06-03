@@ -60,7 +60,17 @@ p {
 
 .lead {
 	font-size:2em;
-	margin-bottom:40px;
+	margin-bottom: 20px;
+}
+
+.resumeLink {
+	font-size: 1em;
+}
+
+.nowBar {
+	font-size: 2em;
+	margin-bottom: 0px;
+	margin-top: 10px;
 }
 
 .clear {
@@ -72,8 +82,8 @@ p {
 /* ============ TIMELINE ============= */
 
 .timelineContainer {
-	border-left:2px solid #ccc;
-	margin:20px auto;
+	border-left:2px solid #ccc; 
+	margin:auto;
 	width:900px;
 }
 
@@ -94,10 +104,10 @@ a.expandAll {
 	padding:3px 5px;
 }
 
-	a.expandAll:hover {
-		color:#7DBADF;
-		cursor:pointer;
-	}
+a.expandAll:hover {
+	color:#7DBADF;
+	cursor:pointer;
+}
 
 div.timelineMajor {
 	clear:left;
