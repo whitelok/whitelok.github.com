@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<!--
+Copyright 2011 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Author: Eric Bidelman (ericbidelman@chromium.org)
+
+中文翻译及本地化
+Author：骆兆楷@SHU
+Copyright 2014 SHU Inc.
+-->
+<html>
+<head>
+  <title>Three.js介绍</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <script src='js/slides.js'></script>
+
+</head>
+<body style="display: none">
+
+<section class='slides layout-regular'>
+
+  <article class="biglogo">
+    <script>
+      (function() {
+        var c = document.createElement('canvas');
+        var ctx = null;
+        try {
+          ctx = c.getContext('webgl');
+        } catch(e) { }
+        try {
+          ctx = ctx || c.getContext('experimental-webgl');
+        } catch(e) { }
+        if (!ctx) alert("No WebGL detected, live demos disabled!");
+      })();
+    </script>
+  </article>
+
+  <article>
+    <h3 style="display:block;width:100%;text-align:center;font-size:40px;margin:20px;"><b>Three.js 基础教程</b></h3>
+    <a style="display:block;width:100%;text-align:center;font-size:40px;margin:20px;" href="http://fhtr.org">Ilmari Heikkinen@Google</a>
+    <a style="display:block;width:100%;text-align:center;font-size:40px;margin:20px;" href="http://www.tsinghua.edu.cn">Jim Wang(王辉)@THU</a>
+    <a style="display:block;width:100%;text-align:center;font-size:40px;margin:20px;" href="http://whitelok.github.io">Karl Lok(骆兆楷)@SHU</a>
+  </article>
+
+  <article>
+    <p>English Slides available at <a href="http://fhtr.org/BasicsOfThreeJS">fhtr.org/BasicsOfThreeJS</a></p>
+    <p>Repo at <a href="https://github.com/kig/BasicsOfThreeJS">github.com/kig/BasicsOfThreeJS</a></p>
+
+    <p>中文版的幻灯片在<a href="http://whitelok.github.io">whitelok.github.io/BasicsOfThreeJS</a></p>
+    <p>源码在<a href="https://github.com/whitelok/TreeJS_Introduction">github.com/whitelok/TreeJS_Introduction</a></p>
+  </article>
+
+  <article class="title">
+    <h2>Three.js?</h2>
+  </article>
+
+  <article>
+    <h3>Three.js 是一个基于web的3D显示引擎</h3>
+    <ul>
+      <li><a href="https://github.com/mrdoob/three.js/">github.com/mrdoob/three.js</a></li>
+      <li>轻量级</li>
+      <li>易用</li>
+      <li>有大量的参考例子</li>
+      <li>使用WebGL渲染</li>
+      <li>也可以使用Canvas以及SVG来渲染</li>
+    </ul>
+  </article>
+
+  <article class="title">
+    <h2>基本部署</h2>
+  </article>
+
+  <article>
+    <h3>渲染器</h3>
+    <p>建立一个渲染器</p>
+    <pre>
+      var renderer = new THREE.WebGLRenderer({antialias: true});
+      renderer.setSize(document.body.clientWidth, 
+                       document.body.clientHeight);</pre>
+    <p>嵌入到你的HTML的DOM中</p>
+    <pre>
+      document.body.appendChild(renderer.domElement);</pre>
+    <p>让它看起来更漂亮</p>
+    <pre>
+      renderer.setClearColorHex(0xEEEEEE, 1.0);
+      renderer.clear();</pre>
+  </article>
+
+  <article>
+    <h3>哇!</h3>
+    <iframe src="three/three_1.html"></iframe>
+  </article>
+
+  <article>
+    <h3 style="font-size:40px;">看起来什么都没有，但是我一定会让它看起来更好的。</h3>
+    <div>
+    <p>创建一个摄像机</p>
+    <pre>
+// new THREE.PerspectiveCamera( FOV, viewAspectRatio, zNear, zFar );
+var camera = new THREE.PerspectiveCamera(45, width/height, 1, 10000);
+camera.position.z = 300;</pre>
+    <p>创建一个带立方体的场景</p>
+    <pre>
+var scene = new THREE.Scene();
+var cube = new THREE.Mesh(new THREE.CubeGeometry(50,50,50),
+               new THREE.MeshBasicMaterial({color: 0x000000}));
+scene.add(cube);</pre>
+    <p>从这个摄像机的视觉渲染这个场景</p>
+    <pre>
+renderer.render(scene, camera);</pre>
+    </div>
+  </article>
+
+  <article>
+    <h3>终于有个东西在这了</h3>
+    <iframe src="three/three_2.html"></iframe>
+  </article>
+
+  <article>
+    <h3>复习一下</h3>
+    <p>创建一个渲染器<code>new THREE.WebGLRenderer()</code></p>
+    <p>创建一个摄像机<code>new THREE.PerspectiveCamera(fov, aR, n, f)</code></p>
+    <p>创建一个场景<code>new THREE.Scene()</code></p>
+    <p>创建一个物体<code><br>new THREE.Mesh(new THREE.CubeGeometry(w,h,d),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new THREE.MeshBasicMaterial({color: 0x000000}))</code>
+    </p>
+    <p>将网格添加进去<code>scene.add(mesh)</code></p>
+    <p>渲染场景<code>renderer.render(scene, camera)</code></p>
+    <p>将渲染好的画布放到页面上<code>document.body.appendChild(renderer.domElement)</code></p>
+  </article>
+
+  <article class="title">
+    <h2>动画</h2>
+  </article>
+
+  <article>
+    <h3>能不能让三维的场景动起来?</h3>
+    <p class="small">(首先是自动的模式。)</p>
+    <pre>
+      function animate(t) {
+        // 绕圈圈的方式转动摄像头
+        camera.position.x = Math.sin(t/1000)*300;
+        camera.position.y = 150;
+        camera.position.z = Math.cos(t/1000)*300;
+        // 更新每帧的视觉
+        camera.lookAt(scene.position);
+        // 渲染器会自己更新场景直到autoClear为false
+        renderer.render(scene, camera);
+        window.requestAnimationFrame(animate, renderer.domElement);
+      };
+      animate(new Date().getTime());
+    </pre>
+  </article>
+
+  <article>
+    <h3>出来的效果就像这样</h3>
+    <iframe src="three/three_3.html"></iframe>
+  </article>
+
+  <article>
+    <h3>requestAnimationFrame?</h3>
+    <p class="small">这句是什么意思？</p>
+    <pre>requestAnimationFrame(function(time){}, element)</pre>
+    <p>这就像<code>setTimeout(f, timeUntilNextFrame)</code></p>
+    <p>直到以下的情况发生为止:</p>
+    <ul class="build">
+    <li>浏览器知道什么时候去画下一帧</li>
+    <div> &rarr; 在缩小或者旋转的时候调用回调函数function(time){}<br><br></div>
+    <li>浏览器知道什么时候有个东西出现在屏幕上</li>
+    <div> &rarr; 只有这个东西显示在屏幕上才调用这个回调函数</div>
+    </ul>
+  </article>
+
+  <article class="title">
+    <h2>光源</h2>
+  </article>
+
+  <article>
+    <h3>灯光</h3>
+    <p>没了灯光，我们的场景会变得很黑很暗</p>
+    <p>以下代码创建光源</p>
+    <pre>
+      var light = new THREE.SpotLight();
+      light.position.set( 170, 330, -160 );
+      scene.add(light);</pre>
+    <p>以及一个发光的立方体</p>
+    <pre>
+      var litCube = new THREE.Mesh(
+        new THREE.CubeGeometry(50, 50, 50),
+        new THREE.MeshLambertMaterial({color: 0xFFFFFF}));
+      litCube.position.y = 50;
+      scene.add(litCube);</pre>
+  </article>
+
+  <article>
+    <h3>效果出来了！</h3>
+    <iframe src="three/three_4.html"></iframe>
+  </article>
+
+  <article>
+    <h3>有光就有暗-我们来研究影子</h3>
+    <p>Three.js有个叫影子值的东西。</p>
+    <p>只需要每个光线每个物体设置一下就可以了。</p>
+    <p>影子只在SpotLight类型的光线下有效。</p>
+    <pre>
+      // 渲染器上开启影子模式。
+      renderer.shadowMapEnabled = true;
+
+      // 光线上开启影子模式。
+      light.castShadow = true;
+
+      // 物体也要开启影子模式哦。
+      litCube.castShadow = true;
+      litCube.receiveShadow = true;</pre>
+  </article>
+
+  <article>
+    <h3>加些花边效果</h3>
+    <p>地上加块板子</p>
+    <pre>
+  var planeGeo = new THREE.PlaneGeometry(400, 200, 10, 10);
+  var planeMat = new THREE.MeshLambertMaterial({color: 0xFFFFFF});
+  var plane = new THREE.Mesh(planeGeo, planeMat);
+  plane.rotation.x = -Math.PI/2;
+  plane.position.y = -25;
+  plane.receiveShadow = true;
+  scene.add(plane);</pre>
+    <p>让立方体飞</p>
+    <pre>
+  litCube.position.x = Math.cos(t/600)*85;
+  litCube.position.y = 60-Math.sin(t/900)*25;
+  litCube.position.z = Math.sin(t/600)*85;
+  litCube.rotation.x = t/500;
+  litCube.rotation.y = t/800;</pre>
+  </article>
+
+  <article>
+    <h3>无敌风火轮</h3>
+    <iframe src="three/three_5.html"></iframe>
+  </article>
+
+  <article>
+    <h3>复习一下光线设置</h3>
+    <p>创造一个物体<code>new THREE.MeshLambertMaterial</code> 或者 <code>new THREE.MeshPhongMaterial</code></p>
+    <p>创造一条光线<code>new THREE.SpotLight(color)</code></p>
+    <p>将光线加到场景上<code>scene.add(light)</code></p>
+    <p>有需要的话把光线模式打开</p>
+    <pre>
+      renderer.shadowMapEnabled = true;
+      light.castShadow = true;
+      object.castShadow = true;
+      object.receiveShadow = true;</pre>
+  </article>
+
+  <article class="title">
+    <h2>着色器</h2>
+  </article>
+
+  <article>
+    <h3>什么是着色器</h3>
+    <br>
+    <center class="build">
+      <h3>顾名思义</h3>
+    </center>
+  </article>
+
+  <article>
+    <h3>三维几何面着色器</h3>
+    <p>如何画一个三维几何。</p>
+    <p>投影这个几何到屏幕坐标系。</p>
+    <pre>
+    &lt;script id="vertex" type="text/x-glsl-vert">
+      varying float vZ;
+      uniform float time;
+      void main() {
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        mvPosition.y += 20.0*sin(time*0.5+mvPosition.x/25.0);
+        mvPosition.x += 30.0*cos(time*0.5+mvPosition.y/25.0);
+        vec4 p = projectionMatrix * mvPosition;
+        vZ = p.z;
+        gl_Position = p;
+      }
+    &lt;/script></pre>
+  </article>
+
+  <article>
+    <h3>碎片着色器</h3>
+    <p>计算每个像素的颜色。</p>
+    <pre>
+    &lt;script id="fragment" type="text/x-glsl-frag">
+      varying float vZ;
+      uniform float time;
+      uniform vec2 size;
+      void main() {
+        vec2 d = gl_FragCoord.xy - (0.5+0.02*sin(time))*size;
+        float a = sin(time*0.3)*2.0*3.14159;
+        d = vec2( d.x*cos(a) + d.y*sin(a),
+                 -d.x*sin(a) + d.y*cos(a));
+        vec2 rg = vec2(1.0)-abs(d)/(0.5*size)
+        float b = abs(vZ) / 160.0;
+        gl_FragColor = vec4(rg,b,1.0);
+      }
+    &lt;/script></pre>
+  </article>
+
+  <article>
+    <h3>效果就变成了这样子了。</h3>
+    <iframe src="three/three_6.html"></iframe>
+  </article>
+
+  <article>
+    <h3>着色器和Three.js的关系</h3>
+    <p>使用着色器材质</p>
+    <pre>
+var uniforms = {
+  time : { type: "f", value: 1.0 },
+  size : { type: "v2", value: new THREE.Vector2(width,height) }
+};
+
+var shaderMaterial = new THREE.ShaderMaterial({
+  uniforms : uniforms,
+  vertexShader : $('#vertex').text(),
+  fragmentShader : $('#fragment').text()
+});
+
+var meshCube = new THREE.Mesh(
+  new THREE.CubeGeometry(50,50,50, 20,20,20), // 20 segments
+  shaderMaterial
+);</pre>
+  </article>
+
+  <article>
+    <h3>着色器和动画效果的统一</h3>
+    <p>修改效果值</p>
+    <pre>
+      uniforms.time.value += 0.05;</pre>
+    <p>大小以及重设大小的监听器</p>
+    <pre>
+      window.addEventListener('resize', function() {
+        uniforms.size.value.x = window.innerWidth;
+        uniforms.size.value.y = window.innerHeight;
+      }, false);</pre>
+  </article>
+
+  <article class="title">
+    <h2>有趣的例子</h2>
+  </article>
+
+  <article>
+    <h3>条形图</h3>
+    <pre>
+      var grid = /* 二维数组 */
+      var barGraph = new THREE.Object3D();
+      scene.add(barGraph);
+
+      var max = /* 网格最大值 */
+      var mat = new THREE.MeshLambertMaterial({color: 0xFFAA55});
+      for (var j=0; j&lt;grid.length; j++) {
+        for (var i=0; i&lt;grid[j].length; i++) {
+          var barHeight = grid[j][i]/max * 80;
+          var geo = new THREE.CubeGeometry(8, barHeight, 8);
+          var mesh = new THREE.Mesh(geo, mat);
+          mesh.position.x = (i-grid[j].length/2) * 16;
+          mesh.position.y = barHeight/2;
+          mesh.position.z = -(j-grid.length/2) * 16;
+          mesh.castShadow = mesh.receiveShadow = true;
+          barGraph.add(mesh);
+        }
+      }</pre>
+  </article>
+  
+  <article>
+    <h3>短短几行代码生成的效果</h3>
+    <iframe src="three/three_7.html"></iframe>
+  </article>
+
+  <article>
+    <h3>三维散点图</h3>
+    <pre>
+var scatterPlot = new THREE.Object3D();
+var mat = new THREE.ParticleBasicMaterial(
+  {vertexColors: true, size: 1.5});
+
+var pointCount = 10000;
+var pointGeo = new THREE.Geometry();
+for (var i=0; i&lt;pointCount; i++) {
+  var x = Math.random() * 100 - 50;
+  var y = x*0.8+Math.random() * 20 - 10;
+  var z = x*0.7+Math.random() * 30 - 15;
+  pointGeo.vertices.push(new THREE.Vertex(new THREE.Vector3(x,y,z)));
+  pointGeo.colors.push(new THREE.Color().setHSV(
+    (x+50)/100, (z+50)/100, (y+50)/100));
+}
+var points = new THREE.ParticleSystem(pointGeo, mat);
+scatterPlot.add(points);
+scene.fog = new THREE.FogExp2(0xFFFFFF, 0.0035);</pre>
+  </article>
+
+  <article>
+    <h3>三维散点图的效果</h3>
+    <iframe src="three/three_8.html"></iframe>
+    <p class="small">双击还会有动画显示</p>
+  </article>
+
+  <article>
+    <h3>怎样处理文字呢</h3>
+    <p>新建一个画布，将文字画上去，并且用这些字做纹理。</p>
+    <pre>
+      var c = document.createElement('canvas');
+      c.getContext('2d').font = '50px Arial';
+      c.getContext('2d').fillText('Hello, world!', 2, 50);
+
+      var tex = new THREE.Texture(c);
+      tex.needsUpdate = true;
+      
+      var mat = new THREE.MeshBasicMaterial({map: tex});
+      mat.transparent = true;
+
+      var titleQuad = new THREE.Mesh(
+        new THREE.PlaneGeometry(c.width, c.height),
+        mat
+      );
+      titleQuad.doubleSided = true;</pre>
+  </article>
+
+  <article>
+    <h3>Hello, world!(程序员第一个程序)</h3>
+    <iframe src="three/three_9.html"></iframe>
+  </article>
+
+  <article>
+    <h3>怎样画线呢?</h3>
+    <p>创建一个几何模型，加上顶点成为THREE.Line。</p>
+    <pre>
+      function v(x,y,z){ 
+        return new THREE.Vertex(new THREE.Vector3(x,y,z)); 
+      }
+      
+      var lineGeo = new THREE.Geometry();
+      lineGeo.vertices.push(
+        v(-50, 0, 0), v(50, 0, 0),
+        v(0, -50, 0), v(0, 50, 0),
+        v(0, 0, -50), v(0, 0, 50)
+      );
+      var lineMat = new THREE.LineBasicMaterial({
+        color: 0x000000, lineWidth: 1});
+      var line = new THREE.Line(lineGeo, lineMat);
+      line.type = THREE.Lines;
+      scene.add(line);</pre>
+  </article>
+  
+  <article>
+    <h3>坐标轴</h3>
+    <iframe src="three/three_10.html"></iframe>
+  </article>
+
+  <article class="title">
+    <h2>界面控制</h2>
+  </article>
+
+  <article>
+    <h3>界面控制</h3>
+    <p>就我而言，界面控制是个会呼吸的痛。</p>
+    <p>用这个吧：DAT.GUI。</p>
+    <pre>
+      var gui = new DAT.GUI();
+      gui.add(cube.scale, 'x').min(0.1).max(10).step(0.1);
+      gui.add(cube.scale, 'y', 0.1, 10, 0.1);
+      gui.add(cube.scale, 'z', 0.1, 10, 0.1);</pre>
+    <p>几步搞定！</p>
+    <p><a href="http://code.google.com/p/dat-gui">code.google.com/p/dat-gui</a></p>
+  </article>
+
+  <article>
+    <h3>可缩放大小的立方体</h3>
+    <iframe src="three/three_11.html"></iframe>
+  </article>
+
+  <article>
+    <p>我们可以弄个代理，使得只有当前被选中的对象接收界面控制时间。</p>
+    <pre>
+var controller = new THREE.Object3D();
+var gui = new DAT.GUI({width: 160});
+
+controller.setCurrent = function(current) {
+  this.current = current;
+  this.x.setValue(current.position.x);
+  this.y.setValue(current.position.y);
+  this.z.setValue(current.position.z);
+};
+      
+controller.x = gui.add(controller.position, 'x').onChange(function(v){
+  controller.current.position.x = v;
+});
+// etc.</pre>
+  </article>
+
+  <article>
+    <h3>怎样才算被选上呢?</h3>
+    <p>在场景中射一条射线，并且找出和它相交的对象。</p>
+    <pre>
+var projector = new THREE.Projector();
+window.addEventListener('mousedown', function (ev){
+  if (ev.target == renderer.domElement) {
+    var x = ev.clientX;
+    var y = ev.clientY;
+    var v = new THREE.Vector3((x/width)*2-1, -(y/height)*2+1, 0.5);
+    projector.unprojectVector(v, camera);
+    var ray = new THREE.Ray(camera.position, 
+                            v.subSelf(camera.position).normalize());
+    var intersects = ray.intersectObjects(controller.objects);
+    if (intersects.length > 0) {
+      controller.setCurrent(intersects[0].object);
+    }
+  }
+}, false);</pre>
+  </article>
+
+  <article>
+    <h3>效果就像是这样</h3>
+    <iframe src="three/three_12.html"></iframe>
+  </article>
+
+  <article class="title">
+    <h2>加载物体</h2>
+  </article>
+
+  <article>
+    <h3>模型输出器</h3>
+    <p>在源码的这些目录下面 utils/exporters/</p>
+    <ul>
+      <li>blender/</li>
+      <li>fbx/</li>
+      <li>max/</li>
+      <li>utf8/</li>
+      <li>convert_obj_three.py</li>
+    </ul>
+  </article>
+  <article>
+    <h3>模型加载器</h3>
+    <p>在源码的这些目录下面 src/extras/loaders/</p>
+    <ul>
+      <li>BinaryLoader.js</li>
+      <li>ColladaLoader.js</li>
+      <li>JSONLoader.js</li>
+      <li>SceneLoader.js</li>
+      <li>UTF8Loader.js</li>
+    </ul>
+    <p>擦，怎么用起来啊？</p>
+  </article>
+  
+  <article>
+    <h3>COLLADA 加载器</h3>
+    <pre>
+new THREE.ColladaLoader().load('models/monster.dae',
+function(collada) {
+  var model = collada.scene;
+  model.scale.set(0.1, 0.1, 0.1);
+  model.rotation.x = -Math.PI/2;
+  scene.add(model);
+});</pre>
+    <p>看起来简单吧。</p>
+    <p>其实我是从这抄过来的examples/webgl_collada.html</p>
+    <p>加上些动画的代码而已。</p>
+  </article>
+
+  <article>
+    <h3>异形</h3>
+    <iframe src="three/three_13.html"></iframe>
+  </article>
+
+  <article class="title">
+    <h2>总结</h2>
+  </article>
+
+  <article>
+    <h3>Three.js</h3>
+    <p><a href="https://github.com/mrdoob/three.js/">github.com/mrdoob/three.js</a></p>
+    <p>JavaScript三维图像引擎</p>
+    <p>易用</p>
+    <p>高效</p>
+    <p>还不赖的特性</p>
+    <p>DAT.GUI简化GUI界面控制<a href="http://code.google.com/p/dat-gui">code.google.com/p/dat-gui</a></p>
+  </article>
+  
+  <article>
+    <h3>谢谢</h3>
+    <p>Ilmari Heikkinen</p>
+    <p><a href="http://twitter.com/ilmarihei">@ilmarihei</a> 
+      | <a href="http://fhtr.org/plus">fhtr.org/plus</a>
+      | <a href="http://fhtr.org">fhtr.org</a></p>
+    <br>
+    <p>Karl Lok（骆兆楷）</p>
+    <p><a href="http://whitelok.github.io">@whtielok</a>
+    <br><br>
+    <p>English Slides available at <a href="http://fhtr.org/BasicsOfThreeJS">fhtr.org/BasicsOfThreeJS</a></p>
+    <p>Repo at <a href="https://github.com/kig/BasicsOfThreeJS">github.com/kig/BasicsOfThreeJS</a></p>
+    <p>中文版的幻灯片在<a href="http://whitelok.github.io">whitelok.github.io/BasicsOfThreeJS</a></p>
+    <p>源码在<a href="https://github.com/whitelok/TreeJS_Introduction">github.com/whitelok/TreeJS_Introduction</a></p>
+  </article>
+
+</section>
+
+<script> 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1485935-6']);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script> 
+<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+<script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+
+</body>
+</html>
