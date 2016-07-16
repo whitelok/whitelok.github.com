@@ -193,7 +193,7 @@
   
     <div class="article-meta">
       <a href="/2016/07/16/linux-command-record/" class="article-date">
-      <time datetime="2016-07-16T14:56:13.000Z" itemprop="datePublished">2016-07-16</time>
+      <time datetime="2016-07-16T15:33:58.000Z" itemprop="datePublished">2016-07-16</time>
 </a>
     </div>
   
@@ -216,8 +216,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="查找文件下某一字符串"><a href="#查找文件下某一字符串" class="headerlink" title="查找文件下某一字符串"></a>查找文件下某一字符串</h3><p>方法从简单到难</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -rn <span class="string">"***"</span> <span class="comment">###</span></div></pre></td></tr></table></figure>
+        <h2 id="查找文件下某一字符串"><a href="#查找文件下某一字符串" class="headerlink" title="查找文件下某一字符串"></a>查找文件下某一字符串</h2><p>方法从简单到难</p>
+<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -rn <span class="string">"***"</span> <span class="comment">###</span></div></pre></td></tr></table></figure>
+<p>其中<em>*</em>为要查找的字符串，###为查找的目标文件</p>
+<hr>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="comment">### [-print] | xargs grep "***"</span></div></pre></td></tr></table></figure>
+<p>其中<em>*</em>为要查找的字符串，###为查找的目标文件，-print可有可无</p>
+<hr>
+<h4 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h4><p>建立脚本文件find_str.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">grep <span class="string">"***"</span> <span class="variable">$1</span></div><div class="line"><span class="keyword">if</span> [ $? <span class="_">-eq</span> 0 ]</div><div class="line"><span class="keyword">then</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$1</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+<p>执行上面的脚本文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find . -name <span class="comment">### -exec ./find_str.sh &#123;&#125; /;</span></div></pre></td></tr></table></figure>
 <p>其中<em>*</em>为要查找的字符串，###为查找的目标文件</p>
 
       
