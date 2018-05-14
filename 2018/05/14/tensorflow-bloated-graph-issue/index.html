@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="在使用Tensorflow的过程中，经常在训练循环中使用如下的写法  1234567lr = tf.Variable(0.0,trainable=False)......with tf.Session() as sess:    ......    for _ in range(10):        sess.run(tf.assign(lr, lr_rate*0.9**epoch))    .">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-14T10:35:20.000Z">
+<meta property="og:updated_time" content="2018-05-14T10:36:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow 1.8 计算图膨胀问题">
 <meta name="twitter:description" content="在使用Tensorflow的过程中，经常在训练循环中使用如下的写法  1234567lr = tf.Variable(0.0,trainable=False)......with tf.Session() as sess:    ......    for _ in range(10):        sess.run(tf.assign(lr, lr_rate*0.9**epoch))    .">
@@ -119,7 +119,7 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2018-05-14T10:35:20.000Z" itemprop="datePublished">2018-05-14</time>
+        <time datetime="2018-05-14T10:36:44.000Z" itemprop="datePublished">2018-05-14</time>
     </div>
 
 
@@ -135,9 +135,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lr = tf.Variable(<span class="number">0.0</span>,trainable=<span class="keyword">False</span>)</span><br><span class="line">......</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        sess.run(tf.assign(lr, lr_rate*<span class="number">0.9</span>**epoch))</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
 
 
-在for过程中通过
-```print len(tf.get_default_graph().get_operations())```
-发现graph越来越大，而且执行速度越来越慢。
+在for过程中通过``print len(tf.get_default_graph().get_operations())``发现graph越来越大，而且执行速度越来越慢。
 
 这是因为在sess.run的过程中，由于运算没有赋值给Variable，所以每次run的时候都在graph中生成新的node。
 新建的node需要重新加载数据，所以如果使用cpu数据需要在内存新分配一份，如果使用gpu那么需要新声明一块显存地址并且将数据从内存上拷贝过去。
