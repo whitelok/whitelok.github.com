@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-05T11:57:38.000Z">
+<meta property="og:updated_time" content="2018-09-05T23:56:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在TensorRT上用半精度(FP16)对Caffemodel进行inference">
 <meta name="twitter:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
@@ -130,7 +130,9 @@
   
 
   <div class="content" itemprop="articleBody">
-    <ol>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<ol>
 <li><p>Why? 为什么我们需要使用FP16半精度进行Inference</p>
 <ol>
 <li>低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半</li>
