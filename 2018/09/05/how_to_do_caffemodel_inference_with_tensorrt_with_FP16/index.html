@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T06:04:21.000Z">
+<meta property="og:updated_time" content="2018-09-25T06:31:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在TensorRT上用半精度(FP16)对Caffemodel进行inference">
 <meta name="twitter:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
@@ -153,6 +153,12 @@
 </ol>
 </li>
 <li><p>How? 当我们手上有一个caffemodel的时候，怎么才能使用到TensorRT的FP16 Inference能力呢？</p>
+<ol>
+<li>下载并编译<a href="https://github.com/whitelok/nvcaffe-for-fp16-feature" target="_blank" rel="noopener"><code>nvcaffe</code></a> <code>cmake -DTEST_FP16=ON</code></li>
+<li><code>export PYTHONPATH=/the/path/to/your/caffe_root/python/</code></li>
+<li>修改模型文件prototxt:<br> a. 添加<code>default_forward_type:  FLOAT16</code>到prototxt头部<br> b. 添加<code>default_backward_type: FLOAT16</code>到prototxt头部</li>
+<li>转换FP32模型成FP16兼容模式文件<code>python genDefaultModel.py --input /path/to/net.prototxt --model /path/to/net_fp32.caffemodel --output /path/to/net_fp16.caffemodel</code></li>
+</ol>
 </li>
 </ol>
 
