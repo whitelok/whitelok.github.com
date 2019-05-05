@@ -7,13 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
+<meta name="keywords" content="TensorRT,Inference,FP32 to FP16,Float16">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在TensorRT上用半精度(FP16)对Caffemodel进行inference">
 <meta property="og:url" content="http://whitelok.github.io/2018/09/05/how_to_do_caffemodel_inference_with_tensorrt_with_FP16/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-05T13:51:20.982Z">
+<meta property="og:updated_time" content="2019-05-05T13:56:23.305Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在TensorRT上用半精度(FP16)对Caffemodel进行inference">
 <meta name="twitter:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
@@ -124,6 +125,11 @@
 
 
       
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/FP32-to-FP16/">FP32 to FP16</a>, <a class="tag-link" href="/tags/Float16/">Float16</a>, <a class="tag-link" href="/tags/Inference/">Inference</a>, <a class="tag-link" href="/tags/TensorRT/">TensorRT</a>
+    </div>
+
 
     </div>
   </header>
