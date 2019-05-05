@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在TensorRT上用半精度(FP16)对Caffemodel进行inference">
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T06:33:46.000Z">
+<meta property="og:updated_time" content="2019-05-05T13:51:20.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在TensorRT上用半精度(FP16)对Caffemodel进行inference">
 <meta name="twitter:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
@@ -64,7 +64,7 @@
         
       </ul>
     </span>
-    <br/>
+    <br>
     <span id="actions">
       <ul>
         
@@ -79,7 +79,7 @@
       <span id="i-top" class="info" style="display:none;">Back to top</span>
       <span id="i-share" class="info" style="display:none;">Share post</span>
     </span>
-    <br/>
+    <br>
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2018/09/05/how_to_do_caffemodel_inference_with_tensorrt_with_FP16/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
@@ -119,7 +119,7 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2018-09-05T08:22:38.000Z" itemprop="datePublished">2018-09-05</time>
+        <time datetime="2018-09-05T13:07:50.000Z" itemprop="datePublished">2018-09-05</time>
     </div>
 
 
@@ -224,7 +224,7 @@ b. 添加`default_backward_type: FLOAT16`到prototxt头部
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2018 Karl Luo
+    Copyright &copy; 2019 Karl Luo
   </div>
   <div class="footer-right">
     <nav>
