@@ -32,17 +32,21 @@
         
     
     <!-- title -->
-    <title>Karl Luo Page</title>
+    <title>Writing: 2019</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
     <!-- rss -->
     
     
 </head>
 
-<body>
+<body class="max-width mx-auto px3 ltr">
     
-    <div class="content index width mx-auto px2 my4">
+    <div class="content index py4">
         
           <header id="header">
   <a href="/">
@@ -58,16 +62,16 @@
   <div id="nav">
     <ul>
       <li class="icon">
-        <a href="#"><i class="fa fa-bars fa-2x"></i></a>
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
       </li>
        
         <li><a href="/">Home</a></li>
        
         <li><a href="/about/">About</a></li>
        
-        <li><a href="/posts/">Writing</a></li>
+        <li><a href="/archives/">Writing</a></li>
        
-        <li><a href="http://github.com/whitelok">Projects</a></li>
+        <li><a href="/projects_url">Projects</a></li>
       
     </ul>
   </div>
@@ -76,6 +80,7 @@
         
         <div id="archive">
   <ul class="post-list">
+    
     
     
     
@@ -88,77 +93,21 @@
       <li class="post-item">
         
     <div class="meta">
-        <time datetime="2019-02-27T02:15:35.447Z" itemprop="datePublished">2019-02-27</time>
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/02/27/python-numpy-base-test/">Python NumPy笔试测试70题</a>
-    
-
-
-<span>
-      </li>
-    
       
-      
-      
-      
-      <li class="post-item">
         
-    <div class="meta">
-        <time datetime="2019-02-27T02:15:35.369Z" itemprop="datePublished">2019-02-27</time>
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/02/27/how_to_do_caffemodel_inference_with_tensorrt_with_FP16/">如何在TensorRT上用半精度(FP16)对Caffemodel进行inference</a>
-    
-
-
-<span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
+          <time datetime="2019-06-25T07:04:23.000Z" itemprop="datePublished">2019-06-25</time>
         
-    <div class="meta">
-        <time datetime="2019-02-27T02:15:35.291Z" itemprop="datePublished">2019-02-27</time>
+      
     </div>
 
 
         <span>
     
-        <a class="" href="/2019/02/27/tensorflow-bloated-graph-issue/">Tensorflow 1.8 计算图膨胀问题</a>
+        <a class="" href="/2019/06/25/tvm-tutorials-lesson-1/">深度学习高性能异构框架TVM核心原理解释系列（1）-手把手教你用TVM做Inference加速</a>
     
 
 
-<span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-        <time datetime="2019-02-27T02:15:35.213Z" itemprop="datePublished">2019-02-27</time>
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/02/27/2017-sep-targets/">2017/09的幾個正在進行的Open Source Project</a>
-    
-
-
-<span>
+</span>
       </li>
     
   </ul>
@@ -166,9 +115,8 @@
 
 </div>
 
-    </div>
-    
-    <footer id="footer">
+        
+        <footer id="footer">
   <div class="footer-left">
     Copyright &copy; 2019 Karl Luo
   </div>
@@ -180,29 +128,28 @@
          
           <li><a href="/about/">About</a></li>
          
-          <li><a href="/posts/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok">Projects</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </nav>
   </div>
 </footer>
 
-</body>
-</html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
-<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
-<!-- jquery -->
+    <!-- jquery -->
 <script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
 <script src="/js/main.js"></script>
+<!-- search -->
 
+<!-- Google Analytics -->
 
-    <!-- Google Analytics -->
     <script type="text/javascript">
         (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -212,5 +159,22 @@
         ga('send', 'pageview');
     </script>
 
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'whitelok';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
 
 
+</body>
+</html>

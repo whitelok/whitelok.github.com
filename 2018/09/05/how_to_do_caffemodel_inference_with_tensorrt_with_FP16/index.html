@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
-<meta name="keywords" content="TensorRT,Inference,FP32 to FP16,Float16">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在TensorRT上用半精度(FP16)对Caffemodel进行inference">
 <meta property="og:url" content="http://whitelok.github.io/2018/09/05/how_to_do_caffemodel_inference_with_tensorrt_with_FP16/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-05T13:56:23.305Z">
+<meta property="og:updated_time" content="2019-06-25T07:07:43.006Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在TensorRT上用半精度(FP16)对Caffemodel进行inference">
 <meta name="twitter:description" content="Why? 为什么我们需要使用FP16半精度进行Inference  低的数据精度代表占用更少的存储资源，例如：FP32即float占用的是4字节，FP16占用的2字节，FP16存储空间占用率只有float的一半 计算单元处理FP16比处理FP32的速度快 Nvidia有大量的计算加速框架(cuDNN, cuBlas)以及加速硬件(Tensor Core, DLA)对FP16的数据有加速优化">
@@ -65,13 +64,15 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok">Projects</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </span>
-    <br>
+    <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" href="/2019/06/25/tvm-tutorials-lesson-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2018/05/14/tensorflow-bloated-graph-issue/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -84,7 +85,7 @@
       <span id="i-top" class="info" style="display:none;">Back to top</span>
       <span id="i-share" class="info" style="display:none;">Share post</span>
     </span>
-    <br>
+    <br/>
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2018/09/05/how_to_do_caffemodel_inference_with_tensorrt_with_FP16/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
@@ -125,7 +126,7 @@
       
     <div class="postdate">
       
-        <time datetime="2018-09-05T13:07:50.000Z" itemprop="datePublished">2018-09-05</time>
+        <time datetime="2018-09-05T07:04:23.000Z" itemprop="datePublished">2018-09-05</time>
         
       
     </div>
@@ -134,11 +135,6 @@
       
 
       
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/FP32-to-FP16/">FP32 to FP16</a>, <a class="tag-link" href="/tags/Float16/">Float16</a>, <a class="tag-link" href="/tags/Inference/">Inference</a>, <a class="tag-link" href="/tags/TensorRT/">TensorRT</a>
-    </div>
-
 
     </div>
   </header>
@@ -198,7 +194,7 @@ b. 添加`default_backward_type: FLOAT16`到prototxt头部
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok">Projects</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </div>
@@ -248,7 +244,7 @@ b. 添加`default_backward_type: FLOAT16`到prototxt头部
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok">Projects</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </nav>

@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="在使用Tensorflow的过程中，经常在训练循环中使用如下的写法 1234567lr = tf.Variable(0.0,trainable=False)......with tf.Session() as sess:    ......    for _ in range(10):        sess.run(tf.assign(lr, lr_rate*0.9**epoch))    ..">
-<meta name="keywords" content="Tensorflow,AI,Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensorflow 1.8 计算图膨胀问题">
 <meta property="og:url" content="http://whitelok.github.io/2018/05/14/tensorflow-bloated-graph-issue/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="在使用Tensorflow的过程中，经常在训练循环中使用如下的写法 1234567lr = tf.Variable(0.0,trainable=False)......with tf.Session() as sess:    ......    for _ in range(10):        sess.run(tf.assign(lr, lr_rate*0.9**epoch))    ..">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-05T13:56:31.464Z">
+<meta property="og:updated_time" content="2019-06-25T07:06:55.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow 1.8 计算图膨胀问题">
 <meta name="twitter:description" content="在使用Tensorflow的过程中，经常在训练循环中使用如下的写法 1234567lr = tf.Variable(0.0,trainable=False)......with tf.Session() as sess:    ......    for _ in range(10):        sess.run(tf.assign(lr, lr_rate*0.9**epoch))    ..">
@@ -65,11 +64,11 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok">Projects</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </span>
-    <br>
+    <br/>
     <span id="actions">
       <ul>
         
@@ -86,7 +85,7 @@
       <span id="i-top" class="info" style="display:none;">Back to top</span>
       <span id="i-share" class="info" style="display:none;">Share post</span>
     </span>
-    <br>
+    <br/>
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2018/05/14/tensorflow-bloated-graph-issue/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
@@ -127,7 +126,7 @@
       
     <div class="postdate">
       
-        <time datetime="2018-05-14T09:38:16.000Z" itemprop="datePublished">2018-05-14</time>
+        <time datetime="2018-05-14T07:04:23.000Z" itemprop="datePublished">2018-05-14</time>
         
       
     </div>
@@ -136,11 +135,6 @@
       
 
       
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/AI/">AI</a>, <a class="tag-link" href="/tags/Deep-Learning/">Deep Learning</a>, <a class="tag-link" href="/tags/Tensorflow/">Tensorflow</a>
-    </div>
-
 
     </div>
   </header>
@@ -148,11 +142,11 @@
 
   <div class="content" itemprop="articleBody">
     <p>在使用Tensorflow的过程中，经常在训练循环中使用如下的写法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lr = tf.Variable(<span class="number">0.0</span>,trainable=<span class="literal">False</span>)</span><br><span class="line">......</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        sess.run(tf.assign(lr, lr_rate*<span class="number">0.9</span>**epoch))</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lr = tf.Variable(<span class="number">0.0</span>,trainable=<span class="keyword">False</span>)</span><br><span class="line">......</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        sess.run(tf.assign(lr, lr_rate*<span class="number">0.9</span>**epoch))</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
 <p>在for过程中通过<code>print len(tf.get_default_graph().get_operations())</code>发现graph越来越大，而且执行速度越来越慢。</p>
 <p>这是因为在sess.run的过程中，由于运算没有赋值给Variable，所以每次run的时候都在graph中生成新的node。<br>新建的node需要重新加载数据，所以如果使用cpu数据需要在内存新分配一份，如果使用gpu那么需要新声明一块显存地址并且将数据从内存上拷贝过去。</p>
 <p>解决方法是：在函数调用中尽量使用变量代替运算式。例如上，上面的代码可以改写成这样</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lr = tf.Variable(<span class="number">0.0</span>,trainable=<span class="literal">False</span>)</span><br><span class="line">param = lr_rate*<span class="number">0.9</span>**epoch</span><br><span class="line">......</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        sess.run(tf.assign(lr, param))</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lr = tf.Variable(<span class="number">0.0</span>,trainable=<span class="keyword">False</span>)</span><br><span class="line">param = lr_rate*<span class="number">0.9</span>**epoch</span><br><span class="line">......</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        sess.run(tf.assign(lr, param))</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
 
   </div>
 </article>
@@ -178,7 +172,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok">Projects</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </div>
@@ -228,7 +222,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok">Projects</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </nav>
