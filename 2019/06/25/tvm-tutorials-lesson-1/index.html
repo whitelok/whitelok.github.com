@@ -13,13 +13,10 @@
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="TVM是什么？官方说法：TVM是一种把Deep Learning（以下简称DL）模型分发到各种硬件设备上的、使得模型Inference性能达到最优的、端到端的解决方案。最终目标是让DL模型可以轻松部署到所有硬件种类中，其中不仅包括 GPU、FPGA 和 ASIC（如谷歌 TPU），甚至是嵌入式设备。 引用同在DMLC小组的刘洪亮（phunter_lau）进一步在微博上解释了这个工作的意义：“TVM">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/4515185c0f65b47a200c9ca7d59c895c.png">
-<meta property="og:image" content="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/47df5199181a802ba9cec020aaefdf08.png">
-<meta property="og:updated_time" content="2019-06-25T07:08:28.857Z">
+<meta property="og:updated_time" content="2019-06-25T07:16:42.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习高性能异构框架TVM核心原理解释系列（1）-手把手教你用TVM做Inference加速">
 <meta name="twitter:description" content="TVM是什么？官方说法：TVM是一种把Deep Learning（以下简称DL）模型分发到各种硬件设备上的、使得模型Inference性能达到最优的、端到端的解决方案。最终目标是让DL模型可以轻松部署到所有硬件种类中，其中不仅包括 GPU、FPGA 和 ASIC（如谷歌 TPU），甚至是嵌入式设备。 引用同在DMLC小组的刘洪亮（phunter_lau）进一步在微博上解释了这个工作的意义：“TVM">
-<meta name="twitter:image" content="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/4515185c0f65b47a200c9ca7d59c895c.png">
     
     
         
@@ -146,7 +143,7 @@
 <p>引用同在DMLC小组的刘洪亮（phunter_lau）进一步在微博上解释了这个工作的意义：“TVM可以把DL模型部署到不同硬件，比如群众常问的能不能用AMD的GPU，用FPGA怎么搞，TVM提供这个中间层有效解决这个问题”。</p>
 <p>作者：陈天奇，华盛顿大学计算机系博士生，此前毕业于上海交通大学ACM班。XGBoost、cxxnet等著名机器学习工具的作者，MXNet的主要贡献者之一。</p>
 <h1 id="为什么要用TVM？"><a href="#为什么要用TVM？" class="headerlink" title="为什么要用TVM？"></a>为什么要用TVM？</h1><p>在Deep Learning（以下简称DL）模型的开发过程中一般分为2个阶段：Training和Inference，一般市面上大众框架例如：PyTorch，Tensorflow，Caffe等都包括这两个过程。然而，大部分DL框架的Inference过程并没有很好的优化，即使有如XLA之辈的优化，也只支持CPU，GPU等运算部件，并不能支持如ARM，FPGA等异构加速部件。</p>
-<p><img src="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/4515185c0f65b47a200c9ca7d59c895c.png" alt="TVM与其他框架之前的对比"></p>
+<p><img src="" alt="TVM与其他框架之间的对比"></p>
 <p>TVM相对于Tensorflow、Pytorch等DL框架有以下<strong>优点</strong>：</p>
 <ol>
 <li>部署简单，支持多种模型格式：NNVM，ONNX，Tensorflow (forzen pb), MXnet模型，DarkNet模型</li>
@@ -163,7 +160,7 @@
 <li>需要手动支持不同框架下的新的op类型，例如：当将Pytorch模型转换成onnx模型后，可能会出现Aten op，但是这个TVM暂时没有实现，需要手动支持。</li>
 </ol>
 <h1 id="怎么使用TVM"><a href="#怎么使用TVM" class="headerlink" title="怎么使用TVM"></a>怎么使用TVM</h1><p>TVM主要包括两个过程：编译和部署运行，如图所示。</p>
-<p><img src="http://ata2-img.cn-hangzhou.img-pub.aliyun-inc.com/47df5199181a802ba9cec020aaefdf08.png" alt="TVM主要过程"></p>
+<p><img src="" alt="TVM主要过程"></p>
 <ol>
 <li>图中NNVM表示层主要是将其他DL框架的模型的计算图加载成TVM自己实现的计算图表示层—NNVM。图表示层主要通过Halide，loo.py等框架做一些layer，op的融合与优化。（具体原理以及详细实例将在后续文章系列阐述。）以onnx模型为例，其代码结构大致如下：</li>
 </ol>
@@ -178,7 +175,7 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># C++ 版</span><br><span class="line">tvm::runtime::Module mod = (*tvm::runtime::Registry::Get(&quot;tvm.graph_runtime.create&quot;))(json_data, mod_dylib, device_type, device_id);</span><br><span class="line">......</span><br><span class="line">分配输入输出blob</span><br><span class="line">......</span><br><span class="line">tvm::runtime::PackedFunc run = mod.GetFunction(&quot;run&quot;);</span><br><span class="line">// 执行inference</span><br><span class="line">run();</span><br></pre></td></tr></table></figure>
 <h1 id="TVM的Inference性能测评实验结果"><a href="#TVM的Inference性能测评实验结果" class="headerlink" title="TVM的Inference性能测评实验结果"></a>TVM的Inference性能测评实验结果</h1><p>模型：<a href="https://gist.github.com/zhreshold/bcda4716699ac97ea44f791c24310193/raw/93672b029103648953c4e5ad3ac3aadf346a4cdc/super_resolution_0.2.onnx" target="_blank" rel="noopener">super_resolution.onnx</a></p>
-<p>实验源码：<a href="http://gitlab.alibaba-inc.com/karl.lzk/tvm-tutorials" target="_blank" rel="noopener">http://gitlab.alibaba-inc.com/karl.lzk/tvm-tutorials</a></p>
+<p>实验源码：</p>
 <p>测试机器：<a href="https://detail.tmall.com/item.htm?spm=a230r.1.14.8.528b3f1dTYWhfP&amp;id=567118762627&amp;ns=1&amp;abbucket=4&amp;sku_properties=5919063:6536025" target="_blank" rel="noopener">GTX1080 with MAX-Q</a></p>
 <table>
 <thead>
@@ -195,16 +192,6 @@
 <td>623MB</td>
 </tr>
 <tr>
-<td>Ailice (自动驾驶团队自研框架)</td>
-<td>约1.34ms</td>
-<td>377MB</td>
-</tr>
-<tr>
-<td>Ailice + TensorRT优化 (自动驾驶团队自研框架)</td>
-<td>约1.34ms</td>
-<td>377MB</td>
-</tr>
-<tr>
 <td>TVM Python CUDA mode</td>
 <td>约1.71ms</td>
 <td>201MB</td>
@@ -219,11 +206,7 @@
 <h1 id="P-S-第一篇博客的最后"><a href="#P-S-第一篇博客的最后" class="headerlink" title="P.S. 第一篇博客的最后"></a>P.S. 第一篇博客的最后</h1><ul>
 <li><p>关于原理、优缺点、特性，本人以后会有更深入的原理详述和源码导读。</p>
 </li>
-<li><p>写这篇文章的主要目的是想通过例子让大家先有一个直观的感受，感受一下TVM对各位业务上的价值。有任何疑问，欢迎直接钉我。第一次内网写技术文章，有不足之处，请多多指教。</p>
-</li>
 <li><p>如果有同学能贡献个FPGA我做实验，我还是很愿意提供FPGA的实验结果的。</p>
-</li>
-<li><p>本文全部代码和实验结果均为原创，希望大家踊跃提出意见，欢迎钉钉私聊交流。</p>
 </li>
 </ul>
 
