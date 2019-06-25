@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="搞过高性能计算的同学都知道，带有for循环的逻辑的串行代码，性能一般都不太好，特别是多重for循环套嵌的。如果对多重复杂循环的代码进行并行化，不仅需要对当前使用的计算环境的系统结构有很好的了解，而且还需要了解串行代码的业务逻辑，所以对串行代码优化是业务得到验证之后的通点和难点。 那么有没有可能自动地将串行代码中的复杂循环块自动生成高效的并行化代码呢？ 通过多面体模型编译技术完全可以做到的，如GCC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md">
+<meta property="og:title" content="深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)">
 <meta property="og:url" content="http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="搞过高性能计算的同学都知道，带有for循环的逻辑的串行代码，性能一般都不太好，特别是多重for循环套嵌的。如果对多重复杂循环的代码进行并行化，不仅需要对当前使用的计算环境的系统结构有很好的了解，而且还需要了解串行代码的业务逻辑，所以对串行代码优化是业务得到验证之后的通点和难点。 那么有没有可能自动地将串行代码中的复杂循环块自动生成高效的并行化代码呢？ 通过多面体模型编译技术完全可以做到的，如GCC">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/whitelok/tvm-lesson/raw/master/lession-2/images/img-1.png">
-<meta property="og:updated_time" content="2019-06-25T08:21:18.561Z">
+<meta property="og:updated_time" content="2019-06-25T08:53:57.520Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md">
+<meta name="twitter:title" content="深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)">
 <meta name="twitter:description" content="搞过高性能计算的同学都知道，带有for循环的逻辑的串行代码，性能一般都不太好，特别是多重for循环套嵌的。如果对多重复杂循环的代码进行并行化，不仅需要对当前使用的计算环境的系统结构有很好的了解，而且还需要了解串行代码的业务逻辑，所以对串行代码优化是业务得到验证之后的通点和难点。 那么有没有可能自动地将串行代码中的复杂循环块自动生成高效的并行化代码呢？ 通过多面体模型编译技术完全可以做到的，如GCC">
 <meta name="twitter:image" content="https://github.com/whitelok/tvm-lesson/raw/master/lession-2/images/img-1.png">
     
@@ -38,7 +38,7 @@
         
     
     <!-- title -->
-    <title>深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md</title>
+    <title>深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -89,15 +89,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&text=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&is_video=false&description=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md&body=Check out this article: http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&name=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&text=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&is_video=false&description=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)&body=Check out this article: http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&name=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -114,7 +114,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md
+        深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)
     </h1>
 
 
@@ -232,15 +232,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&text=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&is_video=false&description=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md&body=Check out this article: http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&name=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例).md&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&text=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&is_video=false&description=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)&body=Check out this article: http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&title=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/06/25/tvm-tutorials-lesson-2/&name=深度学习高性能异构框架TVM核心原理解释系列（2）-TVM中循环计算自动并行化方法(以Loo.py为例)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
