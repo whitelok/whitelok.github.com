@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="目标 将ros部署到docker的container中，外部机器不受影响 container运行结果直接输出到host主机上 效果图如下loam-velodyne-with-docker-image-1">
+    <meta name="description" content="目标 由于将ros安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne地址为：  安装&amp;amp;部署 先在host上安装docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何用docker部署loam_velodyne激光点云可视化工具">
+<meta property="og:title" content="如何用Docker部署loam_velodyne激光点云可视化工具">
 <meta property="og:url" content="http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
-<meta property="og:description" content="目标 将ros部署到docker的container中，外部机器不受影响 container运行结果直接输出到host主机上 效果图如下loam-velodyne-with-docker-image-1">
+<meta property="og:description" content="目标 由于将ros安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne地址为：  安装&amp;amp;部署 先在host上安装docker">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-30T04:06:15.454Z">
+<meta property="og:image" content="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif">
+<meta property="og:updated_time" content="2019-08-30T04:10:44.711Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何用docker部署loam_velodyne激光点云可视化工具">
-<meta name="twitter:description" content="目标 将ros部署到docker的container中，外部机器不受影响 container运行结果直接输出到host主机上 效果图如下loam-velodyne-with-docker-image-1">
+<meta name="twitter:title" content="如何用Docker部署loam_velodyne激光点云可视化工具">
+<meta name="twitter:description" content="目标 由于将ros安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne地址为：  安装&amp;amp;部署 先在host上安装docker">
+<meta name="twitter:image" content="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif">
     
     
         
@@ -36,7 +38,7 @@
         
     
     <!-- title -->
-    <title>如何用docker部署loam_velodyne激光点云可视化工具</title>
+    <title>如何用Docker部署loam_velodyne激光点云可视化工具</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -87,20 +89,20 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&text=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&is_video=false&description=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=如何用docker部署loam_velodyne激光点云可视化工具&body=Check out this article: http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&name=如何用docker部署loam_velodyne激光点云可视化工具&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&text=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&is_video=false&description=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何用Docker部署loam_velodyne激光点云可视化工具&body=Check out this article: http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&name=如何用Docker部署loam_velodyne激光点云可视化工具&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装-amp-部署"><span class="toc-number">2.</span> <span class="toc-text">安装&amp;部署</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -112,7 +114,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        如何用docker部署loam_velodyne激光点云可视化工具
+        如何用Docker部署loam_velodyne激光点云可视化工具
     </h1>
 
 
@@ -140,10 +142,15 @@
 
   <div class="content" itemprop="articleBody">
     <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
-<li>将ros部署到docker的container中，外部机器不受影响</li>
+<li>由于将ros安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突</li>
 <li>container运行结果直接输出到host主机上</li>
-<li>效果图如下<br><a href="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif">loam-velodyne-with-docker-image-1</a></li>
+<li>效果图如下<br><img src="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif" alt="loam-velodyne-with-docker-image-1"></li>
+<li>loam_velodyne地址为：<a href="https://github.com/laboshinl/loam_velodyne" target="_blank" rel="noopener"></a></li>
 </ul>
+<h1 id="安装-amp-部署"><a href="#安装-amp-部署" class="headerlink" title="安装&amp;部署"></a>安装&amp;部署</h1><ol>
+<li>先在host上安装docker</li>
+<li></li>
+</ol>
 
   </div>
 </article>
@@ -175,21 +182,21 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装-amp-部署"><span class="toc-number">2.</span> <span class="toc-text">安装&amp;部署</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&text=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&is_video=false&description=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=如何用docker部署loam_velodyne激光点云可视化工具&body=Check out this article: http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&name=如何用docker部署loam_velodyne激光点云可视化工具&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&text=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&is_video=false&description=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何用Docker部署loam_velodyne激光点云可视化工具&body=Check out this article: http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=如何用Docker部署loam_velodyne激光点云可视化工具"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&name=如何用Docker部署loam_velodyne激光点云可视化工具&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
