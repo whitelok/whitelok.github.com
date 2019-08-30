@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="目标 由于将ros安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne的项目地址  安装&amp;amp;部署&amp;amp;运行 先在host上安装Docker， 并运行：xhost + 拉取melodic版">
+    <meta name="description" content="目标 在现有的Ubuntu系统上部署ROS耗时长而且冲突很多 而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne的项目地址  安装&amp;amp;部署&amp;amp;运行 先在host上安装">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具">
 <meta property="og:url" content="http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
-<meta property="og:description" content="目标 由于将ros安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne的项目地址  安装&amp;amp;部署&amp;amp;运行 先在host上安装Docker， 并运行：xhost + 拉取melodic版">
+<meta property="og:description" content="目标 在现有的Ubuntu系统上部署ROS耗时长而且冲突很多 而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne的项目地址  安装&amp;amp;部署&amp;amp;运行 先在host上安装">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif">
-<meta property="og:updated_time" content="2019-08-30T06:22:01.174Z">
+<meta property="og:updated_time" content="2019-08-30T06:26:25.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具">
-<meta name="twitter:description" content="目标 由于将ros安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne的项目地址  安装&amp;amp;部署&amp;amp;运行 先在host上安装Docker， 并运行：xhost + 拉取melodic版">
+<meta name="twitter:description" content="目标 在现有的Ubuntu系统上部署ROS耗时长而且冲突很多 而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne的项目地址  安装&amp;amp;部署&amp;amp;运行 先在host上安装">
 <meta name="twitter:image" content="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif">
     
     
@@ -142,7 +142,8 @@
 
   <div class="content" itemprop="articleBody">
     <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
-<li>由于将ros安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突</li>
+<li>在现有的Ubuntu系统上部署ROS耗时长而且冲突很多</li>
+<li>而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突</li>
 <li>container运行结果直接输出到host主机上</li>
 <li>效果图如下<br><img src="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif" alt="loam-velodyne-with-docker-image-1"></li>
 <li>loam_velodyne的<a href="https://github.com/laboshinl/loam_velodyne" target="_blank" rel="noopener">项目地址</a></li>
