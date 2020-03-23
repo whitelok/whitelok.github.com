@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="##这篇blog讲啥？  在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代">
+    <meta name="description" content="这篇blog讲啥？ 在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代码比c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nvidia嵌入式系统系列使用CUDA的unified memory性能分析">
 <meta property="og:url" content="http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
-<meta property="og:description" content="##这篇blog讲啥？  在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代">
+<meta property="og:description" content="这篇blog讲啥？ 在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代码比c">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-23T03:59:35.226Z">
+<meta property="og:updated_time" content="2020-03-23T04:00:42.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nvidia嵌入式系统系列使用CUDA的unified memory性能分析">
-<meta name="twitter:description" content="##这篇blog讲啥？  在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代">
+<meta name="twitter:description" content="这篇blog讲啥？ 在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代码比c">
     
     
         
@@ -100,7 +100,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">1.</span> <span class="toc-text">结论</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#这篇blog讲啥？"><span class="toc-number">1.</span> <span class="toc-text">这篇blog讲啥？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为啥会有这么一个猜想？"><span class="toc-number">2.</span> <span class="toc-text">为啥会有这么一个猜想？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unified-Memory"><span class="toc-number">3.</span> <span class="toc-text">Unified Memory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验"><span class="toc-number">4.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -139,8 +139,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>##这篇blog讲啥？</p>
-<ul>
+    <h1 id="这篇blog讲啥？"><a href="#这篇blog讲啥？" class="headerlink" title="这篇blog讲啥？"></a>这篇blog讲啥？</h1><ul>
 <li><p>在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。</p>
 </li>
 <li><p>在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。</p>
@@ -148,8 +147,7 @@
 <li><p>使用cudaMallocManaged调试代码比cudaMalloc-&gt;cudaMemcpy方式方便多了，显存上放了啥gdb print一下就能看到，妈妈再也不用担心我CPU-GPU数据调试问题了</p>
 </li>
 </ul>
-<p>##为啥会有这么一个猜想？</p>
-<ol>
+<h1 id="为啥会有这么一个猜想？"><a href="#为啥会有这么一个猜想？" class="headerlink" title="为啥会有这么一个猜想？"></a>为啥会有这么一个猜想？</h1><ol>
 <li><p>Jetson Xavier是是NVIDIA于2018年底出品的的新一代人工智能用途的嵌入式边缘计算硬件。可以理解为一个带GPU的嵌入式硬件。</p>
 </li>
 <li><p>Jetson Xavier上内存和显存都放在同一块RAM上，理论上，东西放内存or显存，都在一个芯片上，是不是可以实现Zero Copy、而不是显式copy一下，而且嵌入式的带宽真是没法儿和x86比，memcpy一下真是慢出翔。</p>
@@ -157,11 +155,9 @@
 <li><p>很多时候，调试GPU代码得看kernel输入输出的数据是不是对的，而gdb print不能直接print 显存数据，cuda-gdb跑起来简直慢到让人想摸鱼，所以有没一个更快的方法解决这个问题。</p>
 </li>
 </ol>
-<p>##Unified Memory</p>
-<p>unified memory：在CUDA 6.0版本后，CUDA新增了统一寻址这个功能，该功能主要是在内存池结构上增加了一个统一内存系统，程序员可以直接访问任何内存/显存资源，或者在合法的内存空间内寻址，而不用管涉及到的存储空间到底是内存还是显存。</p>
+<h1 id="Unified-Memory"><a href="#Unified-Memory" class="headerlink" title="Unified Memory"></a>Unified Memory</h1><p>unified memory：在CUDA 6.0版本后，CUDA新增了统一寻址这个功能，该功能主要是在内存池结构上增加了一个统一内存系统，程序员可以直接访问任何内存/显存资源，或者在合法的内存空间内寻址，而不用管涉及到的存储空间到底是内存还是显存。</p>
 <p>而涉及到内存和显存之间的数据拷贝由程序员的手动执行（cudaMemcpy），变成自动执行（yes，啥都不用干）。</p>
-<p>##实验</p>
-<ul>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><ul>
 <li>设备：Jetson Xavier </li>
 <li>系统：Jetpack 4.2</li>
 <li>显存占用：<ul>
@@ -444,7 +440,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在嵌入式设备上使用Unified Memory确实能在不影响kernel的执行效率下，更好地减少访存的时延，当然，本实验主要是Matrix Multiply kernel，如果可以，可以试试不同的算法，例如传统的高访存machine learning算法。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>在嵌入式设备上使用Unified Memory确实能在不影响kernel的执行效率下，更好地减少访存的时延，当然，本实验主要是Matrix Multiply kernel，如果可以，可以试试不同的算法，例如传统的高访存machine learning算法。</p>
 
   </div>
 </article>
@@ -476,7 +472,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">1.</span> <span class="toc-text">结论</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#这篇blog讲啥？"><span class="toc-number">1.</span> <span class="toc-text">这篇blog讲啥？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为啥会有这么一个猜想？"><span class="toc-number">2.</span> <span class="toc-text">为啥会有这么一个猜想？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unified-Memory"><span class="toc-number">3.</span> <span class="toc-text">Unified Memory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验"><span class="toc-number">4.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
