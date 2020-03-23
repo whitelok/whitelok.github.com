@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="在过去的五年中，通过AI生成的艺术作品（无论是绘画、诗歌还是音乐）受到社会的热烈关注。去年10月，一件由AI创作的艺术品在佳士得拍卖会上以超过40万美元的价格拍出，引发了关于机器产生的艺术品的内在价值和本质的讨论。">
+    <meta name="description" content="这些年来，用AI生成的艺术作品（无论是绘画、诗歌还是音乐）受到社会的热烈关注。去年10月，一件由AI创作的艺术品在佳士得拍卖会上以超过40万美元的价格拍出，引发了关于机器产生的艺术品的内在价值和本质的讨论。  虽然这些提到的艺术作品大多数都是通过生成对抗网络（GAN的，我们将在未来的教程中讨论）生成的原创作品，但像PRISMA这样的应用程序一直受到关注，因为能够应用著名的风格画到自己的照片。这个概">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI如何将把你的照片变成艺术大师的作品？ --- 原理和实战">
 <meta property="og:url" content="http://whitelok.github.io/2020/01/30/neural-art-style-transfer-with-keras-theory-and-implementation/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
-<meta property="og:description" content="在过去的五年中，通过AI生成的艺术作品（无论是绘画、诗歌还是音乐）受到社会的热烈关注。去年10月，一件由AI创作的艺术品在佳士得拍卖会上以超过40万美元的价格拍出，引发了关于机器产生的艺术品的内在价值和本质的讨论。">
+<meta property="og:description" content="这些年来，用AI生成的艺术作品（无论是绘画、诗歌还是音乐）受到社会的热烈关注。去年10月，一件由AI创作的艺术品在佳士得拍卖会上以超过40万美元的价格拍出，引发了关于机器产生的艺术品的内在价值和本质的讨论。  虽然这些提到的艺术作品大多数都是通过生成对抗网络（GAN的，我们将在未来的教程中讨论）生成的原创作品，但像PRISMA这样的应用程序一直受到关注，因为能够应用著名的风格画到自己的照片。这个概">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://static.runoob.com/images/runoob-logo.png">
-<meta property="og:updated_time" content="2020-01-31T08:47:38.233Z">
+<meta property="og:updated_time" content="2020-02-01T02:46:49.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AI如何将把你的照片变成艺术大师的作品？ --- 原理和实战">
-<meta name="twitter:description" content="在过去的五年中，通过AI生成的艺术作品（无论是绘画、诗歌还是音乐）受到社会的热烈关注。去年10月，一件由AI创作的艺术品在佳士得拍卖会上以超过40万美元的价格拍出，引发了关于机器产生的艺术品的内在价值和本质的讨论。">
+<meta name="twitter:description" content="这些年来，用AI生成的艺术作品（无论是绘画、诗歌还是音乐）受到社会的热烈关注。去年10月，一件由AI创作的艺术品在佳士得拍卖会上以超过40万美元的价格拍出，引发了关于机器产生的艺术品的内在价值和本质的讨论。  虽然这些提到的艺术作品大多数都是通过生成对抗网络（GAN的，我们将在未来的教程中讨论）生成的原创作品，但像PRISMA这样的应用程序一直受到关注，因为能够应用著名的风格画到自己的照片。这个概">
 <meta name="twitter:image" content="http://static.runoob.com/images/runoob-logo.png">
     
     
@@ -73,6 +73,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" href="/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2020/01/04/how-to-save-hundreds-of-millions-of-dollars-with-deep-learning-model-optimization/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -141,8 +143,9 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>在过去的五年中，通过AI生成的艺术作品（无论是绘画、诗歌还是音乐）受到社会的热烈关注。去年10月，一件由AI创作的艺术品在佳士得拍卖会上以超过40万美元的价格拍出，引发了关于机器产生的艺术品的内在价值和本质的讨论。</p>
+    <p>这些年来，用AI生成的艺术作品（无论是绘画、诗歌还是音乐）受到社会的热烈关注。去年10月，一件由AI创作的艺术品在佳士得拍卖会上以超过40万美元的价格拍出，引发了关于机器产生的艺术品的内在价值和本质的讨论。</p>
 <p><img src="http://static.runoob.com/images/runoob-logo.png" alt="Edmond Belamy" title="RUNOOB"></p>
+<p>虽然这些提到的艺术作品大多数都是通过生成对抗网络（GAN的，我们将在未来的教程中讨论）生成的原创作品，但像PRISMA这样的应用程序一直受到关注，因为能够应用著名的风格画到自己的照片。这个概念被称为神经风格转移（因此NST），最初由Leon Gatys等人于2015年在一篇论文中引入，最近作为Tensorflow的演示应用程序展示的一部分被实施。</p>
 
   </div>
 </article>

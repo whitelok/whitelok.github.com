@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="这篇blog讲啥？ 在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代码比c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nvidia嵌入式系统系列使用CUDA的unified memory性能分析">
+<meta property="og:url" content="http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/index.html">
+<meta property="og:site_name" content="Karl Luo Page">
+<meta property="og:description" content="这篇blog讲啥？ 在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代码比c">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-23T03:57:36.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nvidia嵌入式系统系列使用CUDA的unified memory性能分析">
+<meta name="twitter:description" content="这篇blog讲啥？ 在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代码比c">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Nvidia嵌入式系统系列使用CUDA的unified memory性能分析</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/whitelok">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/01/30/neural-art-style-transfer-with-keras-theory-and-implementation/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&text=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&is_video=false&description=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&body=Check out this article: http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&name=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#这篇blog讲啥？"><span class="toc-number">1.</span> <span class="toc-text">这篇blog讲啥？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为啥会有这么一个猜想？"><span class="toc-number">2.</span> <span class="toc-text">为啥会有这么一个猜想？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unified-Memory"><span class="toc-number">3.</span> <span class="toc-text">Unified Memory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验"><span class="toc-number">4.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Nvidia嵌入式系统系列使用CUDA的unified memory性能分析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Karl Luo Page</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-03-23T03:55:52.000Z" itemprop="datePublished">2020-03-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="这篇blog讲啥？"><a href="#这篇blog讲啥？" class="headerlink" title="这篇blog讲啥？"></a>这篇blog讲啥？</h2><ul>
+<li><p>在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。</p>
+</li>
+<li><p>在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。</p>
+</li>
+<li><p>使用cudaMallocManaged调试代码比cudaMalloc-&gt;cudaMemcpy方式方便多了，显存上放了啥gdb print一下就能看到，妈妈再也不用担心我CPU-GPU数据调试问题了</p>
+</li>
+</ul>
+<h2 id="为啥会有这么一个猜想？"><a href="#为啥会有这么一个猜想？" class="headerlink" title="为啥会有这么一个猜想？"></a>为啥会有这么一个猜想？</h2><ol>
+<li><p>Jetson Xavier是是NVIDIA于2018年底出品的的新一代人工智能用途的嵌入式边缘计算硬件。可以理解为一个带GPU的嵌入式硬件。</p>
+</li>
+<li><p>Jetson Xavier上内存和显存都放在同一块RAM上，理论上，东西放内存or显存，都在一个芯片上，是不是可以实现Zero Copy、而不是显式copy一下，而且嵌入式的带宽真是没法儿和x86比，memcpy一下真是慢出翔。</p>
+</li>
+<li><p>很多时候，调试GPU代码得看kernel输入输出的数据是不是对的，而gdb print不能直接print 显存数据，cuda-gdb跑起来简直慢到让人想摸鱼，所以有没一个更快的方法解决这个问题。</p>
+</li>
+</ol>
+<h2 id="Unified-Memory"><a href="#Unified-Memory" class="headerlink" title="Unified Memory"></a>Unified Memory</h2><p>unified memory：在CUDA 6.0版本后，CUDA新增了统一寻址这个功能，该功能主要是在内存池结构上增加了一个统一内存系统，程序员可以直接访问任何内存/显存资源，或者在合法的内存空间内寻址，而不用管涉及到的存储空间到底是内存还是显存。</p>
+<p>而涉及到内存和显存之间的数据拷贝由程序员的手动执行（cudaMemcpy），变成自动执行（yes，啥都不用干）。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><ul>
+<li>设备：Jetson Xavier </li>
+<li>系统：Jetpack 4.2</li>
+<li>显存占用：<ul>
+<li>无Unified Memory: RAM 9292/15699MB</li>
+<li>有Unified Memory: RAM 9285/15699MB</li>
+</ul>
+</li>
+<li>实验用kernel: 矩阵大小1000*1000 Byte的乘加（无share memory 无auto boost）</li>
+<li>统计对象GPU Activities:</li>
+</ul>
+<p>有Unified Memory，kernel内循环100次</p>
+<table>
+<thead>
+<tr>
+<th>Time(%)</th>
+<th>Time</th>
+<th>Calls</th>
+<th>Avg</th>
+<th>Min</th>
+<th>Max</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100.00%</td>
+<td>22.2794s</td>
+<td>1</td>
+<td>22.2794s</td>
+<td>22.2794s</td>
+<td>22.2794s</td>
+<td>AplusB(int, int, int, int)</td>
+</tr>
+</tbody>
+</table>
+<p>无Unified Memory，kernel内循环100次</p>
+<table>
+<thead>
+<tr>
+<th>Time(%)</th>
+<th>Time</th>
+<th>Calls</th>
+<th>Avg</th>
+<th>Min</th>
+<th>Max</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>93.86%</td>
+<td>22.2528s</td>
+<td>1</td>
+<td>22.2528s</td>
+<td>22.2528s</td>
+<td>22.2528s</td>
+<td>AplusB(int, int, int, int)</td>
+</tr>
+<tr>
+<td>3.08%</td>
+<td>730.93ms</td>
+<td>2</td>
+<td>365.47ms</td>
+<td>360.19ms</td>
+<td>370.74ms</td>
+<td>[CUDA memcpy HtoD]</td>
+</tr>
+<tr>
+<td>3.06%</td>
+<td>725.64ms</td>
+<td>1</td>
+<td>725.64ms</td>
+<td>725.64ms</td>
+<td>725.64ms</td>
+<td>[CUDA memcpy DtoH]</td>
+</tr>
+</tbody>
+</table>
+<p>有Unified Memory，kernel内循环10次    </p>
+<table>
+<thead>
+<tr>
+<th>Time(%)</th>
+<th>Time</th>
+<th>Calls</th>
+<th>Avg</th>
+<th>Min</th>
+<th>Max</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100.00%</td>
+<td>2.29094s</td>
+<td>1</td>
+<td>2.29094s</td>
+<td>2.29094s</td>
+<td>2.29094s</td>
+<td>AplusB(int, int, int, int)</td>
+</tr>
+</tbody>
+</table>
+<p>无Unified Memory，kernel内循环10次</p>
+<table>
+<thead>
+<tr>
+<th>Time(%)</th>
+<th>Time</th>
+<th>Calls</th>
+<th>Avg</th>
+<th>Min</th>
+<th>Max</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>60.99%</td>
+<td>2.29096s</td>
+<td>1</td>
+<td>2.29096s</td>
+<td>2.29096s</td>
+<td>2.29096s</td>
+<td>AplusB(int, int, int, int)</td>
+</tr>
+<tr>
+<td>19.63%</td>
+<td>737.42ms</td>
+<td>2</td>
+<td>368.71ms</td>
+<td>364.59ms</td>
+<td>372.83ms</td>
+<td>[CUDA memcpy HtoD]</td>
+</tr>
+<tr>
+<td>19.37%</td>
+<td>727.62ms</td>
+<td>1</td>
+<td>727.62ms</td>
+<td>727.62ms</td>
+<td>727.62ms</td>
+<td>[CUDA memcpy DtoH]</td>
+</tr>
+</tbody>
+</table>
+<p>有Unified Memory，kernel外循环100次</p>
+<table>
+<thead>
+<tr>
+<th>Time(%)</th>
+<th>Time</th>
+<th>Calls</th>
+<th>Avg</th>
+<th>Min</th>
+<th>Max</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100.00%</td>
+<td>26.8297s</td>
+<td>100</td>
+<td>268.30ms</td>
+<td>268.27ms</td>
+<td>268.32ms</td>
+<td>AplusB(int, int, int, int)</td>
+</tr>
+</tbody>
+</table>
+<p>无Unified Memory，kernel外循环100次</p>
+<table>
+<thead>
+<tr>
+<th>Time(%)</th>
+<th>Time</th>
+<th>Calls</th>
+<th>Avg</th>
+<th>Min</th>
+<th>Max</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>94.79%</td>
+<td>26.8299s</td>
+<td>100</td>
+<td>268.30ms</td>
+<td>268.27ms</td>
+<td>268.34ms</td>
+<td>AplusB(int, int, int, int)</td>
+</tr>
+<tr>
+<td>2.65%</td>
+<td>749.90ms</td>
+<td>2</td>
+<td>374.95ms</td>
+<td>367.92ms</td>
+<td>381.97ms</td>
+<td>[CUDA memcpy HtoD]</td>
+</tr>
+<tr>
+<td>2.56%</td>
+<td>725.41ms</td>
+<td>1</td>
+<td>725.41ms</td>
+<td>725.41ms</td>
+<td>725.41ms</td>
+<td>[CUDA memcpy DtoH]</td>
+</tr>
+</tbody>
+</table>
+<p>有Unified Memory，kernel外循环10次    </p>
+<table>
+<thead>
+<tr>
+<th>Time(%)</th>
+<th>Time</th>
+<th>Calls</th>
+<th>Avg</th>
+<th>Min</th>
+<th>Max</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100.00%</td>
+<td>2.68303s</td>
+<td>10</td>
+<td>268.30ms</td>
+<td>268.29ms</td>
+<td>268.33ms</td>
+<td>AplusB(int, int, int, int)</td>
+</tr>
+</tbody>
+</table>
+<p>无UM，kernel外循环10次</p>
+<table>
+<thead>
+<tr>
+<th>Time(%)</th>
+<th>Time</th>
+<th>Calls</th>
+<th>Avg</th>
+<th>Min</th>
+<th>Max</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>64.62%</td>
+<td>2.68300s</td>
+<td>10</td>
+<td>268.30ms</td>
+<td>268.28ms</td>
+<td>268.31ms</td>
+<td>AplusB(int, int, int, int)</td>
+</tr>
+<tr>
+<td>17.93%</td>
+<td>744.61ms</td>
+<td>2</td>
+<td>372.30ms</td>
+<td>366.02ms</td>
+<td>378.58ms</td>
+<td>[CUDA memcpy HtoD]</td>
+</tr>
+<tr>
+<td>17.44%</td>
+<td>724.20ms</td>
+<td>1</td>
+<td>724.20ms</td>
+<td>724.20ms</td>
+<td>724.20ms</td>
+<td>[CUDA memcpy DtoH]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在嵌入式设备上使用Unified Memory确实能在不影响kernel的执行效率下，更好地减少访存的时延，当然，本实验主要是Matrix Multiply kernel，如果可以，可以试试不同的算法，例如传统的高访存machine learning算法。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/whitelok">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#这篇blog讲啥？"><span class="toc-number">1.</span> <span class="toc-text">这篇blog讲啥？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为啥会有这么一个猜想？"><span class="toc-number">2.</span> <span class="toc-text">为啥会有这么一个猜想？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unified-Memory"><span class="toc-number">3.</span> <span class="toc-text">Unified Memory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实验"><span class="toc-number">4.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&text=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&is_video=false&description=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&body=Check out this article: http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&name=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Karl Luo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/whitelok">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-107706378-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'whitelok';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
