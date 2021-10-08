@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="生成对抗网络 （GAN） 是近十年来出现的最具创新性的想法之一。他原理其实就是通过模仿输入数据，生成一批新的数据。例如，给定一批人脸图像生成另外一批人脸图像；给定周杰伦的歌的全集，根据这些歌生成风格，调调都类似的新歌。 GAN 已找到图像、文本和声音生成的应用程序，是 AI 音乐、深度假和内容感知图像编辑等技术的核心。除了纯一代之外，GAN 还应用于将图像从一个域转换为另一个域，并作为样式传输的一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI换脸背后技术发展史-GAN简史2020">
+<meta property="og:url" content="http://whitelok.github.io/2020/07/15/gan-timeline-2020/index.html">
+<meta property="og:site_name" content="Karl Luo Page">
+<meta property="og:description" content="生成对抗网络 （GAN） 是近十年来出现的最具创新性的想法之一。他原理其实就是通过模仿输入数据，生成一批新的数据。例如，给定一批人脸图像生成另外一批人脸图像；给定周杰伦的歌的全集，根据这些歌生成风格，调调都类似的新歌。 GAN 已找到图像、文本和声音生成的应用程序，是 AI 音乐、深度假和内容感知图像编辑等技术的核心。除了纯一代之外，GAN 还应用于将图像从一个域转换为另一个域，并作为样式传输的一">
+<meta property="og:image" content="https://miro.medium.com/max/925/1*oy3cmYRAvCNtIcA4TwbpNw.png">
+<meta property="og:image" content="https://miro.medium.com/max/1145/1*uOtShESNWlhoc5QCw6hHNQ.png">
+<meta property="og:image" content="https://miro.medium.com/max/1044/1*9PBjKoEvyVEtAAXOSt__ig.png">
+<meta property="og:image" content="https://miro.medium.com/max/1028/1*ui9quP9NC8fW7154trsUyQ.png">
+<meta property="og:image" content="https://miro.medium.com/max/729/1*Jp9DW9ywvH7u1icijk8DIg.png">
+<meta property="og:image" content="https://miro.medium.com/max/905/1*qNvtp9hTXR5Mi_jisCIRlA.png">
+<meta property="article:published_time" content="2020-07-15T14:38:25.000Z">
+<meta property="article:modified_time" content="2020-08-20T03:48:16.965Z">
+<meta property="article:author" content="Karl Luo">
+<meta property="article:tag" content="AI GAN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/max/925/1*oy3cmYRAvCNtIcA4TwbpNw.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>AI换脸背后技术发展史-GAN简史2020</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/03/26/tvm-tutorials-lesson-3/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2020/07/15/gan-timeline-2020/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&text=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&is_video=false&description=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AI换脸背后技术发展史-GAN简史2020&body=Check out this article: http://whitelok.github.io/2020/07/15/gan-timeline-2020/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&name=AI换脸背后技术发展史-GAN简史2020&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-第一篇GAN论文（2014）"><span class="toc-number">1.</span> <span class="toc-text">1 第一篇GAN论文（2014）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-StyleGAN（2019）"><span class="toc-number">2.</span> <span class="toc-text">2 StyleGAN（2019）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Pix2Pix-and-CycleGAN-2017"><span class="toc-number">3.</span> <span class="toc-text">3 Pix2Pix and CycleGAN (2017)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Semi-Supervised-Learning-（2016）"><span class="toc-number">4.</span> <span class="toc-text">4 Semi-Supervised Learning （2016）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Anime-GAN-（2017）"><span class="toc-number">5.</span> <span class="toc-text">Anime GAN （2017）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Wasserstein-Loss-2017"><span class="toc-number">6.</span> <span class="toc-text">6 Wasserstein Loss (2017)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Spectral-Norm-2018"><span class="toc-number">7.</span> <span class="toc-text">7 Spectral Norm (2018)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-Self-Attention-GAN-2018"><span class="toc-number">8.</span> <span class="toc-text">8 Self-Attention GAN (2018)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-Boundary-Equilibrium-GAN"><span class="toc-number">9.</span> <span class="toc-text">9 Boundary Equilibrium GAN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Are-GANs-Created-Equal-2018"><span class="toc-number">10.</span> <span class="toc-text">10 Are GANs Created Equal? (2018)</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        AI换脸背后技术发展史-GAN简史2020
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Karl Luo Page</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-07-15T14:38:25.000Z" itemprop="datePublished">2020-07-15</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/AI-GAN/" rel="tag">AI GAN</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>生成对抗网络 （GAN） 是近十年来出现的最具创新性的想法之一。他原理其实就是通过模仿输入数据，生成一批新的数据。例如，给定一批人脸图像生成另外一批人脸图像；给定周杰伦的歌的全集，根据这些歌生成风格，调调都类似的新歌。</p>
+<p>GAN 已找到图像、文本和声音生成的应用程序，是 AI 音乐、深度假和内容感知图像编辑等技术的核心。除了纯一代之外，GAN 还应用于将图像从一个域转换为另一个域，并作为样式传输的一种方式。为了再添加一个应用程序，它们适合作为一种智能数据增强技术进行半监督学习。<br>在这篇文章中，我选择了到2020年对GAN最大开眼界的10个读数。特别是，我挑选了五篇论文，扩大了可在哪里以及如何使用GAN的视野，并挑选了五篇论文，处理培训GAN的具体技术挑战。<br>至于我以前关于阅读建议的文章，我简要概述了每篇论文，并提供了阅读论文的一套理由，以及关于对相同或相关主题的进一步阅读的一些想法。</p>
+<h1 id="1-第一篇GAN论文（2014）"><a href="#1-第一篇GAN论文（2014）" class="headerlink" title="1 第一篇GAN论文（2014）"></a>1 第一篇GAN论文（2014）</h1><p><em>Goodfellow, Ian, et al.</em> <a href="https://papers.nips.cc/paper/5423-generative-adversarial-nets" target="_blank" rel="noopener">“Generative adversarial nets.”</a> <em>Advances in neural information processing systems**. 2014.</em></p>
+<p>2014年，Ian Goodfellow和他的朋友在一个酒吧讨论怎样AI来做图像合成。他的朋友建议通过统计学方法来完成，而Goodfellow大神则构想通过两个神经网络：神经网络A学习“怎么生成需要的图片”，神经网络B学习“怎么判断生成的图片是否合格”来完成图片合成任务。前者根据后者的反馈进行训练，后者通过训练从前者生成的假图片中识别出真的图片。</p>
+<p><img src="https://miro.medium.com/max/925/1*oy3cmYRAvCNtIcA4TwbpNw.png" alt="Image for post"></p>
+<p>深度阅读：虽然GANs目前被证明是效果非常好的方法，但是另外还有2篇相关的论文值得一读：Variational Auto-Encoders (VAEs)](<a href="https://arxiv.org/abs/1906.02691" target="_blank" rel="noopener">https://arxiv.org/abs/1906.02691</a>) 以及 <a href="https://arxiv.org/abs/1601.06759" target="_blank" rel="noopener">Autoregressive models</a> Both are worth checking out and have their pros and cons over GANs。</p>
+<h1 id="2-StyleGAN（2019）"><a href="#2-StyleGAN（2019）" class="headerlink" title="2 StyleGAN（2019）"></a>2 StyleGAN（2019）</h1><p>Five years later, GANs are now able to generate high-resolution customizable portraits trained on massive corpora. While many novel ideas were proposed from 2014 to 2019 and they certainly inspired many of the authors’ decisions, it all boils down to the architecture, AdaIN, Wasserstein loss, and novel dataset: <a href="https://github.com/NVlabs/ffhq-dataset" target="_blank" rel="noopener">Flickr-Faces-HQ Dataset (FFHQ)</a>.</p>
+<p>五年过去了，虽然说GANs已经可以做到生成超高分辨率的图片之类的革命性功能，但是都只是基于网络结构、损失函数以及数据集的提升而得到的结果。</p>
+<p>The paper’s core idea is to input different noise vectors at each level of upsampling. This goes in stark contrast to most previous works, which employ noise only as a first step. By tweaking the noise vectors of each resolution, the authors can control “high-level details” by tampering with the lower levels noise and “low-level details” tampering with the later levels.</p>
+<p>这篇论文的核心思想是在不同层级的upsampling的输入加入不同的噪声矩阵。这样就和之前的论文产生非常鲜明的区别，因为之前大多数论文都只是在第一层的输入添加噪声，而这篇论文在不同层级的upsampling输入添加噪声可以通过低层级的噪声和“低分辨率特征图的细节”来控制“高分辨率特征图的细节”。</p>
+<p><img src="https://miro.medium.com/max/1145/1*uOtShESNWlhoc5QCw6hHNQ.png" alt="Image for post"></p>
+<p>The intuition over the StyleGAN architecture. Different noises are applied at various stages to control the “style” while a central “main” noise is used as the “essence”. Portrait by <a href="https://unsplash.com/@chrisjoelcampbell?utm_source=medium&utm_medium=referral" target="_blank" rel="noopener">Christopher Campbell</a> on <a href="https://unsplash.com/?utm_source=medium&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></p>
+<p>The intuition over the StyleGAN architecture. Different noises are applied at various stages to control the “style” while a central “main” noise is used as the “essence”. Portrait by <a href="https://unsplash.com/@chrisjoelcampbell?utm_source=medium&utm_medium=referral" target="_blank" rel="noopener">Christopher Campbell</a> on <a href="https://unsplash.com/?utm_source=medium&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></p>
+<p><strong>Reason #1:</strong> While the amount of contributions made each year in deep learning is overwhelming, some papers show that only a small fraction of it is needed to achieve state-of-the-art results. This paper is a good example.</p>
+<p><strong>Reason #2:</strong> In essence, the main contribution of this work is a novel way to employ noise. There is no significant new algorithm or mathematical formulation involved. In fact, page three onwards is dedicated to evaluation.</p>
+<p><strong>Reason #3:</strong> On the other hand, they had to scrape an entire dataset and run on <a href="https://github.com/NVlabs/stylegan" target="_blank" rel="noopener">eight Tesla V100 GPUs for a whole week</a>. This usage of <em>p3.16xlarge</em> instances is about four thousand dollars on AWS. The technical contribution might be ingenious, but the computational cost to reach it is pretty high.</p>
+<p><strong>Further Reading:</strong> By the end of 2019, <a href="https://arxiv.org/abs/1912.04958" target="_blank" rel="noopener">a follow-up paper was released</a>, trimming several of the model’s edges. However, more impressive is the work developed independently by other authors using StyleGAN as a tool. My favorite is <a href="http://openaccess.thecvf.com/content_ICCV_2019/html/Abdal_Image2StyleGAN_How_to_Embed_Images_Into_the_StyleGAN_Latent_Space_ICCV_2019_paper.html" target="_blank" rel="noopener">Image2StyleGAN</a>. The authors’ idea was to train a network to find the corresponding noise for a face that would generate it back using StyleGAN. This way, the network can be used to style pre-existing images as if they were any other generated picture.</p>
+<p>到 2019 年底，<a href="https：//arxiv.org/abs/1912.04958">发布后续论文</a>，修剪了模型的几个边缘。然而，更令人印象深刻的是其他作者使用 StyleGAN 作为工具独立开发的作品。我最喜欢的是 [Image2StyleGAN]（http：//openAccess.thecvf.com/content_ICCV_2019/html/Abdal_Image2StyleGAN_How_to_Embed_Images_Into_the_StyleGAN_Latent_Space_ICCV_2019_paper.html）。作者的想法是训练一个网络，以找到相应的噪音的脸，将生成它回来使用 StyleGAN。这样，网络就可用于将预先存在的图像设置样式，就像它们是任何其他生成的图片一样。</p>
+<h1 id="3-Pix2Pix-and-CycleGAN-2017"><a href="#3-Pix2Pix-and-CycleGAN-2017" class="headerlink" title="3 Pix2Pix and CycleGAN (2017)"></a>3 Pix2Pix and CycleGAN (2017)</h1><p>The original GAN formulation is unsupervised: images are generated out of nowhere. However, many authors have devised supervised formulations, in which some prior knowledge given to the network. These are named “conditional” approaches. Among these, the Pix2Pix and CycleGAN architectures are among the most well known.</p>
+<p>原始的GAN核心公式是无监督学习的公式。然而，许多作者为在这个公式上增加了一些监督项，给网络增加了一些先验的知识。其中，Pix2Pix和CycleGAN这种类型网络架构中最著名的。</p>
+<p>The Pix2Pix model deals with problems such as converting line drawings to finished paintings, allowing users to have some degree of artistic control by improving/altering their sketches. In turn, the CycleGAN model relaxes the need for paired training examples. It’s most famous uses are to replace horses for zebras or apples for oranges. However, <a href="https://www.youtube.com/watch?time_continue=57&v=xkLtgwWxrec" target="_blank" rel="noopener">turning Fortnite into PUBG</a> is undoubtedly more appealing to the younger generation.</p>
+<p><img src="https://miro.medium.com/max/1044/1*9PBjKoEvyVEtAAXOSt__ig.png" alt="Image for post"></p>
+<p>The Pix2Pix algorithm enables “artistic control”, unlike traditional unconditional approaches.</p>
+<p><strong>Reason #1:</strong> As GANs improve in quality, artistic control becomes a much more exciting concern. Conditional models provide an avenue for GANs to become useful in practice.</p>
+<p>随着GAN质量的提高，艺术控制成为一个更令人兴奋的问题。条件模型为 GAN 在实践中变得有用提供了一条途径。</p>
+<p><strong>Reason #2:</strong> The main component behind Pix2Pix is the U-Net architecture, which was initially proposed for biomedical image segmentation. This highlights how the many applications of deep learning contribute back to each other. You might not be a GAN researcher, but some GAN innovation might be just what you need right now.</p>
+<p>Pix2Pix 背后的主要组件是 U-Net 架构，最初建议用于生物医学图像分割。这突出了深度学习的许多应用如何相互贡献。你可能不是 GAN 研究员， 但一些 GAN 创新可能就是你现在需要的。</p>
+<p><strong>Reason #3:</strong> The CycleGAN paper, in particular, demonstrates how an effective loss function can work wonders at solving difficult problems. As for #2, much can be improved by just connecting things differently.</p>
+<p>特别是，CycleGAN 论文演示了有效的loss函数如何解决难题。至于#2，只要以不同的方式连接事物，就可以改进很多。</p>
+<p><strong>Further Reading:</strong> I highly recommend coding a GAN if you never have. They are an excellent exercise for deeply learning deep learning :). The TensorFlow 2 documentation has three excellent articles on building the <a href="https://www.tensorflow.org/tutorials/generative/dcgan" target="_blank" rel="noopener">original GAN</a>, <a href="https://www.tensorflow.org/tutorials/generative/pix2pix" target="_blank" rel="noopener">the Pix2Pix model</a>, and <a href="https://www.tensorflow.org/tutorials/generative/cyclegan" target="_blank" rel="noopener">the CycleGAN</a>.</p>
+<h1 id="4-Semi-Supervised-Learning-（2016）"><a href="#4-Semi-Supervised-Learning-（2016）" class="headerlink" title="4 Semi-Supervised Learning （2016）"></a>4 Semi-Supervised Learning （2016）</h1><p><em>Salimans, Tim, et al.</em> <a href="http://papers.nips.cc/paper/6124-improved-techniques-for-training-gans" target="_blank" rel="noopener">“Improved techniques for training gans.”</a> <em>Advances in neural information processing systems**. 2016.</em></p>
+<p>While generating stuff is usually the spotlight, GANs can also be used as an auxiliary tool to improve other tasks. One of these uses is semi-supervised learning: when plenty of unlabeled data is available, but only a small set of labeled examples is given. In other words, how to leverage unlabeled data.</p>
+<p>虽然生成内容通常是聚光灯下的焦点，但 GAN 也可以用作改进其他任务的辅助工具。其中一个用途是半监督学习：当有大量的未标记数据可用，但只给出一小组标记示例。换句话说，如何利用未标记的数据。</p>
+<p>This paper gives the basic formulation for training a classifier with the help of a GAN. In essence, the classifier is jointly trained to classify images and detect fakes while the generator strives to generate classifiable photos, which are not seen as fake. This way, the unlabeled data can be used to train the generator, which in turn provides more data for the classifier to learn.</p>
+<p>本文给出了在GAN的帮助下训练分类器的基本公式。从本质上讲，分类器是联合训练，以分类图像和检测假货，而生成器努力生成可分类的照片，不被视为假。这样，未标记的数据可用于训练生成器，这反过来又为分类器提供了更多的数据供其学习。</p>
+<p><strong>Reason #1:</strong> Semi-supervised learning is one of the most promising ideas to lower the cost of data. Many domains, such as medical imaging, are incredibly expensive to annotate. In these contexts, this formulation might save money. This idea is championed by the <a href="https://www.youtube.com/watch?v=UX8OubxsY8w" target="_blank" rel="noopener">Turing award winner Yann LeCun</a>.</p>
+<p>半监督式学习是降低数据成本的最有前途的想法之一。许多领域，如医学成像，是令人难以置信的昂贵的批注。在这些情况下，这种提法可能节省资金。这个想法是由[图灵奖得主Yann LeCun]（https：//<a href="http://www.youtube.com/watch？v=UX8OubxSY8w）倡导的。" target="_blank" rel="noopener">www.youtube.com/watch？v=UX8OubxSY8w）倡导的。</a></p>
+<p><strong>Reason #2:</strong> Most of us are familiar with the concept of data augmentation, such as adding random crops, zooms, rotations, and mirrors. In that regard, GANs can be employed as a “gourmet data augmentation.”</p>
+<p>我们大多数人都熟悉数据扩充的概念，例如添加随机裁剪、缩放、旋转和镜像。在这方面，GAN 可以用作”美食数据扩增”。</p>
+<p><strong>Reason #3:</strong> While this work is not directly focused on the philosophy of it, it is said that “if you can generate something, you know all about it”. This is one of the main reasons generative learning is deemed essential for higher-level intelligence. This paper is an example of how GANs can help other tasks.</p>
+<p>虽然这项工作不是直接专注于它的理念，但它说，”如果你能产生一些东西，你了解它的所有”。这是生成学习被认为对更高层次智力至关重要的主要原因之一。本文是一个说明GAN如何帮助其他任务的示例。</p>
+<p><strong>Reason #4:</strong> Besides the focus on semi-supervised learning, this paper shares a set of tricks to improve and evaluate GANs. Among them, they proposed the widely used Inception Score, one of the primary metrics to evaluate GANs.</p>
+<p>除了关注半监督学习之外，本文还分享了一套改进和评估GAN的技巧。其中，他们提出了广泛使用的”初始分数”，这是评估GAN的主要指标之一。</p>
+<p><strong>Further Reading:</strong> I highly recommend watching the <a href="https://www.youtube.com/watch?v=UX8OubxsY8w" target="_blank" rel="noopener">AAAI 20 keynote speech</a> given by the three Turning award winners. The topics are the future of CNNs, semi-supervised learning, and reasoning with neural networks. I have been recommending this talk on most of my articles, and I can’t stress enough how important it is to watch top-notch keynotes. Reading papers is important, but listening to what the authors have to say is the other half of the picture.</p>
+<p>我强烈推荐观看三位车削奖得主的[AI 20主题演讲]（https：//<a href="http://www.youtube.com/watch？v=UX8OubxSY8w）。主题是CNN的未来，半监督学习和推理与神经网络。我一直在推荐我大部分文章的这次演讲，" target="_blank" rel="noopener">www.youtube.com/watch？v=UX8OubxSY8w）。主题是CNN的未来，半监督学习和推理与神经网络。我一直在推荐我大部分文章的这次演讲，</a> 我再怎么强调一下看顶级主题演讲是多么重要。阅读论文很重要，但听作者的话是图片的另一半。</p>
+<h1 id="Anime-GAN-（2017）"><a href="#Anime-GAN-（2017）" class="headerlink" title="Anime GAN （2017）"></a>Anime GAN （2017）</h1><p><em>Jin, Yanghua, et al.</em> <a href="https://arxiv.org/abs/1708.05509" target="_blank" rel="noopener">“Towards the automatic anime characters creation with generative adversarial networks.”</a> <em>arXiv preprint arXiv:1708.05509</em> <em>(2017).</em></p>
+<p>The fifth entry in this list is, informally, the AnimeGAN. All previously presented approaches handle natural images. However, GANs can be quite useful in other domains too, such as waifu generation, sprite completion, cartoon stylization, deep fakes, and so on. While this paper is not particularly renowned or is as well known as others in this list, it beautifully showcases that there are many avenues for exploration besides faces and cars.</p>
+<p>这个列表中的第五个条目是， 非正式的， 动画。所有以前介绍的方法都处理自然图像。但是，GAN 在其他领域也非常有用，例如 waifu 生成、子画面完成、卡通风格化、深层假等。虽然这篇文章不是特别出名或是众所周知的其他人在这个名单，它精美地展示了除了面孔和汽车，有许多探索的途径。</p>
+<p><img src="https://miro.medium.com/max/1028/1*ui9quP9NC8fW7154trsUyQ.png" alt="Image for post"></p>
+<p>Semi-supervised learning as a means for artistic control. Generated with <a href="https://make.girls.moe/#/" target="_blank" rel="noopener">make.girls.moe</a></p>
+<p><strong>Reason #1:</strong> GANs are not restricted to natural images and good looking people. Generative methods can be employed for a wide variety of tasks (and well beyond the image domain).</p>
+<p>GAN 不限于自然图像和好看的人。生成方法可用于各种任务（远远超出图像域）。</p>
+<p><strong>Reason #2:</strong> This paper showcases the use of a tagged dataset, which can be leveraged to guide the generator into picking a specific hairstyle or eye color. The formulation is almost the same as in semi-supervised learning. However, in this case, we don’t care about the trained classifier.</p>
+<p>本文展示了标记数据集的使用，可用于引导生成器选择特定的发型或眼睛颜色。该公式与半监督式学习中几乎相同。但是，在这种情况下，我们不关心训练有素的分类器。</p>
+<p><strong>Further Reading:</strong> Although GANs evolved quickly, many results are stuck in academia. It is nice when models are made public as interactive tools. Many things can only be learned live, such as forcing algorithms to the extreme or playing with unusual choices. Here are some interesting links: <a href="https://affinelayer.com/pixsrv/" target="_blank" rel="noopener">Pix2Pix</a>, <a href="https://make.girls.moe/#/" target="_blank" rel="noopener">AnimeGAN</a>, <a href="https://reiinakano.com/arbitrary-image-stylization-tfjs/" target="_blank" rel="noopener">StyleTransfer</a>, <a href="https://magenta.tensorflow.org/assets/sketch_rnn_demo/index.html" target="_blank" rel="noopener">SketchRNN</a>, <a href="https://www.autodraw.com/" target="_blank" rel="noopener">AutoDraw</a>, and <a href="https://www.artbreeder.com/" target="_blank" rel="noopener">ArtBreeder</a>.</p>
+<p>虽然GAN发展迅速，但许多结果仍停留在学术界。当模型作为交互式工具公开时，这很好。很多事情只能现场学习，例如强制算法到极致或玩不寻常的选择。这里有一些有趣的链接： <a href="https://affinelayer.com/pixsrv/" target="_blank" rel="noopener">Pix2Pix</a>, <a href="https://make.girls.moe/#/" target="_blank" rel="noopener">AnimeGAN</a>, <a href="https://reiinakano.com/arbitrary-image-stylization-tfjs/" target="_blank" rel="noopener">StyleTransfer</a>, <a href="https://magenta.tensorflow.org/assets/sketch_rnn_demo/index.html" target="_blank" rel="noopener">SketchRNN</a>, <a href="https://www.autodraw.com/" target="_blank" rel="noopener">AutoDraw</a>, and <a href="https://www.artbreeder.com/" target="_blank" rel="noopener">ArtBreeder</a>。</p>
+<p>到目前为止，所介绍的作品已经解决了什么是GAN以及如何应用它们来解决计算机视觉中的几个任务。另一方面，以下工作侧重于训练和实施GAN的技术方面，如新的损失函数和正则化技术。</p>
+<h1 id="6-Wasserstein-Loss-2017"><a href="#6-Wasserstein-Loss-2017" class="headerlink" title="6 Wasserstein Loss (2017)"></a>6 Wasserstein Loss (2017)</h1><p><em>Arjovsky, Martin, Soumith Chintala, and Léon Bottou.</em> <a href="https://arxiv.org/abs/1701.07875" target="_blank" rel="noopener">“Wasserstein gan.”</a> <em>arXiv preprint arXiv:1701.07875</em> <em>(2017).</em></p>
+<p>Since their debut, GANs are known as hard to train: most of the time, the generator is incapable of generating anything useful or produces the same thing over and over (mode collapse). While many “tricks” have been proposed over the years, the Wasserstein loss is one of the first principled approaches to become mainstream and pass the test of time.</p>
+<p>自从它们首次亮相以来，GAN被称为难以训练：大多数时候，生成器无法生成任何有用的东西，或者一遍又一遍地产生相同的东西（模式崩溃）。虽然多年来已经提出了许多”技巧”，但Wasserstein Loss是成为主流和通过时间考验的第一个原则性方法之一。</p>
+<p>The general idea is to replace de discriminator, which judges images as real or fake, by a critic, which merely states a score for each image. Unlike the judge, the critic is unbounded; it can give any score: one, minus three, a hundred, etc. During training, the critic trains to score reals as much apart from fakes as it can while the generator trains to minimize this gap.</p>
+<p>一般的想法是改进鉴别器让鉴别器不要单纯给生成器的结果只做真假的判断，而是给生成器的结果打个分数。生成器可以不断通过改进让自己生成出来的东西得到更好的分数。</p>
+<p>Informally, the main advantage of this approach is that it poses a non-stationary problem. The critic can change its views and score real images lower, or fake images higher. It is a cat and mouse game. The generator is always chasing the score of reals, which is always running away.</p>
+<p>但是判别器的分数可高可低，而生成器只为求得到高分，所以这样并不会产生一个好的结果。</p>
+<p><img src="https://miro.medium.com/max/729/1*Jp9DW9ywvH7u1icijk8DIg.png" alt="Image for post"></p>
+<p>The Wasserstein Loss replaces the discriminator for a critic.</p>
+<p><strong>Reason #1:</strong> Most papers start with a gentle introduction; this paper goes from 0 to 100 real quick. It deserves the read just for its boldness (and if you love math, this is just right for you)</p>
+<p><strong>Reason #2:</strong> Nothing is perfect. While many papers try to hide their shortcomings, others are keen on highlighting and acknowledging them. This should always be praised, as it invites others to contribute. Quoting the paper:</p>
+<p>Weight clipping is a clearly terrible way to enforce a Lipschitz constraint</p>
+<p>Reason #3: Meany famous GANs published after 2017 use the Wasserstein loss and some that didn’t now do in a second version. This is undoubtedly a milestone paper on the field and should be read by anyone on it.</p>
+<p>原因#3： 2017 年后出版的 Meany 著名的 GaNs 使用 Wasserstein 损失， 有些现在没有在第二版中这样做。这无疑是一份具有里程碑意义的文件，任何人都应该阅读。</p>
+<p><strong>Further Reading:</strong> Although this paper has become more or less the go-to loss for training GANs, it is hardly the only loss used. Two that deserve special attention are the <a href="https://arxiv.org/abs/1603.08155" target="_blank" rel="noopener">Perceptual</a> and <a href="https://arxiv.org/abs/1605.01368" target="_blank" rel="noopener">Total Variance</a> losses. The former uses a frozen VGG network as a measure of perceptual similarity while the latter penalizes the image gradients, encouraging smoothness.</p>
+<p>进一步阅读：虽然本文或多或少成为训练GAN的损失，但它几乎不是唯一使用的损失。两个值得特别注意的是<a href="https://arxiv.org/abs/1603.08155" target="_blank" rel="noopener">Perceptual</a>和<a href="https://arxiv.org/abs/1605.01368" target="_blank" rel="noopener">Total Variance</a>损失。前者使用冻结的VGG网络作为感知相似性的度量，而后者则惩罚图像渐变，鼓励平滑度。</p>
+<h1 id="7-Spectral-Norm-2018"><a href="#7-Spectral-Norm-2018" class="headerlink" title="7 Spectral Norm (2018)"></a>7 Spectral Norm (2018)</h1><p><em>Miyato, Takeru, et al.</em> <a href="https://arxiv.org/abs/1802.05957" target="_blank" rel="noopener"><em>“Spectral normalization for generative adversarial networks.”</em></a> <em>arXiv preprint arXiv:1802.05957 (2018).</em></p>
+<p>The Wasserstein loss significantly improves convergence at the cost of requiring gradients to be 1-Lipschitz. To enforce this, the authors proposed to clip weights to [-0.01, 0.01]. A more elegant approach was later introduced by Miyato et al.: Spectral Normalization.</p>
+<p>Wasserstein 损失显著改善收敛，成本要求梯度为 1-Lipschitz。为了实施此规定，作者建议将权重剪裁为 [-0.01， 0.01]。Miyato等人后来提出了一种更优雅的方法：光谱规范化。</p>
+<p>The main idea of this paper is to constrain the largest eigenvalue of a weight matrix to be one, which, in turn, guarantees the Lipschitz requirement. To keep computational costs low, the authors also propose to approximate the eigenvalue computation by using power iteration, which is pretty efficient.</p>
+<p>本文的主要思想是将权重矩阵的最大特征值约束为一个，从而保证了利普斯基茨的要求。为了保持较低的计算成本，作者还建议使用功率迭代来近似于特征值计算，这种计算效率相当高。</p>
+<p>Reason #1: As mentioned in the previous entry, highlighting your weaknesses invites other authors to contribute. Although this paper is not worded as such, it acts as a direct reply to weight clipping.</p>
+<p>原因#1：如上一部分所述，突出你的弱点会邀请其他作者做出贡献。虽然本文没有这样措辞，但它直接回答了体重剪报。</p>
+<p>Reason #2: Normalization is a much bigger topic than most people are aware of. Many select properties can be enforced through specialized norms and careful activation function design, such as the SELU activation function.</p>
+<p>原因#2：正常化是一个比大多数人意识到的要大得多的话题。许多选择的属性可以通过专门的规范和仔细的激活功能设计（如 SELU 激活功能）强制执行。</p>
+<p>Reason #3: Besides being a norm, this is also a regularization, which is an often overlooked topic in neural networks. It is refreshing to read a successful paper on the matter besides dropout.</p>
+<p>原因#3：除了作为一个规范，这也是一个规律化，这是神经网络中经常被忽视的话题。除了辍学之外，读一篇关于此事的成功论文令人耳目一新。</p>
+<p>Further Reading: Other recent advances in normalization techniques are the Group Normalization and Adaptive Instance Normalization techniques. The former solves some of batch norm shortcomings with small batch sizes while the latter is one of the critical breakthroughs in arbitrary style transfer. The latter is also used on #2, to condition the data flow to the noise vectors.</p>
+<p>进一步阅读：规范化技术的其他最新进展是组规范化和自适应实例规范化技术。前者解决了小批量的批规范缺陷，后者是任意样式传输的重大突破之一。后者还用于#2，以条件数据流到噪声向量。</p>
+<h1 id="8-Self-Attention-GAN-2018"><a href="#8-Self-Attention-GAN-2018" class="headerlink" title="8 Self-Attention GAN (2018)"></a>8 Self-Attention GAN (2018)</h1><p><em>Zhang, Han, et al.</em> <a href="https://arxiv.org/abs/1805.08318" target="_blank" rel="noopener">“Self-attention generative adversarial networks.”</a> <em>arXiv preprint arXiv:1805.08318</em> <em>(2018).</em></p>
+<p>While the overall innovations on text and image processing are considerably different, once in a while, one inspires the other. The Attention is All You Need paper, from the natural language processing community, proposed the attention mechanism, a way to add global-level reasoning to CNNs.</p>
+<p>虽然在文本和图像处理方面的整体创新大不相同，但偶尔，一个激发另一个。关注是您所需要的论文，从自然语言处理社区，提出了关注机制，一种向CNN添加全局级推理的方法。</p>
+<p>In this paper, this concept has been brought to the GAN domain as a means to improve image quality. In broad terms, the self-attention mechanism computes “what each pixel thinks of each other pixel.” Thus, it allows the network to reason on global level relationships. This is accomplished by taking the outer product of the flattened image with itself.</p>
+<p>本文将这个概念作为提高图像质量的一种手段，被带到了GAN领域。从广义上讲，自我注意机制计算”每个像素对彼此像素的看法”。因此，它允许网络对全局级关系进行推理。这是通过将拼合图像的外部产品与自身一起完成。</p>
+<p><img src="https://miro.medium.com/max/905/1*qNvtp9hTXR5Mi_jisCIRlA.png" alt="Image for post"></p>
+<p>The self-attention mechanism computes a score from each pixel to each other pixel.</p>
+<p><strong>Reason #1:</strong> Attention is taking the deep learning world by storm. Every field has an attention-based solution now in 2020. GANs are no exception.</p>
+<p>原因#1：注意力正风波波上深度学习世界。每个领域都有一个基于注意力的解决方案，现在到2020年。GAN 也不例外。</p>
+<p><strong>Reason #2:</strong> Taking the outer product of the flattened image is very time and memory consuming, limiting the applicability of this technique to a few low-resolution layers. This would not be possible two GPU generations ago. Which power-hungry methods will we see two generations from now?</p>
+<p>原因#2：采用拼合图像的外部产品是非常耗时和内存消耗，限制此技术的适用性到几个低分辨率层。这在两代之前是不可能的。从现在起，我们将看到两代人使用哪些电力渴求的方法？</p>
+<p><strong>Further Reading:</strong> I highly recommend reading the <a href="http://papers.nips.cc/paper/7181-attention-is-all-you-need" target="_blank" rel="noopener">original paper on the attention mechanism</a>, as it is almost everywhere by now. In a sense, it has shown the world what global-level reasoning can bring to the table. Nevertheless, it is damn expensive. For this reason, many teams are working on more efficient ways to tackle attention. One such method is the <a href="https://arxiv.org/abs/2001.04451" target="_blank" rel="noopener">Reformer, the efficient Transformer</a>. If you are curious about my views on both papers, I have covered them in my <a href="https://towardsdatascience.com/ai-papers-to-read-in-2020-ac0e4e91d915" target="_blank" rel="noopener">AI Papers to Read in 2020</a> article.</p>
+<p>进一步阅读： 我强烈建议阅读关于注意力机制的原始论文， 因为它现在几乎无处不在。从某种意义上说，它向全世界展示了全球层面的推理能带来什么。然而，它太贵了。因此，许多团队正在研究更有效的方法来解决注意力问题。其中一个方法是改革者，高效的变压器。如果你对我对这两篇论文的看法感到好奇， 我在 2020 年阅读的 Ai 论文中介绍了它们。</p>
+<h1 id="9-Boundary-Equilibrium-GAN"><a href="#9-Boundary-Equilibrium-GAN" class="headerlink" title="9 Boundary Equilibrium GAN"></a>9 Boundary Equilibrium GAN</h1><p><em>Berthelot, David, Thomas Schumm, and Luke Metz.</em><a href="https://arxiv.org/abs/1703.10717" target="_blank" rel="noopener"> “Began: Boundary equilibrium generative adversarial networks.”</a> <em>arXiv preprint arXiv:1703.10717</em> <em>(2017).</em></p>
+<p>Most GAN issues are attributed to a lack of balance between generator and discriminator networks. In this paper, Google researchers propose a method to enforce an equilibrium among the two players and a convergence metric to evaluate the generator evolution over the epochs. Additionally, by tuning the balance, the authors are able to trade-off image quality for variety.</p>
+<p>大多数 GAN 问题归因于生成器和鉴别器网络之间缺乏平衡。在这篇论文中，谷歌的研究人员提出了一种在两个玩家之间实现平衡的方法，以及一个用于评估时代发电机演化的收敛指标。此外，通过调整平衡，作者能够权衡图像质量的多样性。</p>
+<p><strong>Reason #1:</strong> The proposal is quite radical: the discriminator is an autoencoder, and we compare the losses of encoding real and fake images.</p>
+<p>这个建议非常激进：鉴别者是一个自动编码器，我们比较编码真实和假图像的损失。</p>
+<p><strong>Reason #2:</strong> It is pretty hard to tell if a GAN is improving, as manual inspection is not reliable after a certain quality level is reached. Having a simple to compute convergence metric is pretty handy.</p>
+<p><strong>Reason #3:</strong> Besides the equilibrium idea, everything else is pretty standard. This shows how accurately modeling a problem can do wonders. No fancy layers, norms, or expensive operations are needed.</p>
+<p>很难判断 GAN 是否正在改善，因为手动检测在达到一定质量水平后不可靠。拥有一个简单的计算收敛指标非常方便。</p>
+<p><strong>Further Reading:</strong> Likewise, the <a href="https://arxiv.org/abs/1809.11096" target="_blank" rel="noopener">BigGAN paper</a> shows that merely using larger models and four to eight times the batch size can vastly improve image quality. Similarly, the <a href="https://arxiv.org/abs/1710.10196" target="_blank" rel="noopener">ProGAN paper</a> shows that training with a small resolution first and then doubling it progressively can help to reach higher resolutions without changes to the model.</p>
+<p>同样，[BigGAN 论文]（https：//arxiv.org/abs/1809.11096）显示，仅使用较大的模型和四到八倍的批处理大小可以大大提高图像质量。同样，[ProGAN 文件]（https：//arxiv.org/abs/1710.10196）表明，先用小分辨率进行训练，然后逐步将其翻倍，有助于在不更改模型的情况下实现更高的分辨率。</p>
+<h1 id="10-Are-GANs-Created-Equal-2018"><a href="#10-Are-GANs-Created-Equal-2018" class="headerlink" title="10 Are GANs Created Equal? (2018)"></a>10 Are GANs Created Equal? (2018)</h1><p><em>Lucic, Mario, et al.</em> <a href="https://arxiv.org/abs/1711.10337" target="_blank" rel="noopener">“Are gans created equal? a large-scale study.”</a> <em>Advances in neural information processing systems**. 2018.</em></p>
+<p>I saved this one for last for a reason: it is one of the most extensive comparative studies of GANs to date. All previous nine entries garnered much praise for their high-quality results and technical breakthroughs. However, many other formulations exist. In this paper, you can take a look at not so known ideas, such as least-squares GAN or DRAGAN.</p>
+<p>我保存这个最后是有原因的： 这是迄今为止对 GANs 最广泛的比较研究之一。前九项参赛作品都因其高质量的成绩和技术突破而大加赞誉。然而，存在许多其他配方。在这篇论文中，你可以看看不太为人所知的想法，如最少平方GAN或德拉甘。</p>
+<p><strong>Reason #1:</strong> If you came so far, you are likely into GANs. What best than a survey paper to keep on reading?</p>
+<p>如果你来到这么远，你很可能进入GANS。还有什么比一份调查论文最好继续阅读呢？</p>
+<p><strong>Reason #2:</strong> This paper has a handy table with the generator and discriminator losses for seven different formulations. If implementing GANs is not your plan, this table still counts a lot as a math reading exercise.</p>
+<p>本文有一个方便的表，包含七种不同配方的发电机和鉴别器损耗。如果实现 GAN 不是您的计划，则此表仍作为数学阅读练习很重要。</p>
+<p><strong>Reason #3:</strong> Being a comparative study, this paper has some dedicated paragraphs on how GANs can be compared quantitatively and the challenges involved in making a fair comparison.</p>
+<p>作为比较研究，本文有一些专门段落，内容涉及如何定量比较GAN以及进行公平比较所涉及的挑战。</p>
+<p><strong>Further Reading:</strong> On the topic of comparing GANs, the <a href="https://arxiv.org/abs/1606.03498" target="_blank" rel="noopener">Inception Score</a> (IS) and <a href="https://arxiv.org/abs/1706.08500" target="_blank" rel="noopener">Fréchet Inception Distance</a> (FID) are widely used measures of similarity between image sets. A less known approach was proposed by <a href="https://arxiv.org/abs/1806.00035" target="_blank" rel="noopener">Sajjadi <em>et al.</em></a>, which adapts the precision and recall scores measures of quality and diversity, respectively. Understanding how to compare GANs is as much important as the GANs themselves.</p>
+<p>进一步阅读：关于比较GAN的主题，初始分数（IS）和Fréchet初始距离（FID）被广泛用于图像集之间的相似性度量。Sajjadi等人提出了一种鲜为人知的方法，分别对质量和多样性的精度和召回分数度值进行调整。了解如何比较 GAN 与 GAN 本身同样重要。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-第一篇GAN论文（2014）"><span class="toc-number">1.</span> <span class="toc-text">1 第一篇GAN论文（2014）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-StyleGAN（2019）"><span class="toc-number">2.</span> <span class="toc-text">2 StyleGAN（2019）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Pix2Pix-and-CycleGAN-2017"><span class="toc-number">3.</span> <span class="toc-text">3 Pix2Pix and CycleGAN (2017)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Semi-Supervised-Learning-（2016）"><span class="toc-number">4.</span> <span class="toc-text">4 Semi-Supervised Learning （2016）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Anime-GAN-（2017）"><span class="toc-number">5.</span> <span class="toc-text">Anime GAN （2017）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Wasserstein-Loss-2017"><span class="toc-number">6.</span> <span class="toc-text">6 Wasserstein Loss (2017)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Spectral-Norm-2018"><span class="toc-number">7.</span> <span class="toc-text">7 Spectral Norm (2018)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-Self-Attention-GAN-2018"><span class="toc-number">8.</span> <span class="toc-text">8 Self-Attention GAN (2018)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-Boundary-Equilibrium-GAN"><span class="toc-number">9.</span> <span class="toc-text">9 Boundary Equilibrium GAN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Are-GANs-Created-Equal-2018"><span class="toc-number">10.</span> <span class="toc-text">10 Are GANs Created Equal? (2018)</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2020/07/15/gan-timeline-2020/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&text=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&is_video=false&description=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AI换脸背后技术发展史-GAN简史2020&body=Check out this article: http://whitelok.github.io/2020/07/15/gan-timeline-2020/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&title=AI换脸背后技术发展史-GAN简史2020" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2020/07/15/gan-timeline-2020/&name=AI换脸背后技术发展史-GAN简史2020&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Karl Luo
+    粤ICP备20049594号-1
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-107706378-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'whitelok';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
