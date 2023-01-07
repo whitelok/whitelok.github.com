@@ -6,15 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="目标 在现有的Ubuntu系统上部署ROS耗时长而且冲突很多 而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne的项目地址  安装&amp;部署&amp;运行 先在host上安装">
+    <meta name="description" content="目标 在现有的Ubuntu系统上部署ROS耗时长而且冲突很多 而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下  loam_velodyne的项目地址  安装&amp;部署&amp;运行 先在host上安">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具">
 <meta property="og:url" content="http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
-<meta property="og:description" content="目标 在现有的Ubuntu系统上部署ROS耗时长而且冲突很多 而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下 loam_velodyne的项目地址  安装&amp;部署&amp;运行 先在host上安装">
+<meta property="og:description" content="目标 在现有的Ubuntu系统上部署ROS耗时长而且冲突很多 而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突 container运行结果直接输出到host主机上 效果图如下  loam_velodyne的项目地址  安装&amp;部署&amp;运行 先在host上安">
+<meta property="og:locale">
 <meta property="og:image" content="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif">
 <meta property="article:published_time" content="2019-08-30T03:33:46.000Z">
-<meta property="article:modified_time" content="2020-05-10T08:51:39.686Z">
+<meta property="article:modified_time" content="2023-01-07T09:31:57.896Z">
 <meta property="article:author" content="Karl Luo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif">
@@ -51,7 +52,7 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -65,11 +66,11 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+          <li><a target="_blank" rel="noopener" href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li>
         
       </ul>
     </span>
@@ -93,21 +94,21 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&text=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&is_video=false&description=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&text=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&is_video=false&description=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具&body=Check out this article: http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&name=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&name=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装-amp-部署-amp-运行"><span class="toc-number">2.</span> <span class="toc-text">安装&amp;部署&amp;运行</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-amp-%E9%83%A8%E7%BD%B2-amp-%E8%BF%90%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">安装&amp;部署&amp;运行</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -150,8 +151,8 @@
 <li>在现有的Ubuntu系统上部署ROS耗时长而且冲突很多</li>
 <li>而且由于将ROS安装到Ubuntu 16.04上会遇到ROS依赖包与catkin_make冲突的问题，将ROS部署到Docker的container中，外部机器不受影响，避免包冲突</li>
 <li>container运行结果直接输出到host主机上</li>
-<li>效果图如下<br><img src="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif" alt="loam-velodyne-with-docker-image-1"></li>
-<li>loam_velodyne的<a href="https://github.com/laboshinl/loam_velodyne" target="_blank" rel="noopener">项目地址</a></li>
+<li>效果图如下<br> <img src="http://whitelok.github.io/resources/loam-velodyne-with-docker-image-1.gif" alt="loam-velodyne-with-docker-image-1"></li>
+<li>loam_velodyne的<a target="_blank" rel="noopener" href="https://github.com/laboshinl/loam_velodyne">项目地址</a></li>
 </ul>
 <h1 id="安装-amp-部署-amp-运行"><a href="#安装-amp-部署-amp-运行" class="headerlink" title="安装&amp;部署&amp;运行"></a>安装&amp;部署&amp;运行</h1><ol>
 <li>先在host上安装Docker， 并运行：<code>xhost +</code></li>
@@ -164,7 +165,7 @@
 <li>下载loam_velodyne：<code>git clone https://github.com/laboshinl/loam_velodyne.git</code></li>
 <li>根据loam_velodyne的issue，修改loam_velodyne源码：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim loam_velodyne&#x2F;CMakeLists.txt</span><br><span class="line">注释掉：add_definitions( -march&#x3D;native )</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim loam_velodyne/CMakeLists.txt</span><br><span class="line">注释掉：add_definitions( -march=native )</span><br></pre></td></tr></table></figure>
 
 <ol start="10">
 <li>回到源码的根目录：<code>cd ~/catkin_ws</code></li>
@@ -173,16 +174,16 @@
 <li>在第1个terminal运行：<code>source /ros_entrypoint.sh; roscore &gt; /dev/null</code></li>
 <li>在第2个terminal运行：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;ros_entrypoint.sh; </span><br><span class="line">source ~&#x2F;catkin_ws&#x2F;devel&#x2F;setup.bash; </span><br><span class="line">cd ~&#x2F;catkin_ws;</span><br><span class="line">roslaunch loam_velodyne loam_velodyne.launch</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source /ros_entrypoint.sh; </span><br><span class="line">source ~/catkin_ws/devel/setup.bash; </span><br><span class="line">cd ~/catkin_ws;</span><br><span class="line">roslaunch loam_velodyne loam_velodyne.launch</span><br></pre></td></tr></table></figure>
 
 <ol start="15">
-<li><p>此时host界面已经出现如效果图一样的UI，只是里面暂时没有点云而已</p>
-</li>
-<li><p>在第3个terminal运行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;ros_entrypoint.sh; </span><br><span class="line">source ~&#x2F;catkin_ws&#x2F;devel&#x2F;setup.bash; </span><br><span class="line">cd ~&#x2F;catkin_ws;</span><br><span class="line">roslaunch velodyne_pointcloud VLP16_points.launch pcap:&#x3D;&quot;$HOME&#x2F;Downloads&#x2F;velodyne.pcap&quot;</span><br><span class="line">注意pcap数据可以在此处下载：https:&#x2F;&#x2F;data.kitware.com&#x2F;#folder&#x2F;5b7fff608d777f06857cb539</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>完成。如果还是不行，请在下面留言</p>
-</li>
+<li>此时host界面已经出现如效果图一样的UI，只是里面暂时没有点云而已</li>
+<li>在第3个terminal运行：</li>
+</ol>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">source /ros_entrypoint.sh; </span><br><span class="line">source ~/catkin_ws/devel/setup.bash; </span><br><span class="line">cd ~/catkin_ws;</span><br><span class="line">roslaunch velodyne_pointcloud VLP16_points.launch pcap:=&quot;$HOME/Downloads/velodyne.pcap&quot;</span><br><span class="line">注意pcap数据可以在此处下载：https://data.kitware.com/#folder/5b7fff608d777f06857cb539</span><br></pre></td></tr></table></figure>
+
+<ol start="17">
+<li>完成。如果还是不行，请在下面留言</li>
 </ol>
 
   </div>
@@ -205,31 +206,31 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+          <li><a target="_blank" rel="noopener" href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装-amp-部署-amp-运行"><span class="toc-number">2.</span> <span class="toc-text">安装&amp;部署&amp;运行</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-amp-%E9%83%A8%E7%BD%B2-amp-%E8%BF%90%E8%A1%8C"><span class="toc-number">2.</span> <span class="toc-text">安装&amp;部署&amp;运行</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&text=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&is_video=false&description=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&text=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&is_video=false&description=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具&body=Check out this article: http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&name=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&title=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2019/08/30/loam-velodyne-with-docker/&name=手把手教你用Docker看自动驾驶的激光点云：loam_velodyne激光点云可视化工具&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -247,8 +248,7 @@
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2021 Karl Luo
-    粤ICP备20049594号-1
+    Copyright &copy; 2023 Karl Luo
   </div>
   <div class="footer-right">
     <nav>
@@ -256,11 +256,11 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+          <li><a target="_blank" rel="noopener" href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li>
         
       </ul>
     </nav>

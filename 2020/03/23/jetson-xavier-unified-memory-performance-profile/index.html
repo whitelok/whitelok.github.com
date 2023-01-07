@@ -12,8 +12,9 @@
 <meta property="og:url" content="http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/index.html">
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="这篇blog讲啥？ 在NVIDIA的嵌入式产品上，使用cudaMallocManaged接口管理显存和内存在系统整体性能上会有比较明显的收益，收益主要体现在GPU activity上，memcpy可被省掉了，但是在x86上这个收益不存在。  在嵌入式设备上使用Unified Memory能在不影响kernel的执行效率下，更好地减少访存的时延。  使用cudaMallocManaged调试代码比c">
+<meta property="og:locale">
 <meta property="article:published_time" content="2020-03-23T03:55:52.000Z">
-<meta property="article:modified_time" content="2020-05-10T08:51:39.686Z">
+<meta property="article:modified_time" content="2023-01-07T09:31:57.897Z">
 <meta property="article:author" content="Karl Luo">
 <meta name="twitter:card" content="summary">
     
@@ -49,7 +50,7 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -63,11 +64,11 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+          <li><a target="_blank" rel="noopener" href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li>
         
       </ul>
     </span>
@@ -91,21 +92,21 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&text=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&is_video=false&description=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&text=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&is_video=false&description=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&body=Check out this article: http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&name=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&name=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#这篇blog讲啥？"><span class="toc-number">1.</span> <span class="toc-text">这篇blog讲啥？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为啥会有这么一个猜想？"><span class="toc-number">2.</span> <span class="toc-text">为啥会有这么一个猜想？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unified-Memory"><span class="toc-number">3.</span> <span class="toc-text">Unified Memory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验"><span class="toc-number">4.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%99%E7%AF%87blog%E8%AE%B2%E5%95%A5%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">这篇blog讲啥？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E5%95%A5%E4%BC%9A%E6%9C%89%E8%BF%99%E4%B9%88%E4%B8%80%E4%B8%AA%E7%8C%9C%E6%83%B3%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">为啥会有这么一个猜想？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unified-Memory"><span class="toc-number">3.</span> <span class="toc-text">Unified Memory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">4.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -160,16 +161,14 @@
 <li><p>很多时候，调试GPU代码得看kernel输入输出的数据是不是对的，而gdb print不能直接print 显存数据，cuda-gdb跑起来简直慢到让人想摸鱼，所以有没一个更快的方法解决这个问题。</p>
 </li>
 </ol>
-<h1 id="Unified-Memory"><a href="#Unified-Memory" class="headerlink" title="Unified Memory"></a>Unified Memory</h1><p>unified memory：在CUDA 6.0版本后，CUDA新增了统一寻址这个功能，该功能主要是在内存池结构上增加了一个统一内存系统，程序员可以直接访问任何内存/显存资源，或者在合法的内存空间内寻址，而不用管涉及到的存储空间到底是内存还是显存。</p>
+<h1 id="Unified-Memory"><a href="#Unified-Memory" class="headerlink" title="Unified Memory"></a>Unified Memory</h1><p>unified memory：在CUDA 6.0版本后，CUDA新增了统一寻址这个功能，该功能主要是在内存池结构上增加了一个统一内存系统，程序员可以直接访问任何内存&#x2F;显存资源，或者在合法的内存空间内寻址，而不用管涉及到的存储空间到底是内存还是显存。</p>
 <p>而涉及到内存和显存之间的数据拷贝由程序员的手动执行（cudaMemcpy），变成自动执行（yes，啥都不用干）。</p>
 <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><ul>
 <li>设备：Jetson Xavier </li>
 <li>系统：Jetpack 4.2</li>
-<li>显存占用：<ul>
-<li>无Unified Memory: RAM 9292/15699MB</li>
-<li>有Unified Memory: RAM 9285/15699MB</li>
-</ul>
-</li>
+<li>显存占用：</li>
+<li>无Unified Memory: RAM 9292&#x2F;15699MB</li>
+<li>有Unified Memory: RAM 9285&#x2F;15699MB</li>
 <li>实验用kernel: 矩阵大小1000*1000 Byte的乘加（无share memory 无auto boost）</li>
 <li>统计对象GPU Activities:</li>
 </ul>
@@ -237,7 +236,7 @@
 <td>[CUDA memcpy DtoH]</td>
 </tr>
 </tbody></table>
-<p>有Unified Memory，kernel内循环10次    </p>
+<p>有Unified Memory，kernel内循环10次	</p>
 <table>
 <thead>
 <tr>
@@ -365,7 +364,7 @@
 <td>[CUDA memcpy DtoH]</td>
 </tr>
 </tbody></table>
-<p>有Unified Memory，kernel外循环10次    </p>
+<p>有Unified Memory，kernel外循环10次	</p>
 <table>
 <thead>
 <tr>
@@ -451,31 +450,31 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+          <li><a target="_blank" rel="noopener" href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#这篇blog讲啥？"><span class="toc-number">1.</span> <span class="toc-text">这篇blog讲啥？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为啥会有这么一个猜想？"><span class="toc-number">2.</span> <span class="toc-text">为啥会有这么一个猜想？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unified-Memory"><span class="toc-number">3.</span> <span class="toc-text">Unified Memory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验"><span class="toc-number">4.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结论"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%99%E7%AF%87blog%E8%AE%B2%E5%95%A5%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">这篇blog讲啥？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E5%95%A5%E4%BC%9A%E6%9C%89%E8%BF%99%E4%B9%88%E4%B8%80%E4%B8%AA%E7%8C%9C%E6%83%B3%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">为啥会有这么一个猜想？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unified-Memory"><span class="toc-number">3.</span> <span class="toc-text">Unified Memory</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">4.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">结论</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&text=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&is_video=false&description=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&text=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&is_video=false&description=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&body=Check out this article: http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&name=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&title=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2020/03/23/jetson-xavier-unified-memory-performance-profile/&name=Nvidia嵌入式系统系列使用CUDA的unified memory性能分析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -493,8 +492,7 @@
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2021 Karl Luo
-    粤ICP备20049594号-1
+    Copyright &copy; 2023 Karl Luo
   </div>
   <div class="footer-right">
     <nav>
@@ -502,11 +500,11 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="http://linkedin.com/in/karl-lok-a74a4964" target="_blank" rel="noopener">About</a></li>
+          <li><a target="_blank" rel="noopener" href="http://linkedin.com/in/karl-lok-a74a4964">About</a></li>
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="http://github.com/whitelok" target="_blank" rel="noopener">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li>
         
       </ul>
     </nav>
