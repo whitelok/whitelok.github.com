@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="Karl Luo Page">
 <meta property="og:description" content="正如上一篇所说的，TVM借用了Halide的思想，将计算（compute）和用户计算加速的调度（schedule）分离，所以从业务场景上说，只要算法团队写好了算法，工程团队把schedule写好，就能用比较高效的方式部署业务应用了。 先用一个例子说明一下TVM是怎么做到计算和调度分离的 假如说用户想实现一个简单的矩阵按行reduction操作 1234B &#x3D; numpy.sum(A, axis&#x3D;1">
 <meta property="og:locale">
-<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/raw/master/resources/tvm-tutorials-lession-3-1.JPG">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/raw/master/resources/tvm-tutorials-lession-3-1.JPG?raw=true">
 <meta property="article:published_time" content="2020-03-26T07:57:53.000Z">
-<meta property="article:modified_time" content="2023-05-03T11:27:59.311Z">
+<meta property="article:modified_time" content="2024-06-10T02:36:23.034Z">
 <meta property="article:author" content="Karl Luo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/whitelok/whitelok.github.com/raw/master/resources/tvm-tutorials-lession-3-1.JPG">
+<meta name="twitter:image" content="https://github.com/whitelok/whitelok.github.com/raw/master/resources/tvm-tutorials-lession-3-1.JPG?raw=true">
     
     
       
@@ -90,6 +90,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2020/03/23/jetson-xavier-unified-memory-performance-profile/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -177,7 +179,7 @@
 <p>OK计算做好了，那么调度呢，并行优化呢，没看见你有写嘛</p>
 <p>下面我们对这个简单的算法进行并行优化</p>
 <p>优化思想如下：</p>
-<p><img src="https://github.com/whitelok/whitelok.github.com/raw/master/resources/tvm-tutorials-lession-3-1.JPG" alt="IMG_2591"></p>
+<p><img src="https://github.com/whitelok/whitelok.github.com/raw/master/resources/tvm-tutorials-lession-3-1.JPG?raw=true" alt="tvm-tutorials-lession-3-1.JPG"></p>
 <p>即多个thread并发执行，每个thread处理不同的行</p>
 <p>为了让搞CUDA的同事失业，下面并行化在CUDA上实现</p>
 <p>在保持当前算法不变的情况下，代码修改如下</p>

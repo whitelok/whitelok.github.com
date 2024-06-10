@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="由于美国对中国高端芯片的封锁，为了避免英伟达GPU断供，所以需要支持华为昇腾的NPU。但是华为昇腾发展较晚，整体生态的完善度和研发工具的易用性都远远不及英伟达。本文从实战入手详细记录如何Profile-优化华为AscendC Vector算子。 一、 准备运行环境和代码 镜像https:&#x2F;&#x2F;ascendhub.huawei.com&#x2F;#&#x2F;detail&#x2F;ascend-pytorch Ascend To">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华为昇腾AscendC Vector类型算子Profile-Base性能优化实战">
+<meta property="og:url" content="http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/index.html">
+<meta property="og:site_name" content="Karl Luo Page">
+<meta property="og:description" content="由于美国对中国高端芯片的封锁，为了避免英伟达GPU断供，所以需要支持华为昇腾的NPU。但是华为昇腾发展较晚，整体生态的完善度和研发工具的易用性都远远不及英伟达。本文从实战入手详细记录如何Profile-优化华为AscendC Vector算子。 一、 准备运行环境和代码 镜像https:&#x2F;&#x2F;ascendhub.huawei.com&#x2F;#&#x2F;detail&#x2F;ascend-pytorch Ascend To">
+<meta property="og:locale">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-1.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-2.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-3.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-4.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-5.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-6.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-7.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-8.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-9.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-10.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-11.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-13.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-14.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-15.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-16.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-17.png?raw=true">
+<meta property="og:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-18.png?raw=true">
+<meta property="article:published_time" content="2024-06-09T15:55:21.000Z">
+<meta property="article:modified_time" content="2024-06-10T03:02:43.314Z">
+<meta property="article:author" content="Karl Luo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-1.png?raw=true">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>华为昇腾AscendC Vector类型算子Profile-Base性能优化实战</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107706378-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-107706378-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/karl-luo-a74a4964/">Resume</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2020/03/26/tvm-tutorials-lesson-3/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&text=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&is_video=false&description=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战&body=Check out this article: http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&name=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&t=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E5%87%86%E5%A4%87%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%92%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">一、 准备运行环境和代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%8D%8E%E4%B8%BA%E7%AE%97%E5%AD%90"><span class="toc-number">2.</span> <span class="toc-text">二、编译运行华为算子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BC%96%E8%AF%91%E4%BB%A3%E7%A0%81"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 编译代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Profile-Vector%E7%B1%BB%E5%9E%8B%E7%AE%97%E5%AD%90%E5%AE%9E%E4%BE%8B"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. Profile Vector类型算子实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Vector%E7%B1%BB%E5%9E%8B%E7%AE%97%E5%AD%90Profile%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. Vector类型算子Profile数据分析实战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-PipeUtilization"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">4.1 PipeUtilization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-ArithmeticUtilization"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">4.2 ArithmeticUtilization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-AI-Core%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.0.4.3.</span> <span class="toc-text">4.3 AI Core的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-1-L2Cache"><span class="toc-number">2.0.4.3.1.</span> <span class="toc-text">4.3.1 L2Cache</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-2-Memory"><span class="toc-number">2.0.4.3.2.</span> <span class="toc-text">4.3.2 Memory</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-4-MemoryUB"><span class="toc-number">2.0.4.3.3.</span> <span class="toc-text">4.3.4 MemoryUB</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-ResourceConflictRatio"><span class="toc-number">2.0.4.4.</span> <span class="toc-text">4.4 ResourceConflictRatio</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Vector%E7%B1%BB%E5%9E%8B%E7%AE%97%E5%AD%90%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98"><span class="toc-number">2.0.5.</span> <span class="toc-text">5. Vector类型算子性能优化实战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AE%9E%E9%AA%8C%E6%95%B0%E6%8D%AE"><span class="toc-number">2.0.6.</span> <span class="toc-text">6. 实验数据</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        华为昇腾AscendC Vector类型算子Profile-Base性能优化实战
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Karl Luo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-06-09T15:55:21.000Z" class="dt-published" itemprop="datePublished">2024-06-09</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>由于美国对中国高端芯片的封锁，为了避免英伟达GPU断供，所以需要支持华为昇腾的NPU。但是华为昇腾发展较晚，整体生态的完善度和研发工具的易用性都远远不及英伟达。本文从实战入手详细记录如何Profile-优化华为AscendC Vector算子。</p>
+<h1 id="一、-准备运行环境和代码"><a href="#一、-准备运行环境和代码" class="headerlink" title="一、 准备运行环境和代码"></a>一、 准备运行环境和代码</h1><ul>
+<li>镜像<a target="_blank" rel="noopener" href="https://ascendhub.huawei.com/#/detail/ascend-pytorch">https://ascendhub.huawei.com/#/detail/ascend-pytorch</a></li>
+<li>Ascend Toolkit 8.0RC2(相当于英伟达的CUDA)</li>
+<li>910BC2(相当于英伟达的GPU型号：A100，H800等)</li>
+<li>代码：一念<a target="_blank" rel="noopener" href="https://github.com/pcg-mlp/KsanaLLM">https://github.com/pcg-mlp/KsanaLLM</a></li>
+</ul>
+<h1 id="二、编译运行华为算子"><a href="#二、编译运行华为算子" class="headerlink" title="二、编译运行华为算子"></a>二、编译运行华为算子</h1><h3 id="1-编译代码"><a href="#1-编译代码" class="headerlink" title="1. 编译代码"></a>1. 编译代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://git.woa.com/deep_learning_framework/KsanaLLM</span><br><span class="line"><span class="built_in">cd</span> KsanaLLM &amp;&amp; <span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake -DWITH_TESTING=ON \</span><br><span class="line">      -DWITH_CUDA=OFF \</span><br><span class="line">	  -DWITH_ACL=ON \</span><br><span class="line">	  -DWITH_STANDALONE_TEST=ON ..</span><br><span class="line">make -j</span><br></pre></td></tr></table></figure>
+<h3 id="2-运行"><a href="#2-运行" class="headerlink" title="2. 运行"></a>2. 运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/llm_kernels_ascend_permute_test</span><br></pre></td></tr></table></figure>
+<p>由于华为NPU核心计算部件分为AI Cube和AI Vector，所以本文实战案例分别以Vector计算为主的permute作为例子。</p>
+<h3 id="3-Profile-Vector类型算子实例"><a href="#3-Profile-Vector类型算子实例" class="headerlink" title="3. Profile Vector类型算子实例"></a>3. Profile Vector类型算子实例</h3><p>采样运行数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">msprof op --application=<span class="string">&quot;./bin/llm_kernels_ascend_permute_test --gtest_filter=LlamaAscendPermuteTestSuit.PermuteKernelTest&quot;</span> \</span><br><span class="line">          --aic-metrics=ArithmeticUtilization,L2Cache,Memory,MemoryL0,MemoryUB,PipeUtilization,ResourceConflictRatio \</span><br><span class="line">	      --output=./output_data</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-1.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-1.png"><br>导出分析报告</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msprof --<span class="built_in">export</span>=on --output=./output_data</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-2.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-2.png"><br>调试命令中比较重要的是<code>--aic-metrics</code>。这个选项有ArithmeticUtilization，L2Cache，Memory，MemoryL0，MemoryUB，PipeUtilization，ResourceConflictRatio总共7个相关的指标分组。当导出分析报告之后，可以在运行采样目录.&#x2F;output_data下找到指标数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 这个是op基础信息</span><br><span class="line">./output_data/OPPROF_xx/OpBasicInfo.csv</span><br><span class="line">./output_data/OPPROF_xx/PipeUtilization.csv</span><br><span class="line">./output_data/OPPROF_xx/ArithmeticUtilization.csv</span><br><span class="line">./output_data/OPPROF_xx/L2Cache.csv</span><br><span class="line">./output_data/OPPROF_xx/Memory.csv</span><br><span class="line">./output_data/OPPROF_xx/ResourceConflictRatio.csv</span><br><span class="line">./output_data/OPPROF_xx/MemoryL0.csv</span><br><span class="line">./output_data/OPPROF_xx/MemoryUB.csv</span><br></pre></td></tr></table></figure>
+<h3 id="4-Vector类型算子Profile数据分析实战"><a href="#4-Vector类型算子Profile数据分析实战" class="headerlink" title="4. Vector类型算子Profile数据分析实战"></a>4. Vector类型算子Profile数据分析实战</h3><p>首先我们先了解一下这个算子主要是用NPU上的哪个部件执行运算的。打开.&#x2F;output_data&#x2F;OPPROF_xx&#x2F;OpBasicInfo.csv如下:<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-3.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-3.png"><br>华为昇腾NPU上的计算核心是AI Core，主要有2个计算单元：AI Cube和AI Vector。AI Cube主要处理矩阵计算任务，AI Vector主要处理向量运算任务。目前市面上华为NPU的AI Core有两种架构，AI Cube和AI Vector分离和统一架构。AI Cube和AI Vector分离是指两者不共享一个Unified Buffer，好处是两个计算单元可以独立并发执行。昇腾910B2C就是AI Cube和AI Vector分离架构。单个910B2C总共有24个AI Cube和48个AI Vector。<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-4.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-4.png"><br>上图是AI Cube&#x2F;Vector统一架构<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-5.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-5.png"><br>上图是AI Cube&#x2F;Vector分离架构</p>
+<p>因为我们目前在分析permute，permute执行Tensor维度交换的操作，所以OpType中显示的是Vector就是表示permute执行在AI Vector上。而Block dim表示用了多少个计算单元，图中显示1即表示使用了1个AI Vector。</p>
+<h4 id="4-1-PipeUtilization"><a href="#4-1-PipeUtilization" class="headerlink" title="4.1 PipeUtilization"></a>4.1 PipeUtilization</h4><p>由于华为AscendC的计算范式如下图所示，是多级并发流水线的模式。所以PipeUtilization表示的是计算单元和搬运单元耗时占比。<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-6.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-6.png"><br>打开.&#x2F;output_data&#x2F;OPPROF_xx&#x2F;PipeUtilization.csv<br>发现aic_* 数据都是NA，这是因为不是矩阵运算，所以没有用到AIC（AI Cube）。这里可以着重分析AIV（AI Vector）。<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-7.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-7.png"><br>block_id表示逻辑意义上的AI Vector ID，sub_block_id表示物理意义上的AI Vector ID。例如NPU 910B2C上处理128个vector运算，后面统称为128个任务。block_id的值是0-47，sub_block_id的值是0-127，其中block_id为1的AI Vector要处理sub_block_id&#x3D;1和sub_block_id&#x3D;49的任务。<br>aiv_time(us)表示在这个AI Vector上执行128个任务中sub_block_id为0的任务的总耗时，单位是us。<br>aiv_total_cycles是执行这个任务时时钟总数。<br>aiv_vec_time(us)是代表vec类型指令（向量类运算指令）耗时。aiv_vec_ratio代表vec单元指令的cycle数在total cycle数中的占用比。<br>在AI Vector中，有Scalar单元和Vector处理单元。Scalar单元主要处理数据逻辑操作。例如:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面语句都由scalar单元执行。</span></span><br><span class="line">LocalTensor&lt;T&gt; a;</span><br><span class="line">LocalTensor&lt;T&gt; b</span><br><span class="line">__gm__ T* a_ptr = a[offset];</span><br><span class="line">__gm__ T* b_ptr = b[offset];</span><br><span class="line"><span class="comment">// 下面这个语句由Vector单元执行。</span></span><br><span class="line"><span class="built_in">vadd</span>(a_ptr, b_ptr);</span><br></pre></td></tr></table></figure>
+<p>因为硬件上一般情况下计算部件单位时间处理数据量比传输通路单位时间传输数据量多（英伟达GPU和华为NPU在这一点上同理）。所以一般情况下aiv_time &gt;&#x3D; aiv_vec_time，且两者越接近越好，即aiv_vec_ratio越高越好。因为两者耗时越接近，逻辑控制流和数据搬运操作越少，越能发挥NPU的计算能力。<br>同理aiv_scalar_time(us)和aiv_scalar_ratio表示scalar单元总耗时和scalar类型指令（标量类运算指令）的clock cycle数在total clock cycle数中的占用比。因为scalar单元负责逻辑控制处理，所以这两个指标也是越低越好。<br>剩余的4个指标aiv_mte2_time(us)，aiv_mte2_ratio，aiv_mte3_time(us)，aiv_mte3_ratio均为数据搬运指标。MTE（Memory Transfer Engine）可以结合下面这个图来看<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-8.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-8.png"><br>在Vector算子上，MTE2是Global Memory搬到Unified Memory的操作。MTE3是Unified Memory搬到Global Memory的操作。<br>aiv_icache_miss_rate：表示instruction cache缺失率，即未命中instruction的L1 cache，数值越小越好。<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-9.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-9.png"><br>通过分析PipeUtilization，发现整个计算过程中，scalar操作占比怀疑是因为scalar的占比过高导致的性能不足。<br>一般情况来说，只要分析到这里，然后用SIMD的vector指令代替scalar指令即可完成这个算子的初步优化，但是为了演示如何全面分析算子性能，后面会继续分析其他指标的profile文件。</p>
+<h4 id="4-2-ArithmeticUtilization"><a href="#4-2-ArithmeticUtilization" class="headerlink" title="4.2 ArithmeticUtilization"></a>4.2 ArithmeticUtilization</h4><p>ArithmeticUtilization同上，由于不是矩阵计算类型的算子，所以.&#x2F;output_data&#x2F;OPPROF_xx&#x2F;ArithmeticUtilization.csv中aic_为前缀的指标都显示为N&#x2F;A，所以着重分析aiv指标。<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-10.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-10.png"><br>其中aiv_time，aiv_total_cycles，aiv_vec_ratio已经在前面章节描述过，所以这里可以忽略。<br>aiv_vec_&lt;数据类型&gt;_ratio表示元素为&lt;数据类型&gt;的vector指令cycle数在total cycle数中的占用比。<br>aiv_vec_fops表示vector类型浮点运算数，即计算量，可用于衡量算法&#x2F;模型的复杂度，其中fops表示floating point operations，缩写为FLOPs。<br>可以看到，几乎完全没有使用AI Vector中vector组件进行计算，所以验证下一步最直接的优化方式是将scalar操作替换成vector的SIMD操作。</p>
+<h4 id="4-3-AI-Core的存储结构"><a href="#4-3-AI-Core的存储结构" class="headerlink" title="4.3 AI Core的存储结构"></a>4.3 AI Core的存储结构</h4><p>英伟达GPU相似，华为NPU的存储结构是Global memory-&gt;L2-&gt;L1-&gt;L0-&gt;Unified Memory。<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-11.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-11.png"></p>
+<ul>
+<li>GM（Global Memory）容量最大，通常是DDR或者HBM。GM为全部AI Core共享。</li>
+<li>L2 Cache，L2缓冲区，在AI Core片上，介乎于GM和L1Cache中间，所有访存GM的操作都会被cache到L2上。</li>
+<li>L1 Buffer，从L2读取数据作为缓存AI Cube的输入。AI Vector不使用此缓存。</li>
+<li>L0 Buffer。一般L0 Buffer分两类，一类L0 buffer是AI Cube的输入，一类缓存AI Cube的输出，一般标记为L0C buffer。AI Vector不使用此缓存。</li>
+<li>UB，Unified Buffer，用于缓存Vector和Scalar操作的输入和输出。通常对应逻辑中的LocalTensor，<a target="_blank" rel="noopener" href="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-12.png?raw=true">huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-12.png</a><br>AI Cube不使用此缓存。<br>上述提及到的AI Cube&#x2F;Vector统一&#x2F;分离架构主要也是和存储结构相关。<br>与外部资料不一样的是，910B2C作为分离架构，AI Vector 和 AI Cube只存在GM共享关系。其他缓存均不共享，所以AI Cube的输出缓冲区的数据不能直接作为AI Vecor输入，必须先搬运到GM再搬运到UB。</li>
+</ul>
+<h5 id="4-3-1-L2Cache"><a href="#4-3-1-L2Cache" class="headerlink" title="4.3.1 L2Cache"></a>4.3.1 L2Cache</h5><p><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-13.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-13.png"><br>L2Cache中的指标一般和图中MTE2的性能相关。<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-14.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-14.png"><br>既然是与缓存相关，那么和访存指标一样，hit rate越高越好，miss rate越低越好。</p>
+<h5 id="4-3-2-Memory"><a href="#4-3-2-Memory" class="headerlink" title="4.3.2 Memory"></a>4.3.2 Memory</h5><p><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-15.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-15.png"><br>因为AI Vector只和GM-L2-UB相关，所以可以看到与L1 L0相关的指标全部都为N&#x2F;A。Memory主要展现2个访存维度：UB和GM。<br>MTE2，MTE3和GM写入写出相关。<br>ub*主要和AI Vector写入写出UB相关。</p>
+<h5 id="4-3-4-MemoryUB"><a href="#4-3-4-MemoryUB" class="headerlink" title="4.3.4 MemoryUB"></a>4.3.4 MemoryUB</h5><p><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-16.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-16.png"><br>由于这个算子没有使用到AI Vector，只使用了scalar做数据搬运，所以这项也是空的。</p>
+<h4 id="4-4-ResourceConflictRatio"><a href="#4-4-ResourceConflictRatio" class="headerlink" title="4.4 ResourceConflictRatio"></a>4.4 ResourceConflictRatio</h4><p><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-17.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-17.png"><br>这项指标和英伟达<a target="_blank" rel="noopener" href="https://developer.nvidia.com/blog/using-shared-memory-cuda-cc/">CUDA bank conflict</a>的概念类似。Vector对UB的访存也是一个bank一个bank来的。所以也会存在bank的读写冲突或者bank group的读读冲突。这个文件就是展示这个冲突比率。bank conflict rate越低越好。<br>由于这个算子没有使用AI Vector。所以bank conflict rate全都是0。</p>
+<h3 id="5-Vector类型算子性能优化实战"><a href="#5-Vector类型算子性能优化实战" class="headerlink" title="5. Vector类型算子性能优化实战"></a>5. Vector类型算子性能优化实战</h3><p>Permute这个算子的原始实现<a target="_blank" rel="noopener" href="https://github.com/pcg-mlp/KsanaLLM/blob/9201ca09f510244b3fa62b7360c0930508936995/3rdparty/LLM_kernels/csrc/kernels/ascend/permute/permute_kernel.cc">https://github.com/pcg-mlp/KsanaLLM/blob/9201ca09f510244b3fa62b7360c0930508936995/3rdparty/LLM_kernels/csrc/kernels/ascend/permute/permute_kernel.cc</a>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">__aicore__ <span class="type">void</span> PermuteKernel&lt;T&gt;::<span class="built_in">Process</span>() &#123;</span><br><span class="line">  <span class="type">bool</span> should_break = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; tiling_-&gt;dim0; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (should_break) <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> j = <span class="number">0</span>; j &lt; tiling_-&gt;dim1; ++j) &#123;</span><br><span class="line">      <span class="keyword">if</span> (should_break) <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">size_t</span> k = <span class="number">0</span>; k &lt; tiling_-&gt;dim2; ++k) &#123;</span><br><span class="line">        <span class="keyword">if</span> (should_break) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> x = <span class="number">0</span>; x &lt; tiling_-&gt;dim3; ++x) &#123;</span><br><span class="line">          <span class="keyword">if</span> (should_break) <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">for</span> (<span class="type">size_t</span> y = <span class="number">0</span>; y &lt; tiling_-&gt;dim4; ++y) &#123;</span><br><span class="line">            <span class="keyword">if</span> (should_break) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> z = <span class="number">0</span>; z &lt; tiling_-&gt;dim5; ++z) &#123;</span><br><span class="line">              <span class="type">uint64_t</span> src_pos = <span class="built_in">GetInputIndexPos</span>(i, j, k, x, y, z);</span><br><span class="line">              <span class="keyword">if</span> (src_pos &gt;= tiling_-&gt;block_length * (block_idx_ + <span class="number">1</span>) || src_pos &gt;= tiling_-&gt;total_length) &#123;</span><br><span class="line">                should_break = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              <span class="keyword">if</span> (src_pos &gt;= tiling_-&gt;block_length * block_idx_) &#123;</span><br><span class="line">                <span class="type">uint64_t</span> dst_pos = <span class="built_in">GetNewIndexPos</span>(i, j, k, x, y, z);</span><br><span class="line">                *(<span class="built_in">const_cast</span>&lt;__gm__ T*&gt;(output_gm_.<span class="built_in">GetPhyAddr</span>()) + dst_pos) =</span><br><span class="line">                    *(<span class="built_in">const_cast</span>&lt;__gm__ T*&gt;(input_gm_.<span class="built_in">GetPhyAddr</span>()) + src_pos);</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个代码性能底下的根源是：</p>
+<ol>
+<li>用了六层循环套嵌来获取dims转换之间的坐标。</li>
+<li>copy的时候也是scalar操作，即一个clock cycle只操作一个数。</li>
+</ol>
+<p>所以最简单的一个优化方向是将最内层的copy转化成Vector的SIMD操作。</p>
+<p>原始代码中最内层的z循环改成如下代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DataCopyParams simd_copy_param;</span><br><span class="line">simd_copy_param.blockCount = <span class="number">1</span>;</span><br><span class="line">simd_copy_param.blockLen = z;</span><br><span class="line">simd_copy_param.srcStride = <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 预先计算好新tensor在原z维度的相对于旧tensor的stride</span></span><br><span class="line">simd_copy_param.dstStride = dst_z_stride;</span><br><span class="line"><span class="built_in">DataCopy</span>(tmpLocal, dstLocal, simd_copy_param);</span><br></pre></td></tr></table></figure>
+<p>这个代码有两个优化点:</p>
+<ol>
+<li>输入输出从GM指针改成LocalTensor，因为LocalTensor存放在UB上。使用LocalTensor后便可以使用如下的UB&lt;—&gt;GM多级流水线提升性能。<br><img src="https://github.com/whitelok/whitelok.github.com/blob/master/resources/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-18.png?raw=true" alt="huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle-18.png"></li>
+<li>因为使用了Vector Copy指令，这样每一个clock cycle可以操作至少128个float16。这样算子的吞吐是原来的128倍。</li>
+</ol>
+<h3 id="6-实验数据"><a href="#6-实验数据" class="headerlink" title="6. 实验数据"></a>6. 实验数据</h3><p>最后我们将输入扩大至1024*1024。端到端的时延从128.74ms降低到5ms。具体优化代码详见<a target="_blank" rel="noopener" href="https://github.com/pcg-mlp/KsanaLLM/tree/9201ca09f510244b3fa62b7360c0930508936995">https://github.com/pcg-mlp/KsanaLLM/tree/9201ca09f510244b3fa62b7360c0930508936995</a> 后的更新。<br>后续极致的性能优化将会同步到一念官方代码仓库中<a target="_blank" rel="noopener" href="https://github.com/pcg-mlp/KsanaLLM%E3%80%82%E6%95%AC%E8%AF%B7%E6%9C%9F%E5%BE%85%E3%80%82">https://github.com/pcg-mlp/KsanaLLM。敬请期待。</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/karl-luo-a74a4964/">Resume</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E5%87%86%E5%A4%87%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%92%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">一、 准备运行环境和代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E5%8D%8E%E4%B8%BA%E7%AE%97%E5%AD%90"><span class="toc-number">2.</span> <span class="toc-text">二、编译运行华为算子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BC%96%E8%AF%91%E4%BB%A3%E7%A0%81"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 编译代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%90%E8%A1%8C"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Profile-Vector%E7%B1%BB%E5%9E%8B%E7%AE%97%E5%AD%90%E5%AE%9E%E4%BE%8B"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. Profile Vector类型算子实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Vector%E7%B1%BB%E5%9E%8B%E7%AE%97%E5%AD%90Profile%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. Vector类型算子Profile数据分析实战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-PipeUtilization"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">4.1 PipeUtilization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-ArithmeticUtilization"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">4.2 ArithmeticUtilization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-AI-Core%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.0.4.3.</span> <span class="toc-text">4.3 AI Core的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-1-L2Cache"><span class="toc-number">2.0.4.3.1.</span> <span class="toc-text">4.3.1 L2Cache</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-2-Memory"><span class="toc-number">2.0.4.3.2.</span> <span class="toc-text">4.3.2 Memory</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-4-MemoryUB"><span class="toc-number">2.0.4.3.3.</span> <span class="toc-text">4.3.4 MemoryUB</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-ResourceConflictRatio"><span class="toc-number">2.0.4.4.</span> <span class="toc-text">4.4 ResourceConflictRatio</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Vector%E7%B1%BB%E5%9E%8B%E7%AE%97%E5%AD%90%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E6%88%98"><span class="toc-number">2.0.5.</span> <span class="toc-text">5. Vector类型算子性能优化实战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AE%9E%E9%AA%8C%E6%95%B0%E6%8D%AE"><span class="toc-number">2.0.6.</span> <span class="toc-text">6. 实验数据</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&text=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&is_video=false&description=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战&body=Check out this article: http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&title=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&name=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://whitelok.github.io/2024/06/09/huawei-ascendc-vector-type-operator-profile-based-optimization-practical-battle/&t=华为昇腾AscendC Vector类型算子Profile-Base性能优化实战"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    1990-2024
+    Karl Luo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/karl-luo-a74a4964/">Resume</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/whitelok">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
