@@ -95,7 +95,7 @@ nav（毛玻璃，KL logo + Experience/Education/Contact）
 ## 5. 内容数据源（已核实，可直接复用）
 
 - **小红书 · Xiaohongshu** — Director of ML Systems（2025.08– 至今）：
-  - bullets：Lead ML Infra（Search/Ads/Rec，leader+核心贡献者）；创立 AI Infra（AIGC/LLM/VLM，业界首个训推一体框架）；LLM serving → AI搜索+点点 300M MAU；AIGC 推理优化 GPU/NPU/PPU/XPU；Awards: 🏆 2025 Impact Challenge — Business Breakthrough Award, Annual Champion
+  - bullets：Lead ML Infra（Search/Ads/Rec，technical lead+核心贡献者）；创立 AI Infra（AIGC/LLM/VLM，**生产级统一框架**——用户 2026-10-01 明确将"业界首个"软化为 production-grade）；LLM serving → AI搜索+点点 300M MAU；AIGC 推理优化 GPU/NPU/PPU/XPU（speed-of-light）；Awards: 🏆 2025 Impact Challenge — Business Breakthrough Award, Annual Champion
   - Academic Publications 折叠组（10 篇，近→远）：RedKnot(2606.06256)、Akashic(2607.05708)、FlowBlock(2607.17652)、Hierarchical Latent Reasoning(2607.27760)、OneModel(2608.18606)、PILOT(2608.26530)、AtomRec(2609.04882)、RedKnot-MLA(2609.07008)、PACT(HF 2609.26355)、EMNLP 2026 Main（15.4% acceptance，无链接带 badge）
   - Press & Media 折叠组（9 篇）：KV Cache 按头分家/China Daily RedKnot/FDFO 木桶效应/发改委谢涛演讲/B站云栖大会 T-Head SAIL（标题为完整版「…完整回放 1080P（精准空降到 25:50）」，t=1550）/OneModel×2/GR-Inference×2（含 NVIDIA Developer）
   - Open Source 折叠组（4）：RedKnot 仓库、Megatron-Bridge PR#3769、sglang PR#27551/#27877
