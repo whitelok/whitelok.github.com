@@ -2,9 +2,11 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-01（双语版）
+> 最后更新：2026-10-02（双语版 Google Analytics 代码及操作记录规则）
 
 ## ⚠️ 第一规则（用户明确要求）
+
+**后续所有操作都必须同步记录到 `MEMORY.md`（用户于 2026-10-02 明确要求）。每次操作完成后记录实际改动、验证结果及必要的差异或限制，并更新本文件的最后更新日期。**
 
 **任何内容/样式修改，必须同步更新英文版（index.html）和中文版（index_zh.html）两个文件，保持结构、样式、信息完全一致（仅语言不同）。修改后两版都要截图验证。**
 例外：用户明确指定只改某一版时（如中文版头衔"模型工程负责人"仅改 zh 版），按指令执行并在本文件记录差异。
@@ -122,3 +124,13 @@ nav（毛玻璃，KL logo + Experience/Education/Contact）
 2. sed 静态化 + headless 截图 + PIL 裁块验证（两版都要验证，定位到改动区域）
 3. 清理临时文件 + `open` 页面
 4. 一句话汇报改动点
+5. 同步更新 `MEMORY.md`，记录本次操作及验证结果。
+
+## 7. 操作记录
+
+### 2026-10-02
+- 在英文版 `index.html` 和中文版 `index_zh.html` 的 `<head>` 元素之后，原样添加用户提供的 Google tag（gtag.js）代码，测量 ID 为 `G-XBS6JF7VRM`。
+- 脚本异步加载 `https://www.googletagmanager.com/gtag/js?id=G-XBS6JF7VRM`，初始化 `window.dataLayer` 和 `gtag`，并调用 `gtag('config', 'G-XBS6JF7VRM')`。
+- 验证：已检查两版各仅有一份 Google 代码，`git diff --check` 通过；尚未验证上线后的数据接收。本次未修改可见内容或样式，未执行截图验证。
+- 将用户要求「后面的操作都要同步到 MEMORY.md」写入本文件的第一规则和变更响应流程。
+- 用户授权将上述双语 Google Analytics 修改及本文件提交并推送到 `origin/master`（`https://github.com/whitelok/whitelok.github.com`）；提交前 `git diff --check` 通过。推送结果以 Git 命令回执为准。
