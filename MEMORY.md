@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-02（双语版 Google Analytics 代码及操作记录规则）
+> 最后更新：2026-10-03（双语 SEO 元数据、图标、分享封面及抓取文件）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -134,3 +134,11 @@ nav（毛玻璃，KL logo + Experience/Education/Contact）
 - 验证：已检查两版各仅有一份 Google 代码，`git diff --check` 通过；尚未验证上线后的数据接收。本次未修改可见内容或样式，未执行截图验证。
 - 将用户要求「后面的操作都要同步到 MEMORY.md」写入本文件的第一规则和变更响应流程。
 - 用户授权将上述双语 Google Analytics 修改及本文件提交并推送到 `origin/master`（`https://github.com/whitelok/whitelok.github.com`）；提交前 `git diff --check` 通过。推送结果以 Git 命令回执为准。
+
+### 2026-10-03
+- 为 `index.html` 和 `index_zh.html` 添加 canonical、SVG/ICO favicon、Open Graph、Twitter 大图卡片及 WebSite/ProfilePage/Person JSON-LD，保留原 Google Analytics 代码和全部正文、样式。
+- 英文 canonical 为 `https://whitelok.github.io/`；中文为 `https://whitelok.github.io/index_zh.html`。两版均标注 `en`、`zh-CN` 和指向英文首页的 `x-default` hreflang；Open Graph locale 分别为 `en_US`、`zh_CN`，不是示例中的日语。
+- 英文标题/描述长度为 57/144 字符，中文为 25/86 字符；描述使用页面真实履历内容。
+- 根目录创建 `favicon.svg` 和 `favicon.ico`（红色 KL 标识）、`og-cover.png`（1200×630，沿用页面色板与姓名/头衔）、`robots.txt`（允许抓取并提供 sitemap 入口）、`sitemap.xml`（两版规范 URL 及语言关联）。本次 sitemap 仅覆盖用户指定的两个个人介绍页面。
+- 验证：两版 HTML 解析、唯一 canonical/Google tag、JSON-LD 解析、标题/描述长度、引用资源存在性、XML 解析、封面尺寸及 `git diff --check` 通过；逐字比较确认 `<style>` 之后内容未变。两版 headless Chrome 截图及封面已查看，显示正常。
+- 用户已授权将本次 SEO 修改、五个新增资源文件及 `MEMORY.md` 提交并推送到 `origin/master`；推送结果以 Git 命令回执为准。线上 SEO 得分和收录效果需发布后重新检测。
