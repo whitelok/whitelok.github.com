@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-03（双语 SEO 元数据、图标、分享封面及抓取文件）
+> 最后更新：2026-10-08（删除双语页面顶部区块导航）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -66,7 +66,7 @@ sed -e 's/\.reveal{opacity:0;transform:translateY(26px);/\.reveal{opacity:1;tran
 
 ### 页面结构（当前）
 ```
-nav（毛玻璃，KL logo + Experience/Education/Contact）
+nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact 导航已删除，勿恢复）
 └─ hero：Karl Luo.骆兆楷（h1 超大字+红句点+中文名小字灰色）→ 头衔行 → 3 按钮（LinkedIn/Google Scholar/Team GitHub）
 └─ — EXPERIENCE（kicker 大标题）→ timeline（6 段经历，近→远）
 └─ — EDUCATION（kicker 大标题）→ 纵向教育卡片 ×2
@@ -142,3 +142,8 @@ nav（毛玻璃，KL logo + Experience/Education/Contact）
 - 根目录创建 `favicon.svg` 和 `favicon.ico`（红色 KL 标识）、`og-cover.png`（1200×630，沿用页面色板与姓名/头衔）、`robots.txt`（允许抓取并提供 sitemap 入口）、`sitemap.xml`（两版规范 URL 及语言关联）。本次 sitemap 仅覆盖用户指定的两个个人介绍页面。
 - 验证：两版 HTML 解析、唯一 canonical/Google tag、JSON-LD 解析、标题/描述长度、引用资源存在性、XML 解析、封面尺寸及 `git diff --check` 通过；逐字比较确认 `<style>` 之后内容未变。两版 headless Chrome 截图及封面已查看，显示正常。
 - 用户已授权将本次 SEO 修改、五个新增资源文件及 `MEMORY.md` 提交并推送到 `origin/master`；推送结果以 Git 命令回执为准。线上 SEO 得分和收录效果需发布后重新检测。
+
+### 2026-10-08
+- 按用户要求删除两版顶部的三个区块导航项：英文 Experience/Education/Contact，中文工作经历/教育经历/联系方式；保留 KL 标识和语言切换按钮。
+- 修改文件：`index.html`、`index_zh.html`、`MEMORY.md`。两版导航结构检查通过；用户已授权提交并推送到 `origin/master`，推送结果以 Git 命令回执为准。
+- 验证：`git diff --check` 通过；两版 Chrome 截图已查看，顶部仅保留标识和语言切换，页面显示正常。
