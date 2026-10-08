@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-08（删除双语页面顶部区块导航）
+> 最后更新：2026-10-08（双语小红书论文列表更新至 13 篇）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -147,3 +147,10 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 - 按用户要求删除两版顶部的三个区块导航项：英文 Experience/Education/Contact，中文工作经历/教育经历/联系方式；保留 KL 标识和语言切换按钮。
 - 修改文件：`index.html`、`index_zh.html`、`MEMORY.md`。两版导航结构检查通过；用户已授权提交并推送到 `origin/master`，推送结果以 Git 命令回执为准。
 - 验证：`git diff --check` 通过；两版 Chrome 截图已查看，顶部仅保留标识和语言切换，页面显示正常。
+
+### 2026-10-08：新增小红书学术论文
+- 读取用户指定的 Google Scholar 主页（https://scholar.google.com/citations?hl=en&user=tKJPx-oAAAAJ），按最新论文列表与现有条目比较，确认新增三篇，并在 arXiv 核实标题、编号及 Zhaokai Luo 作者身份。
+- 在 `index.html` 与 `index_zh.html` 的小红书 Academic Publications / 学术论文列表顶部，按 Scholar 顺序添加：CompoWorld: Compositional Environment Scaling for General Agents（https://arxiv.org/abs/2609.33665）；Skill2Env: Capability-Oriented Environment Synthesis from Skills for General Agents（https://arxiv.org/abs/2609.33772）；Learning to Learn from Context: Synthetic Training from Perturbed Public Documents（https://arxiv.org/abs/2609.33642）。
+- 沿用现有标题链接、`target="_blank"`、`rel="noopener"` 和 `.src` arXiv 编号格式；计数从 10 更新为 13，保留原有十篇及其顺序。
+- 验证：两版各 13 个条目、新增链接无重复、双语链接列表一致、`git diff --check` 通过；已查看两版论文区域 Chrome 截图，显示正常。
+- 用户已授权将新增三篇小红书论文、双语计数更新及 `MEMORY.md` 提交并推送到 `origin/master`；推送结果以 Git 命令回执为准。
