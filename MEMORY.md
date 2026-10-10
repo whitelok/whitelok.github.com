@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-08（双语小红书论文列表更新至 13 篇）
+> 最后更新：2026-10-10（双语开源贡献补充 PR 标题）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -154,3 +154,11 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 - 沿用现有标题链接、`target="_blank"`、`rel="noopener"` 和 `.src` arXiv 编号格式；计数从 10 更新为 13，保留原有十篇及其顺序。
 - 验证：两版各 13 个条目、新增链接无重复、双语链接列表一致、`git diff --check` 通过；已查看两版论文区域 Chrome 截图，显示正常。
 - 用户已授权将新增三篇小红书论文、双语计数更新及 `MEMORY.md` 提交并推送到 `origin/master`；推送结果以 Git 命令回执为准。
+
+### 2026-10-10：开源贡献补充 PR 标题
+- 在双语工作经历 Open Source & Community / 开源与社区贡献的三个 GitHub PR 条目末尾追加 GitHub 原始英文标题，保留仓库链接、PR 编号和现有样式。
+- PR #3769：[model] feat: add Qwen3.5 text model bridges (dense + MoE)。
+- PR #27551：[dLLM] Make FDFO a framework capability for all dLLM algorithms。
+- PR #27877：[dLLM] Reuse block KV/req slots in place across FDFO rounds。
+- 标题来源：GitHub PR 页面（sglang #27551/#27877）及 GitHub REST API（Megatron-Bridge #3769）。两版条目一致，`git diff --check` 通过；用户已授权将双语 PR 标题及 `MEMORY.md` 提交并推送到 `origin/master`，推送结果以 Git 命令回执为准。
+- 已查看双语页面截图，三个完整 PR 标题显示正常。
