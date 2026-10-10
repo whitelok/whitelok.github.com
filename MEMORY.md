@@ -12,6 +12,7 @@
 例外：用户明确指定只改某一版时（如中文版头衔"模型工程负责人"仅改 zh 版），按指令执行并在本文件记录差异。
 
 ### 两版已知差异
+- **学校名称**：用户于 2026-10-10 明确要求英文版 `index.html` 仅显示 Shanghai University、Guangzhou University，不显示中文学校名；中文版保留原有学校名称。
 - **头衔**：EN 用 "Director of Machine Learning Systems"；ZH 用户指定用「**模型工程负责人**」（2026-10-01，4 处：title/meta/hero role/小红书 h3）。
 
 ---
@@ -166,3 +167,15 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-10-10：同步页脚修改
 - 用户请求推送时发现两版页脚新增本地修改：删除英文 `Crafted locally with HTML & CSS` 及中文「本地 HTML & CSS 手工制作」，保留版权年份和姓名。
 - 将双语页脚修改与本记录一起提交并推送至 `origin/master`；`git diff --check` 通过。推送结果以 Git 回执为准。
+
+### 2026-10-10：英文版学校名称
+- 按用户指定仅修改 `index.html`：删除 Shanghai University 后的「· 上海大学」及 Guangzhou University 后的「· 广州大学」。中文版保持原样，并在两版已知差异中记录。
+- 验证：英文学校名保留、两处中文后缀已删除，`git diff --check` 通过；尚未提交或推送。
+
+### 2026-10-10：KubeGPU 论文等级
+- 根据用户提供的等级，在中英文版腾讯工作经历的 KubeGPU 论文末尾添加 `<span class="badge">CCF-C</span>`，沿用现有论文等级徽章样式。
+- 验证：两版 KubeGPU 条目各有一个 CCF-C 徽章，`git diff --check` 通过；尚未提交或推送。
+
+### 2026-10-10：推送学校名称与论文等级修改
+- 用户授权将英文版学校中文后缀删除、双语 KubeGPU 的 CCF-C 徽章及 MEMORY.md 操作记录一起提交并推送到 origin/master。
+- 提交前 git diff --check 通过；推送结果以 Git 命令回执为准。
