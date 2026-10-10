@@ -162,3 +162,7 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 - PR #27877：[dLLM] Reuse block KV/req slots in place across FDFO rounds。
 - 标题来源：GitHub PR 页面（sglang #27551/#27877）及 GitHub REST API（Megatron-Bridge #3769）。两版条目一致，`git diff --check` 通过；用户已授权将双语 PR 标题及 `MEMORY.md` 提交并推送到 `origin/master`，推送结果以 Git 命令回执为准。
 - 已查看双语页面截图，三个完整 PR 标题显示正常。
+
+### 2026-10-10：同步页脚修改
+- 用户请求推送时发现两版页脚新增本地修改：删除英文 `Crafted locally with HTML & CSS` 及中文「本地 HTML & CSS 手工制作」，保留版权年份和姓名。
+- 将双语页脚修改与本记录一起提交并推送至 `origin/master`；`git diff --check` 通过。推送结果以 Git 回执为准。
