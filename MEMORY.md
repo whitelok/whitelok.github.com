@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-10（双语开源贡献补充 PR 标题）
+> 最后更新：2026-10-14（双语小红书论文新增 Vela）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -179,3 +179,8 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-10-10：推送学校名称与论文等级修改
 - 用户授权将英文版学校中文后缀删除、双语 KubeGPU 的 CCF-C 徽章及 MEMORY.md 操作记录一起提交并推送到 origin/master。
 - 提交前 git diff --check 通过；推送结果以 Git 命令回执为准。
+
+### 2026-10-14：新增 Vela 论文
+- 在中英文版小红书学术论文列表顶部添加 Vela: User Behavior as Supervision Sparks LLM Intelligence（https://arxiv.org/abs/2610.14709），沿用标题链接与 .src arXiv 编号格式，计数从 13 更新为 14。
+- 已从 arXiv 核实标题、编号及 Zhaokai Luo 作者身份；两版均为 14 条且新增链接无重复，git diff --check 通过。本次未进行截图验证。
+- 用户已授权将 Vela 论文双语更新及 MEMORY.md 提交并推送至 origin/master；提交前 git diff --check 通过，推送结果以 Git 回执为准。
