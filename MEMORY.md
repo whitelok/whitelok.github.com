@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-14（双语小红书论文新增 Vela）
+> 最后更新：2026-10-17（修复手机首次打开工作经历空白）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -184,3 +184,9 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 - 在中英文版小红书学术论文列表顶部添加 Vela: User Behavior as Supervision Sparks LLM Intelligence（https://arxiv.org/abs/2610.14709），沿用标题链接与 .src arXiv 编号格式，计数从 13 更新为 14。
 - 已从 arXiv 核实标题、编号及 Zhaokai Luo 作者身份；两版均为 14 条且新增链接无重复，git diff --check 通过。本次未进行截图验证。
 - 用户已授权将 Vela 论文双语更新及 MEMORY.md 提交并推送至 origin/master；提交前 git diff --check 通过，推送结果以 Git 回执为准。
+
+### 2026-10-17：手机工作经历首次打开空白
+- 根据用户截图发现标题和时间线可见、工作条目不可见；根因是 `.reveal` 默认 opacity:0，IntersectionObserver threshold:.12 对手机上的超长工作经历条目可能永远无法达到，导致持续透明。
+- 同步修复 index.html 与 index_zh.html：内容默认可见，observer 阈值改为 0，进入视口时仅通过一次性 keyframes 播放原有渐入上移动画；无 IntersectionObserver 或 JS 未运行时正文仍可见，减少动态效果偏好下禁用动画。
+- 验证：Node VM 检查观察器阈值、进入回调、缺少观察器环境正常执行和默认可见 CSS；git diff --check 通过。使用全新 Chrome 配置在 390×844 窗口截图，已查看双语 Experience 工作内容可见。尚未在用户截图所用的手机 WebView 真机验证。
+- 用户已授权将双语手机版显示修复及 MEMORY.md 提交并推送到 origin/master；提交前 git diff --check 通过，推送结果以 Git 回执为准。
