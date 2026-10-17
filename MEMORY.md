@@ -190,3 +190,13 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 - 同步修复 index.html 与 index_zh.html：内容默认可见，observer 阈值改为 0，进入视口时仅通过一次性 keyframes 播放原有渐入上移动画；无 IntersectionObserver 或 JS 未运行时正文仍可见，减少动态效果偏好下禁用动画。
 - 验证：Node VM 检查观察器阈值、进入回调、缺少观察器环境正常执行和默认可见 CSS；git diff --check 通过。使用全新 Chrome 配置在 390×844 窗口截图，已查看双语 Experience 工作内容可见。尚未在用户截图所用的手机 WebView 真机验证。
 - 用户已授权将双语手机版显示修复及 MEMORY.md 提交并推送到 origin/master；提交前 git diff --check 通过，推送结果以 Git 回执为准。
+
+### 2026-10-17：相连的社交链接按钮
+- 中英文版 LinkedIn、Google Scholar、Team GitHub 改为一组相连按钮：共享外框和圆角，按钮间用分隔线，不再分开或换行。
+- 手机宽度下整组占满可用宽度，按钮使用弹性宽度、较小图标和自适应字号；约束 hero 内容最大宽度，防止内容撑宽按钮组。保留原链接及键盘焦点提示。
+- 窄屏媒体规则覆盖 600px 以下；git diff --check 通过。初次 Chrome 390px 窗口截图存在浏览器最小布局宽度导致的裁切，后续使用 500px 窗口验证完整显示。尚未提交或推送。
+- 已查看两版最终 500px 窄屏截图，三项相连且完整显示在同一行。
+
+### 2026-10-17：推送相连社交按钮
+- 用户授权将中英文相连社交按钮及手机自适应样式、MEMORY.md 记录一起提交并推送至 origin/master。
+- 提交前 git diff --check 通过；推送结果以 Git 回执为准。
