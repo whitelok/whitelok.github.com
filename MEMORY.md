@@ -222,3 +222,7 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-10-26：新增 Iris 与 Navalia 论文
 - 在中英文版小红书工作经历的学术论文列表顶部添加 Iris: Climbing to the Search Frontier 和 Navalia: Advancing Cowork Agents through Verifiable Task Synthesis and Long-Horizon Post-Training，使用用户提供的 Google Scholar 链接，计数从 14 更新为 16。
 - 双语内容检查、页面生成、条目唯一性和 git diff --check 通过；用户授权提交并推送本次论文更新。
+
+### 2026-10-26：论文链接改为 arXiv
+- 核实 Iris 对应 arXiv 2609.04304、Navalia 对应 arXiv 2610.26887，将双语页面链接改为 arXiv abs 页面，并同步来源编号和 JSON 数据。
+- 双语内容检查、页面生成及暂存差异检查通过；按用户要求重新提交。
