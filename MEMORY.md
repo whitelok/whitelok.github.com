@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-17（修复手机首次打开工作经历空白）
+> 最后更新：2026-10-26（新增 Iris 与 Navalia 论文）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -218,3 +218,7 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-10-17：推送顶部间距与专利记录
 - 用户授权将双语手机/桌面 hero 顶部间距调整、小红书专利申请 CN122845659A 及 MEMORY.md 操作记录一起提交并推送至 origin/master。
 - 提交前 git diff --check 通过；推送结果以 Git 回执为准。
+
+### 2026-10-26：新增 Iris 与 Navalia 论文
+- 在中英文版小红书工作经历的学术论文列表顶部添加 Iris: Climbing to the Search Frontier 和 Navalia: Advancing Cowork Agents through Verifiable Task Synthesis and Long-Horizon Post-Training，使用用户提供的 Google Scholar 链接，计数从 14 更新为 16。
+- 双语内容检查、页面生成、条目唯一性和 git diff --check 通过；用户授权提交并推送本次论文更新。
