@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-26（新增 Iris 与 Navalia 论文）
+> 最后更新：2026-10-27（更新 EMNLP 论文链接与格式）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -231,3 +231,7 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 - 中英文版小红书学术论文按 arXiv 编号对应的首次提交顺序从新到旧排列；EMNLP 2026 论文保留在末尾，PACT 按其 HF Papers 对应的 arXiv 编号 2609.26355 参与排序。
 - 保留全部 16 篇论文，未修改标题、链接与计数；双语生成和排序一致性检查通过。
 - 用户授权提交本次排序并推送至 origin/master。
+
+### 2026-10-27：更新 EMNLP 论文链接与格式
+- 根据用户提供的 Scholar 记录，为双语 EMNLP 论文标题添加正式链接 https://aclanthology.org/2026.emnlp-main.1836/，保留会议和录取率徽章；按要求不显示灰色 ACL Anthology 编号标记。
+- 双语内容和生成检查、链接唯一性及灰色标记移除检查、暂存差异检查通过；用户授权提交并推送至 origin/master。
