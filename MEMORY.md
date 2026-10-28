@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-27（更新 EMNLP 论文链接与格式）
+> 最后更新：2026-10-28（清理旧博客文件）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -235,3 +235,10 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-10-27：更新 EMNLP 论文链接与格式
 - 根据用户提供的 Scholar 记录，为双语 EMNLP 论文标题添加正式链接 https://aclanthology.org/2026.emnlp-main.1836/，保留会议和录取率徽章；按要求不显示灰色 ACL Anthology 编号标记。
 - 双语内容和生成检查、链接唯一性及灰色标记移除检查、暂存差异检查通过；用户授权提交并推送至 origin/master。
+
+### 2026-10-28：清理与当前首页无关的旧博客文件
+- 检查双语首页、模板、内容及 sitemap 引用后，将旧博客年份文章、archives、page、css、js、lib、images、resources、旧 404.html 和 ._.DS_Store 移出项目，共 159 个文件、74,705,030 字节。旧文章地址在发布清理后将不再提供内容。
+- 保留双语首页、favicon、og-cover.png、robots.txt、sitemap.xml，以及 JSON 内容、模板、维护脚本、测试、维护说明与实施记录；未改动首页代码和内容。
+- 删除前文件备份位于 /private/tmp/whitelok-legacy-backup-5c65du4m，包含 cleanup-manifest.json；原 Git 已跟踪文件也可从历史恢复。
+- 已核对首页哈希保持一致、本地资源均存在、双语内容检查与维护回归测试通过。用户已授权提交并推送本次清理。
+- 回归初次运行发现新增论文计数测试仍硬编码 15；改为按输入原有条目数加 1 计算预期值，重跑 10 项测试全部通过。
