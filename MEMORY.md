@@ -312,3 +312,10 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 - 按用户要求，将双语产品目录中的 EZVideoRepair 卡片改为灰色静态 article，移除链接及跳转箭头，不参与键盘链接导航，并添加尚未上线 / Coming soon 状态。
 - 移除目录中暗示已上线的可获取文案，改为准备中；保留产品介绍页原文件。
 - 验证：双语卡片均无产品链接、href 或 tabindex，12 项回归测试与 git diff --check 通过。尚未提交或推送。
+
+### 2026-10-29：移除首页研究落地按钮
+- 按用户要求，从中英文首页移除 Research → Apps / 研究落地入口，删除对应 hero JSON 链接、模板标记及专用样式；保留独立产品目录与介绍页。
+
+### 2026-10-29：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
+- 验证：双语生成检查及 12 项测试通过；确认两版入口和专用样式已移除，原社交按钮保留。尚未提交或推送。
