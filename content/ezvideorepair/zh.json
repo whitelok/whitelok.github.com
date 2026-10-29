@@ -20,7 +20,7 @@
   "hero_note": "先预览，再决定。无需上传素材。",
   "screenshot_alt": "EZVideoRepair 中文主界面：预览区、素材区和修复设置",
   "screenshot_caption": "真实应用界面 · 未加载素材状态",
-  "privacy_label": "你的素材，不离开你的 Mac",
+  "privacy_label": "隐私政策",
   "privacy_text": "推理在本机进行。联网用于获取模型，不用于上传待修复的视频或图片。",
   "preview_label": "2 秒",
   "preview_text": "先看一小段预览",
@@ -138,5 +138,6 @@
   "footer_home": "作者主页",
   "footer_notice": "修复结果因素材而异。EZVR Flash V1 为基于 SeedVR2 的转换权重包，非上游官方产品。",
   "other_lang": "en",
-  "skip": "跳转到正文"
+  "skip": "跳转到正文",
+  "privacy_url": "ezvideorepair-privacy.html"
 }

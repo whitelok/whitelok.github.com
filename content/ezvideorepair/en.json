@@ -20,7 +20,7 @@
   "hero_note": "Preview first. Keep your media local.",
   "screenshot_alt": "EZVideoRepair English interface with preview, media library and restoration controls",
   "screenshot_caption": "Actual app interface · No media loaded",
-  "privacy_label": "Your media stays on your Mac",
+  "privacy_label": "Privacy Policy",
   "privacy_text": "Inference runs locally. Internet access is used to obtain models, not to upload your videos or images.",
   "preview_label": "2 seconds",
   "preview_text": "Preview a short clip first",
@@ -138,5 +138,6 @@
   "footer_home": "About the developer",
   "footer_notice": "Results vary by source media. EZVR Flash V1 is a SeedVR2-derived weight package, not an official upstream product.",
   "other_lang": "zh-CN",
-  "skip": "Skip to content"
+  "skip": "Skip to content",
+  "privacy_url": "ezvideorepair-privacy_en.html"
 }

@@ -319,3 +319,7 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-10-29：通过 JSON 生成双语页面
 - 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
 - 验证：双语生成检查及 12 项测试通过；确认两版入口和专用样式已移除，原社交按钮保留。尚未提交或推送。
+
+### 2026-10-29：提交双语隐私政策页面
+- 用户要求推送当前改动，包含新增 ezvideorepair-privacy.html、ezvideorepair-privacy_en.html 及产品页页脚隐私链接；保留现有政策正文。
+- 同步产品 JSON 和共享模板中的隐私链接，防止下次生成丢失；提交前执行生成、回归测试和差异检查。
