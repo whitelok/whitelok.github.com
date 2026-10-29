@@ -307,3 +307,8 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-10-29：提交产品入口与目录整理
 - 用户授权提交并推送当前产品入口、双语产品目录及 EZVideoRepair 页面、资源与生成维护工具，并包含目录整理和说明。
 - 提交前首页内容检查、12 项回归测试及 git diff --check 通过；推送结果以 Git 回执为准。
+
+### 2026-10-29：EZVideoRepair 产品卡片标为未上线
+- 按用户要求，将双语产品目录中的 EZVideoRepair 卡片改为灰色静态 article，移除链接及跳转箭头，不参与键盘链接导航，并添加尚未上线 / Coming soon 状态。
+- 移除目录中暗示已上线的可获取文案，改为准备中；保留产品介绍页原文件。
+- 验证：双语卡片均无产品链接、href 或 tabindex，12 项回归测试与 git diff --check 通过。尚未提交或推送。
