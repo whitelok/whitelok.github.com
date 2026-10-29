@@ -1,2 +1,6 @@
 .DS_Store
 README.md
+
+# Python maintenance tools
+__pycache__/
+*.py[cod]

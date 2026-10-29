@@ -1,0 +1,142 @@
+{
+  "lang": "en",
+  "locale": "en_US",
+  "title": "EZVideoRepair — Focused video restoration, entirely on your Mac",
+  "description": "Local video and image restoration for Apple Silicon Macs. Preview two seconds before processing a full video. Keep your media on your Mac, save projects, and resume interrupted work.",
+  "nav_features": "Features",
+  "nav_workflow": "How it works",
+  "nav_faq": "FAQ",
+  "language": "简体中文",
+  "other_page": "ezvideorepair.html",
+  "source": "View the project",
+  "model": "Get the model",
+  "eyebrow": "Built for Apple Silicon Macs",
+  "headline": [
+    "Restore your footage.",
+    "Right on your Mac."
+  ],
+  "intro": "A focused, fully local video restoration tool. Improve videos and images with EZVR Flash V1 while keeping your media on your Mac, from preview to export.",
+  "availability": "Source code and model weights are available. A public app installer is not yet available.",
+  "hero_note": "Preview first. Keep your media local.",
+  "screenshot_alt": "EZVideoRepair English interface with preview, media library and restoration controls",
+  "screenshot_caption": "Actual app interface · No media loaded",
+  "privacy_label": "Your media stays on your Mac",
+  "privacy_text": "Inference runs locally. Internet access is used to obtain models, not to upload your videos or images.",
+  "preview_label": "2 seconds",
+  "preview_text": "Preview a short clip first",
+  "model_label": "EZVR Flash V1",
+  "model_text": "Download once. Restore offline.",
+  "section_label": "Less distraction. More focus.",
+  "features_title": "The tools you need.",
+  "features_intro": "A clear path from import to preview to export, without turning a simple restoration task into a complicated workspace.",
+  "features": [
+    [
+      "01",
+      "Preview before you commit",
+      "Generate a two-second preview from the selected time. Check it before processing the whole video."
+    ],
+    [
+      "02",
+      "Choose how much to process",
+      "Restore a full video or set a custom duration. Work on just the part you need."
+    ],
+    [
+      "03",
+      "Videos and images",
+      "Use the same local restoration workflow for video clips and still images."
+    ],
+    [
+      "04",
+      "Pick up where you left off",
+      "Projects keep settings, results and restored frames so interrupted work can resume."
+    ],
+    [
+      "05",
+      "Reuse finished results",
+      "Matching media and settings reuse completed results, reducing unnecessary processing."
+    ],
+    [
+      "06",
+      "Downloads stay in view",
+      "Download models asynchronously, pause and resume, and see progress after closing Model manager."
+    ]
+  ],
+  "workflow_label": "From footage to results",
+  "workflow_title": "Three steps to local restoration.",
+  "workflow": [
+    [
+      "Set up the model",
+      "Download EZVR Flash V1 in Model manager, or select an existing local model folder."
+    ],
+    [
+      "Import and preview",
+      "Import your media, choose a start time, and inspect a two-second preview."
+    ],
+    [
+      "Process and save",
+      "Choose a full video or a custom duration, export the result, or save a project to continue later."
+    ]
+  ],
+  "model_title": "Get the model. Then go offline.",
+  "model_intro": "EZVR Flash V1 is a SeedVR2 3B-derived weight package for this app. Downloaded files are checked for integrity before they can be used.",
+  "model_size": "About 7.79 GB",
+  "model_size_label": "Model weight download",
+  "model_license": "Upstream Apache 2.0 license retained",
+  "model_license_label": "Model license and conversion history",
+  "model_action": "Visit the model repository",
+  "model_note": "Getting the model requires Internet access. Restoration can run offline once the model is ready.",
+  "requirements_title": "Check your Mac first.",
+  "requirements": [
+    [
+      "System",
+      "macOS 14 Sonoma or later"
+    ],
+    [
+      "Chip",
+      "Apple Silicon (M series)"
+    ],
+    [
+      "Memory",
+      "24 GB or more"
+    ],
+    [
+      "Storage",
+      "About 7.79 GB for weights, plus space for downloads, outputs and projects"
+    ]
+  ],
+  "faq_title": "A few useful answers",
+  "faq": [
+    [
+      "Are my videos uploaded to a server?",
+      "No. Videos and images are processed on your Mac. Obtaining models makes network requests to the hosting service, but does not upload your media."
+    ],
+    [
+      "Does it work on Intel Macs or Windows?",
+      "Restoration currently supports Apple Silicon Macs only. Intel Macs and Windows are not supported."
+    ],
+    [
+      "Can it output 4K or 8K?",
+      "The current model targets a 512-pixel short edge. There is no promise of 4K, 8K or frame interpolation. Some outputs may be smaller than the original; check a preview first."
+    ],
+    [
+      "How long does restoration take?",
+      "It depends on your Mac, the media and its duration. Processing may take much longer than playback. Start with a two-second preview to decide how much to process."
+    ],
+    [
+      "Does a project include the original media and model?",
+      "No. It references the original media and keeps settings, results and restored frames from unfinished tasks. Keep the original media and model separately when moving a project."
+    ],
+    [
+      "Where can I download the app?",
+      "The project source is available on GitHub and model weights on Hugging Face. This page does not link to an unreleased installer or an App Store listing."
+    ]
+  ],
+  "closing_title": "Keep restoration local.",
+  "closing_text": "A focused Mac tool for better-looking footage. Start with a short preview.",
+  "footer_line": "A focused, fully local video restoration tool",
+  "footer_model": "Model and license",
+  "footer_home": "About the developer",
+  "footer_notice": "Results vary by source media. EZVR Flash V1 is a SeedVR2-derived weight package, not an official upstream product.",
+  "other_lang": "zh-CN",
+  "skip": "Skip to content"
+}

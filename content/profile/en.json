@@ -1,0 +1,562 @@
+{
+  "schema_version": 1,
+  "language": "en",
+  "title": "Karl Luo — Director of Machine Learning Systems @ RedNote",
+  "meta": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "description": "Karl Luo leads machine learning systems at RedNote, building AI infrastructure for 300M+ users. Explore his experience, research, and education.",
+    "og:type": "website",
+    "og:url": "https://whitelok.github.io/",
+    "og:title": "Karl Luo — Director of Machine Learning Systems @ RedNote",
+    "og:description": "Karl Luo leads machine learning systems at RedNote, building AI infrastructure for 300M+ users. Explore his experience, research, and education.",
+    "og:site_name": "Karl Luo · 骆兆楷",
+    "og:locale": "en_US",
+    "og:locale:alternate": "zh_CN",
+    "og:image": "https://whitelok.github.io/og-cover.png",
+    "og:image:type": "image/png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "Karl Luo — Machine Learning Systems & AI Infrastructure",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Karl Luo — Director of Machine Learning Systems @ RedNote",
+    "twitter:description": "Karl Luo leads machine learning systems at RedNote, building AI infrastructure for 300M+ users. Explore his experience, research, and education.",
+    "twitter:image": "https://whitelok.github.io/og-cover.png",
+    "twitter:image:alt": "Karl Luo — Machine Learning Systems & AI Infrastructure"
+  },
+  "structured_data": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://whitelok.github.io/#website",
+        "name": "Karl Luo · 骆兆楷",
+        "url": "https://whitelok.github.io/",
+        "inLanguage": [
+          "en",
+          "zh-CN"
+        ]
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://whitelok.github.io/#profile",
+        "url": "https://whitelok.github.io/",
+        "name": "Karl Luo — Director of Machine Learning Systems @ RedNote",
+        "description": "Karl Luo leads machine learning systems at RedNote, building AI infrastructure for 300M+ users. Explore his experience, research, and education.",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@id": "https://whitelok.github.io/#website"
+        },
+        "mainEntity": {
+          "@id": "https://whitelok.github.io/#person"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://whitelok.github.io/#person",
+        "name": "Karl Luo",
+        "alternateName": "骆兆楷",
+        "url": "https://whitelok.github.io/",
+        "jobTitle": "Director of Machine Learning Systems",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Xiaohongshu / RedNote"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/karl-luo-a74a4964",
+          "https://scholar.google.com/citations?user=tKJPx-oAAAAJ"
+        ]
+      }
+    ]
+  },
+  "nav": {
+    "logo_html": "<span class=\"mark\">KL</span>Karl Luo",
+    "language_label": "中文"
+  },
+  "hero": {
+    "heading_html": "Karl Luo<span class=\"accent\">.</span><span class=\"zh-name\">骆兆楷</span>",
+    "role_html": "Director of <b>Machine Learning Systems</b> @ <b>RedNote · 小红书</b>",
+    "links": [
+      {
+        "id": "link-1",
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/karl-luo-a74a4964"
+      },
+      {
+        "id": "link-2",
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com/citations?hl=en&user=tKJPx-oAAAAJ"
+      },
+      {
+        "id": "link-3",
+        "label": "Team GitHub",
+        "url": "https://github.com/rednote-machine-learning"
+      },
+      {
+        "id": "link-4",
+        "label": "Research → Apps",
+        "url": "products_en.html"
+      }
+    ]
+  },
+  "footer": {
+    "copyright_html": "© 2026 Karl Luo",
+    "links": [
+      {
+        "id": "link-1",
+        "label": "whitelok@gmail.com",
+        "url": "mailto:whitelok@gmail.com"
+      },
+      {
+        "id": "link-2",
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/karl-luo-a74a4964"
+      },
+      {
+        "id": "link-3",
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com/citations?hl=en&user=tKJPx-oAAAAJ"
+      },
+      {
+        "id": "link-4",
+        "label": "GitHub",
+        "url": "https://github.com/rednote-machine-learning"
+      }
+    ]
+  },
+  "experience_label": "Experience",
+  "experience": [
+    {
+      "id": "experience-1",
+      "heading_html": "<span class=\"co\"><a href=\"https://www.xiaohongshu.com\" target=\"_blank\" rel=\"noopener\">Xiaohongshu · 小红书</a></span> — Director of Machine Learning Systems",
+      "time_html": "Aug 2025 — Present · China",
+      "subtitle_html": "",
+      "bullets": [
+        {
+          "id": "bullet-1",
+          "html": "Lead the <b>Machine Learning Infrastructure</b> team that powers Xiaohongshu (小红书) and RedNote's core <b>Search, Ads, and Recommendation</b> systems, serving as both <b>technical lead and hands-on core contributor</b>."
+        },
+        {
+          "id": "bullet-2",
+          "html": "Founded and currently lead the <b>AI Infrastructure team (AIGC / LLM / VLM)</b>; architected and delivered a <b>production-grade unified framework</b> spanning pretraining, post-training, and inference."
+        },
+        {
+          "id": "bullet-3",
+          "html": "Built a highly performance-optimized <b>LLM serving framework</b> — deployed in production Agent scenarios such as <b>Xiaohongshu AI Search (AI搜索)</b> and <b>Diandian (点点)</b>, serving <b>300 million MAU</b>."
+        },
+        {
+          "id": "bullet-4",
+          "html": "Lead the team driving <b>AIGC inference optimization</b>, pushing toward <b>speed-of-light performance</b> across <b>GPU, NPU, PPU, and XPU</b> platforms."
+        },
+        {
+          "id": "bullet-5",
+          "html": "Filed patent application <b>CN122845659A</b>."
+        }
+      ],
+      "tags_html": "\n          <span class=\"tag\">LLM Serving</span><span class=\"tag\">AIGC</span><span class=\"tag\">VLM</span>\n          <span class=\"tag\">Unified Training Framework</span><span class=\"tag\">GPU · NPU · XPU</span>\n        ",
+      "groups": [
+        {
+          "id": "group-1",
+          "summary_html": "Academic Publications <span class=\"cnt\">{{count}} papers · <a href=\"https://scholar.google.com/citations?hl=en&user=tKJPx-oAAAAJ\" target=\"_blank\" rel=\"noopener\">Google Scholar ↗</a></span>",
+          "items": [
+            {
+              "id": "paper-navalia",
+              "html": "<a href=\"https://arxiv.org/abs/2610.26887\" target=\"_blank\" rel=\"noopener\">Navalia: Advancing Cowork Agents through Verifiable Task Synthesis and Long-Horizon Post-Training</a><span class=\"src\">arXiv 2610.26887</span>"
+            },
+            {
+              "id": "item-1",
+              "html": "<a href=\"https://arxiv.org/abs/2610.14709\" target=\"_blank\" rel=\"noopener\">Vela: User Behavior as Supervision Sparks LLM Intelligence</a><span class=\"src\">arXiv 2610.14709</span>"
+            },
+            {
+              "id": "item-3",
+              "html": "<a href=\"https://arxiv.org/abs/2609.33772\" target=\"_blank\" rel=\"noopener\">Skill2Env: Capability-Oriented Environment Synthesis from Skills for General Agents</a><span class=\"src\">arXiv 2609.33772</span>"
+            },
+            {
+              "id": "item-2",
+              "html": "<a href=\"https://arxiv.org/abs/2609.33665\" target=\"_blank\" rel=\"noopener\">CompoWorld: Compositional Environment Scaling for General Agents</a><span class=\"src\">arXiv 2609.33665</span>"
+            },
+            {
+              "id": "item-4",
+              "html": "<a href=\"https://arxiv.org/abs/2609.33642\" target=\"_blank\" rel=\"noopener\">Learning to Learn from Context: Synthetic Training from Perturbed Public Documents</a><span class=\"src\">arXiv 2609.33642</span>"
+            },
+            {
+              "id": "item-13",
+              "html": "<a href=\"https://huggingface.co/papers/2609.26355\" target=\"_blank\" rel=\"noopener\">PACT: From Credit Assignment to Critic Alignment</a><span class=\"src\">HF Papers 2609.26355</span>"
+            },
+            {
+              "id": "item-12",
+              "html": "<a href=\"https://arxiv.org/abs/2609.07008\" target=\"_blank\" rel=\"noopener\">RedKnot-MLA: Multi-Head Offline-Online Reuse for DeepSeek-V4 Long-Context Serving</a><span class=\"src\">arXiv 2609.07008</span>"
+            },
+            {
+              "id": "item-11",
+              "html": "<a href=\"https://arxiv.org/abs/2609.04882\" target=\"_blank\" rel=\"noopener\">AtomRec: Evolving Atomic Memory for Agentic Recommendation</a><span class=\"src\">arXiv 2609.04882</span>"
+            },
+            {
+              "id": "paper-iris",
+              "html": "<a href=\"https://arxiv.org/abs/2609.04304\" target=\"_blank\" rel=\"noopener\">Iris: Climbing to the Search Frontier</a><span class=\"src\">arXiv 2609.04304</span>"
+            },
+            {
+              "id": "item-10",
+              "html": "<a href=\"https://arxiv.org/abs/2608.26530\" target=\"_blank\" rel=\"noopener\">PILOT in the Loop: Live Self-Improvement for Long-Horizon Agents</a><span class=\"src\">arXiv 2608.26530</span>"
+            },
+            {
+              "id": "item-9",
+              "html": "<a href=\"https://arxiv.org/abs/2608.18606\" target=\"_blank\" rel=\"noopener\">OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking</a><span class=\"src\">arXiv 2608.18606</span>"
+            },
+            {
+              "id": "item-8",
+              "html": "<a href=\"https://arxiv.org/abs/2607.27760\" target=\"_blank\" rel=\"noopener\">Hierarchical Latent Reasoning for LLM-based Recommendation</a><span class=\"src\">arXiv 2607.27760</span>"
+            },
+            {
+              "id": "item-7",
+              "html": "<a href=\"https://arxiv.org/abs/2607.17652\" target=\"_blank\" rel=\"noopener\">FlowBlock: Wavefront-Parallel Decoding for Self-Correcting Diffusion Language Models</a><span class=\"src\">arXiv 2607.17652</span>"
+            },
+            {
+              "id": "item-6",
+              "html": "<a href=\"http://arxiv.org/abs/2607.05708\" target=\"_blank\" rel=\"noopener\">Akashic: A Low-Overhead LLM Inference Service with MemAttention</a><span class=\"src\">arXiv 2607.05708</span>"
+            },
+            {
+              "id": "item-5",
+              "html": "<a href=\"https://arxiv.org/abs/2606.06256\" target=\"_blank\" rel=\"noopener\">RedKnot: Efficient Long-Context LLM Serving with Head-Aware KVReuse and SegPagedAttention</a><span class=\"src\">arXiv 2606.06256</span>"
+            },
+            {
+              "id": "item-14",
+              "html": "<a href=\"https://aclanthology.org/2026.emnlp-main.1836/\" target=\"_blank\" rel=\"noopener\">Rethinking Diffusion Large Language Models via Time-aware Weighting and Block-oriented Refinements</a><span class=\"badge\">EMNLP 2026 Main · 15.4% acceptance</span>"
+            }
+          ]
+        },
+        {
+          "id": "group-2",
+          "summary_html": "Awards <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "🏆 2025 Xiaohongshu Impact Challenge — <b>Business Breakthrough Award, Annual Champion</b>"
+            }
+          ]
+        },
+        {
+          "id": "group-3",
+          "summary_html": "Press &amp; Media Coverage <span class=\"cnt\">{{count}} articles</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "<a href=\"https://mp.weixin.qq.com/s/qRrZvL0aZzYI82djFSrLug\" target=\"_blank\" rel=\"noopener\">让 KV Cache「按头分家」：小红书 RedKnot 如何重做长文本推理新引擎</a><span class=\"src\">微信公众号</span>"
+            },
+            {
+              "id": "item-2",
+              "html": "<a href=\"https://cnews.chinadaily.com.cn/a/202607/02/WS6a461038a310d709c2fbb8a8.html\" target=\"_blank\" rel=\"noopener\">小红书集团主导开源长文本大模型推理加速引擎 RedKnot</a><span class=\"src\">China Daily</span>"
+            },
+            {
+              "id": "item-3",
+              "html": "<a href=\"https://www.xiaohongshu.com/explore/6a30f90a000000001003d283\" target=\"_blank\" rel=\"noopener\">FDFO：让 dLLM 推理调度摆脱「木桶效应」</a><span class=\"src\">小红书</span>"
+            },
+            {
+              "id": "item-4",
+              "html": "<a href=\"https://mp.weixin.qq.com/s/Ej0bYULumxqFuXKZ42ZAfA?scene=1\" target=\"_blank\" rel=\"noopener\">谢涛出席2026电力信息通信新技术大会，阐释AI时代的智能体基础设施创新与开源生态构建</a><span class=\"src\">微信公众号 · 发改委</span>"
+            },
+            {
+              "id": "item-5",
+              "html": "<a href=\"https://www.bilibili.com/video/BV1ULad6HEan/?share_source=copy_web&vd_source=1cc407411ca8f167977604c4d35f5d82&t=1550\" target=\"_blank\" rel=\"noopener\">2026云栖大会｜平头哥算力峰会：T-Head SAIL软件栈技术论坛 完整回放 1080P（精准空降到 25:50）</a><span class=\"src\">Bilibili</span>"
+            },
+            {
+              "id": "item-6",
+              "html": "<a href=\"https://mp.weixin.qq.com/s/jUIiv4UNPf58nCF2wc9qvw\" target=\"_blank\" rel=\"noopener\">OneModel：小红书把三个业务的终排并成一个模型</a><span class=\"src\">微信公众号</span>"
+            },
+            {
+              "id": "item-7",
+              "html": "<a href=\"https://mp.weixin.qq.com/s/XoeYUeXodZ84JvxedPiW5Q\" target=\"_blank\" rel=\"noopener\">小红书 OneModel：单模型解决推荐、广告、电商排序问题</a><span class=\"src\">微信公众号</span>"
+            },
+            {
+              "id": "item-8",
+              "html": "<a href=\"https://mp.weixin.qq.com/s/W2PFlau62gtQjfXEL_EkHQ\" target=\"_blank\" rel=\"noopener\">GR-Inference：让搜索生成式召回更高效</a><span class=\"src\">微信公众号</span>"
+            },
+            {
+              "id": "item-9",
+              "html": "<a href=\"https://developer.nvidia.cn/blog/gr-inference-generative-recommendation-inference-system-design-performance-evaluation/\" target=\"_blank\" rel=\"noopener\">GR-Inference：面向生成式推荐的推理系统设计与性能评估</a><span class=\"src\">NVIDIA Developer</span>"
+            }
+          ]
+        },
+        {
+          "id": "group-4",
+          "summary_html": "Open Source &amp; Community <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "<a href=\"https://github.com/rednote-machine-learning/RedKnot\" target=\"_blank\" rel=\"noopener\">rednote-machine-learning/RedKnot</a><span class=\"src\">团队开源仓库</span>"
+            },
+            {
+              "id": "item-2",
+              "html": "<a href=\"https://github.com/NVIDIA-NeMo/Megatron-Bridge/pull/3769\" target=\"_blank\" rel=\"noopener\">NVIDIA-NeMo/Megatron-Bridge</a><span class=\"src\">PR #3769</span> — [model] feat: add Qwen3.5 text model bridges (dense + MoE)"
+            },
+            {
+              "id": "item-3",
+              "html": "<a href=\"https://github.com/sgl-project/sglang/pull/27551\" target=\"_blank\" rel=\"noopener\">sgl-project/sglang</a><span class=\"src\">PR #27551</span> — [dLLM] Make FDFO a framework capability for all dLLM algorithms"
+            },
+            {
+              "id": "item-4",
+              "html": "<a href=\"https://github.com/sgl-project/sglang/pull/27877\" target=\"_blank\" rel=\"noopener\">sgl-project/sglang</a><span class=\"src\">PR #27877</span> — [dLLM] Reuse block KV/req slots in place across FDFO rounds"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience-2",
+      "heading_html": "<span class=\"co\">Tencent · 腾讯</span> — Deep Learning Framework Senior Staff",
+      "time_html": "May 2020 — Aug 2025 · 5 yrs 4 mos · Shenzhen",
+      "subtitle_html": "",
+      "bullets": [
+        {
+          "id": "bullet-1",
+          "html": "Founded the open-source LLM inference engine <b>KsanaLLM (一念)</b> (<a href=\"https://github.com/Tencent/KsanaLLM\" target=\"_blank\" rel=\"noopener\">github.com/Tencent/KsanaLLM</a>) as main contributor — throughput <b>45% higher than SOTA frameworks SGLang &amp; vLLM</b> on DeepSeek V3/R1 (benchmark 2025-06-13), deployed for <a href=\"https://ima.qq.com/\" target=\"_blank\" rel=\"noopener\">ima.copilot</a>, QQ AI Agents, etc."
+        },
+        {
+          "id": "bullet-2",
+          "html": "Developed AI infrastructure for Tencent's <b>Hunyuan (混元) LLM</b> across NVIDIA GPU, Huawei Ascend (昇腾) NPU, and Enflame (燧原) / ZiXiao (紫霄) GCU."
+        },
+        {
+          "id": "bullet-3",
+          "html": "Co-founded the <b>Venus AI Draw Engine</b> — VLM &amp; diffusion (video/image generation) inference acceleration for Tencent Zenvideo (智影) and game art assets (Honor of Kings 王者荣耀, PUBG Mobile 和平精英)."
+        },
+        {
+          "id": "bullet-4",
+          "html": "Co-founded <b>Numerous (无量)</b>, PCG's heterogeneous ML platform for large-scale recommender training &amp; inference across QQ, Tencent Video &amp; QQ Music — <b>10B+ queries/day</b>; main architect of GameLoop's (<a href=\"https://www.gameloop.com/\" target=\"_blank\" rel=\"noopener\">gameloop.com</a>) international federated learning framework."
+        },
+        {
+          "id": "bullet-5",
+          "html": "Contributed to NVIDIA <b>HugeCTR</b> — co-developed with the NVIDIA team, broke <b>MLPerf training world records in 2020 &amp; 2021</b> (<a href=\"https://developer.nvidia.com/zh-cn/blog/merlin-hugectr-hierarchical-parameter-server-intro/\" target=\"_blank\" rel=\"noopener\">NVIDIA Developer Blog</a>); also contributed to S-LoRA (PR #13)."
+        },
+        {
+          "id": "bullet-6",
+          "html": "Served as <b>PCG C++ Committee Member</b> (Nov 2021 – Aug 2025): Tencent engineer promotion assessor; participated in planning Tencent's technical blueprint in AI/ML; code contributor to company-level infrastructure."
+        },
+        {
+          "id": "bullet-7",
+          "html": "Granted patent <b>CN118446316A</b>."
+        }
+      ],
+      "tags_html": "\n          <span class=\"tag\">KsanaLLM</span><span class=\"tag\">Hunyuan</span><span class=\"tag\">HugeCTR</span>\n          <span class=\"tag\">Diffusion</span><span class=\"tag\">RecSys</span><span class=\"tag\">Federated Learning</span>\n        ",
+      "groups": [
+        {
+          "id": "group-1",
+          "summary_html": "Academic Publications <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "Shen, W., Liu, Z., Tan, Y., <b>Luo, Z.</b> &amp; Lei, Z. (2023). KubeGPU: efficient sharing and isolation mechanisms for GPU resource management in container cloud. <i>The Journal of Supercomputing</i>, 79(1), pp. 591–625.<span class=\"badge\">CCF-C</span>"
+            }
+          ]
+        },
+        {
+          "id": "group-2",
+          "summary_html": "Awards <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "🥇 2024 Tencent PCG H1 CVP Technology Innovation Award"
+            },
+            {
+              "id": "item-2",
+              "html": "🥉 2024 Tencent Technology Breakthrough Award — Bronze Prize"
+            },
+            {
+              "id": "item-3",
+              "html": "⭐ Tencent Excellent Employee — 2020 / 2021 / 2022 / 2023"
+            },
+            {
+              "id": "item-4",
+              "html": "⭐ Tencent Outstanding Contributor — 2020 / 2022 / 2023"
+            },
+            {
+              "id": "item-5",
+              "html": "⭐ Excellent Contributor, Tencent Open Source Collaboration Project — 2021 / 2022 / 2023"
+            },
+            {
+              "id": "item-6",
+              "html": "⭐ 2020 Tencent Excellence in R&amp;D Award · 2020 Tencent Open Source Collaboration Award"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience-3",
+      "heading_html": "<span class=\"co\">Alibaba Group · 阿里巴巴</span> — Deep Learning Platform Engineer",
+      "time_html": "Oct 2018 — May 2020 · 1 yr 8 mos · Hangzhou",
+      "subtitle_html": "DAMO Academy (达摩院) · Autonomous Driving Lab (自动驾驶实验室) · Automated Logistics Transportation Project (自动驾驶物流车项目 · 小蛮驴)",
+      "bullets": [
+        {
+          "id": "bullet-1",
+          "html": "Optimized the model-training pipeline for autonomous driving — graph optimization, neural-network pruning, deep compression &amp; quantization, knowledge distillation, and hardware-aware <b>Neural Architecture Search (NAS)</b> with AutoML-Keras."
+        },
+        {
+          "id": "bullet-2",
+          "html": "Accelerated inference via <b>TVM</b> operator tuning and custom operator development for NVIDIA GPU &amp; Huawei NPU; built the <b>edge inference engine</b> on Autopilot for the Xiaomanlv (小蛮驴) autonomous logistics vehicle."
+        }
+      ],
+      "tags_html": "\n          <span class=\"tag\">TVM</span><span class=\"tag\">Model Compression</span><span class=\"tag\">NAS</span><span class=\"tag\">Edge Inference</span>\n        ",
+      "groups": []
+    },
+    {
+      "id": "experience-4",
+      "heading_html": "<span class=\"co\">NVIDIA</span> — Deep Learning Software Engineer",
+      "time_html": "May 2016 — Oct 2018 · 2 yrs 6 mos · Shanghai",
+      "subtitle_html": "",
+      "bullets": [
+        {
+          "id": "bullet-1",
+          "html": "Developed part of <b>TensorRT</b> features (release 4.0+, RC 5.0+) and tuned its inference performance across different models on <b>DrivePX2</b> and <b>Jetson TX2/TX1</b> platforms (Python/C++), including weight quantization &amp; calibration (<b>INT8, INT4</b>)."
+        },
+        {
+          "id": "bullet-2",
+          "html": "Tuned <b>cuDNN</b> performance on DrivePX2 / Jetson TX2/TX1 platforms with Python/C++."
+        },
+        {
+          "id": "bullet-3",
+          "html": "Built automation projects GFE, GFN and COSMOS."
+        }
+      ],
+      "tags_html": "\n          <span class=\"tag\">TensorRT</span><span class=\"tag\">cuDNN</span><span class=\"tag\">CUDA</span><span class=\"tag\">INT8 / INT4</span>\n        ",
+      "groups": []
+    },
+    {
+      "id": "experience-5",
+      "heading_html": "<span class=\"co\">Ele.me · 饿了么</span> — Engineer Intern",
+      "time_html": "Sep 2015 — Mar 2016 · Shanghai",
+      "subtitle_html": "",
+      "bullets": [
+        {
+          "id": "bullet-1",
+          "html": "Developed various <b>Talaris system APIs</b> on the Vespone combining framework: Flask + Vespone + Thrift + Redis + MySQL."
+        }
+      ],
+      "tags_html": "",
+      "groups": []
+    },
+    {
+      "id": "experience-6",
+      "heading_html": "<span class=\"co\">Intel</span> — Engineer Intern",
+      "time_html": "May 2014 — Aug 2015 · 1 yr 4 mos",
+      "subtitle_html": "",
+      "bullets": [
+        {
+          "id": "bullet-1",
+          "html": "Automated the <b>profiling and performance tuning</b> of the <b>Intel Xeon Phi</b> many-core processor (PVL team)."
+        },
+        {
+          "id": "bullet-2",
+          "html": "Built an exclusive <b>distributed automated testing system</b> based on MCG's auto-testing framework — a 3-level architecture: <b>Django</b> (deployed on UWSGI + Nginx for user interaction) + <b>Celery</b> (scheduling tasks across hosts) + testing framework, with Redis cache and MySQL persistence."
+        }
+      ],
+      "tags_html": "",
+      "groups": []
+    }
+  ],
+  "education_label": "Education",
+  "education": [
+    {
+      "id": "education-1",
+      "school_html": "Shanghai University",
+      "degree_html": "Master's degree — High Performance Computing &amp; Parallel Computing",
+      "year_html": "2013 — 2016 · First Honour",
+      "groups": [
+        {
+          "id": "group-1",
+          "summary_html": "Scholarships &amp; Honors <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "National Graduate Student Scholarship (2014, 2015)"
+            },
+            {
+              "id": "item-2",
+              "html": "Kwang-Hua Scholarship — First Prize (2014)"
+            },
+            {
+              "id": "item-3",
+              "html": "National PAC Eastern China Division — First Prize (2014)"
+            },
+            {
+              "id": "item-4",
+              "html": "National Graduate Student MCM — Second Prize (2014)"
+            },
+            {
+              "id": "item-5",
+              "html": "Merit Scholarship of Shanghai University — First Prize (2014)"
+            },
+            {
+              "id": "item-6",
+              "html": "Outstanding Student of Shanghai University (2014)"
+            }
+          ]
+        },
+        {
+          "id": "group-2",
+          "summary_html": "Academic Publications <span class=\"cnt\">{{count}} · SCI ×1 / EI ×4</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "Tang, Y., Lin, P. &amp; <b>Luo, Z.</b> (2015). psobj: Defending against traffic analysis with pseudo-objects. <i>International Conference on Network and System Security</i>, pp. 96–109, Springer."
+            },
+            {
+              "id": "item-2",
+              "html": "Shen, W., <b>Luo, Z.</b>, Wei, D., Xu, W. &amp; Zhu, X. (2015). Load-prediction scheduling algorithm for computer simulation of electrocardiogram in hybrid environments. <i>Journal of Systems and Software</i>, 102, 182–191.<span class=\"badge\">CCF-B · IF 3.8</span>"
+            },
+            {
+              "id": "item-3",
+              "html": "Nguyen, T.C., Shen, W., <b>Luo, Z.</b>, Lei, Z. &amp; Xu, W. (2014). Novel data integrity verification schemes in cloud storage. <i>Computer and Information Science</i>, pp. 115–125."
+            },
+            {
+              "id": "item-4",
+              "html": "<b>Luo, Z.</b>, Shen, W. &amp; Hu, L. (2013). Parallel computing based bitcoin currency system analysis approach. <i>2013 International Conference on Computer Sciences and Applications</i>, pp. 483–486, IEEE."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "education-2",
+      "school_html": "Guangzhou University",
+      "degree_html": "Bachelor's degree — Information Security (Cryptography), Department of Applied Mathematics",
+      "year_html": "2009 — 2013 · GPA 3.75",
+      "groups": [
+        {
+          "id": "group-1",
+          "summary_html": "Scholarships &amp; Honors <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "National Information Application Technology Contest — Second Prize (2011)"
+            },
+            {
+              "id": "item-2",
+              "html": "AFC Challenge Cup of Guangdong Province — Golden Prize (2011)"
+            },
+            {
+              "id": "item-3",
+              "html": "AFC Challenge Cup of Guangzhou University — Golden Prize (2010)"
+            },
+            {
+              "id": "item-4",
+              "html": "Scholarship of Guangzhou University ×4"
+            },
+            {
+              "id": "item-5",
+              "html": "Chinese Patents ×2"
+            }
+          ]
+        },
+        {
+          "id": "group-2",
+          "summary_html": "Academic Publications <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "item-1",
+              "html": "Tang, Y., Lin, P. &amp; <b>Luo, Z.</b> (2014). Obfuscating encrypted web traffic with combined objects. <i>International Conference on Information Security Practice and Experience</i>, pp. 90–104, Springer.<span class=\"badge\">CCF-C · ISPEC 2014</span>"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

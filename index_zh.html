@@ -31,12 +31,12 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Karl Luo — Machine Learning Systems & AI Infrastructure">
+<meta property="og:image:alt" content="Karl Luo — Machine Learning Systems &amp; AI Infrastructure">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="骆兆楷 Karl Luo — 小红书模型工程负责人">
 <meta name="twitter:description" content="骆兆楷（Karl Luo）现任小红书模型工程负责人，为数亿用户构建 AI 基础设施。了解其在大模型推理、机器学习系统与性能优化方面的工作经历、学术论文、开源贡献及教育背景。">
 <meta name="twitter:image" content="https://whitelok.github.io/og-cover.png">
-<meta name="twitter:image:alt" content="Karl Luo — Machine Learning Systems & AI Infrastructure">
+<meta name="twitter:image:alt" content="Karl Luo — Machine Learning Systems &amp; AI Infrastructure">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -302,6 +302,13 @@ footer a:hover{color:var(--red)}
   .reveal,.reveal.in{opacity:1;transform:none;animation:none}
   html{scroll-behavior:auto}
 }
+
+/* Research-to-apps entry sits below the social links. */
+.research-entry{margin-top:14px}
+.research-link{display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border:1px solid var(--line-strong);border-radius:12px;background:var(--card);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;box-shadow:var(--shadow);transition:background .2s,border-color .2s}
+.research-link:hover{background:var(--red-soft);border-color:rgba(255,36,66,.4)}
+.research-link:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.research-link svg{width:16px;height:16px;fill:none;stroke:var(--red);stroke-width:1.7;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -323,17 +330,14 @@ footer a:hover{color:var(--red)}
       <div class="role reveal"><b>小红书 · RedNote</b> — <b>模型工程负责人</b></div>
       <div class="hero-cta reveal">
         <a class="btn" href="https://www.linkedin.com/in/karl-luo-a74a4964" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.31h4.52V23H.24V8.31zM8.34 8.31h4.33v2h.06c.6-1.14 2.08-2.34 4.28-2.34 4.58 0 5.42 3.01 5.42 6.92V23h-4.52v-7.1c0-1.7-.03-3.88-2.36-3.88-2.37 0-2.73 1.85-2.73 3.75V23H8.34V8.31z"/></svg>
-          LinkedIn
-        </a>
-        <a class="btn" href="https://scholar.google.com/citations?hl=en&user=tKJPx-oAAAAJ" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
-          Google Scholar
-        </a>
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.31h4.52V23H.24V8.31zM8.34 8.31h4.33v2h.06c.6-1.14 2.08-2.34 4.28-2.34 4.58 0 5.42 3.01 5.42 6.92V23h-4.52v-7.1c0-1.7-.03-3.88-2.36-3.88-2.37 0-2.73 1.85-2.73 3.75V23H8.34V8.31z"/></svg>LinkedIn</a>
+        <a class="btn" href="https://scholar.google.com/citations?hl=en&amp;user=tKJPx-oAAAAJ" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>Google Scholar</a>
         <a class="btn" href="https://github.com/rednote-machine-learning" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.35.77 1.05.77 2.12v3.15c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-          Team GitHub
-        </a>
+          <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.35.77 1.05.77 2.12v3.15c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>Team GitHub</a>
+      </div>
+      <div class="research-entry reveal">
+        <a class="research-link" href="products.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-6 10a1.4 1.4 0 0 0 1.2 2h13.6a1.4 1.4 0 0 0 1.2-2L14 9V3M7 15h10"/></svg>研究落地 · Research → Apps</a>
       </div>
     </div>
   </div>
@@ -347,7 +351,6 @@ footer a:hover{color:var(--red)}
       <div class="kicker">工作经历</div>
     </div>
     <div class="timeline">
-
       <div class="t-item reveal">
         <div class="t-head">
           <h3><span class="co"><a href="https://www.xiaohongshu.com" target="_blank" rel="noopener">小红书 · Xiaohongshu</a></span> — 模型工程负责人</h3>
@@ -415,7 +418,6 @@ footer a:hover{color:var(--red)}
           <span class="tag">训推一体框架</span><span class="tag">GPU · NPU · XPU</span>
         </div>
       </div>
-
       <div class="t-item past reveal">
         <div class="t-head">
           <h3><span class="co">腾讯 · Tencent</span> — 深度学习框架高级专家</h3>
@@ -452,7 +454,6 @@ footer a:hover{color:var(--red)}
           <span class="tag">扩散模型</span><span class="tag">推荐系统</span><span class="tag">联邦学习</span>
         </div>
       </div>
-
       <div class="t-item past reveal">
         <div class="t-head">
           <h3><span class="co">阿里巴巴 · Alibaba</span> — 深度学习平台工程师</h3>
@@ -467,7 +468,6 @@ footer a:hover{color:var(--red)}
           <span class="tag">TVM</span><span class="tag">模型压缩</span><span class="tag">NAS</span><span class="tag">边缘推理</span>
         </div>
       </div>
-
       <div class="t-item past reveal">
         <div class="t-head">
           <h3><span class="co">NVIDIA</span> — 深度学习软件工程师</h3>
@@ -482,7 +482,6 @@ footer a:hover{color:var(--red)}
           <span class="tag">TensorRT</span><span class="tag">cuDNN</span><span class="tag">CUDA</span><span class="tag">INT8 / INT4</span>
         </div>
       </div>
-
       <div class="t-item past reveal">
         <div class="t-head">
           <h3><span class="co">饿了么 · Ele.me</span> — 工程师实习生</h3>
@@ -492,7 +491,6 @@ footer a:hover{color:var(--red)}
           <li>基于 Vespone 组合框架开发 <b>Talaris 系统各类 API</b>：Flask + Vespone + Thrift + Redis + MySQL。</li>
         </ul>
       </div>
-
       <div class="t-item past reveal">
         <div class="t-head">
           <h3><span class="co">Intel</span> — 工程师实习生</h3>
@@ -503,7 +501,6 @@ footer a:hover{color:var(--red)}
           <li>基于 MCG 自动化测试框架，为 PVL 团队搭建专属<b>分布式自动化测试系统</b>——三层架构：<b>Django</b>（部署于 UWSGI + Nginx 与用户交互）+ <b>Celery</b>（跨主机任务调度）+ 测试框架，Redis 缓存与 MySQL 持久化。</li>
         </ul>
       </div>
-
     </div>
   </section>
 
@@ -570,7 +567,7 @@ footer a:hover{color:var(--red)}
     <div class="flinks">
       <a href="mailto:whitelok@gmail.com">whitelok@gmail.com</a>
       <a href="https://www.linkedin.com/in/karl-luo-a74a4964" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://scholar.google.com/citations?hl=en&user=tKJPx-oAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+      <a href="https://scholar.google.com/citations?hl=en&amp;user=tKJPx-oAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
       <a href="https://github.com/rednote-machine-learning" target="_blank" rel="noopener">GitHub</a>
     </div>
     <div>© 2026 骆兆楷 Karl Luo</div>
