@@ -28,7 +28,7 @@ class ProductPageTests(unittest.TestCase):
             html=(ROOT/name).read_text();page=Page(html)
             self.assertEqual(len(page.ids),len(set(page.ids)))
             self.assertNotIn("$",html)
-            for src in page.assets:self.assertTrue((ROOT/src).is_file(),src)
+            for src in page.assets:self.assertTrue((ROOT/urlsplit(src).path).is_file(),src)
             for link in page.links:
                 href=link.get("href","")
                 if href.startswith("#") and href!="#":self.assertIn(href[1:],page.ids)
