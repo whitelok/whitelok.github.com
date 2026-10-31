@@ -6,3 +6,6 @@
 .section .eyebrow{color:#6650a0}
 
 .section .button.secondary{color:#4c3a7d;border-color:#b9b0cc;background:#fff}
+
+/* Locale navigation wraps naturally with longer Spanish product names. */
+.nav{height:auto;min-height:78px;padding-block:14px;flex-wrap:wrap}.locale-links{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}html[lang="es-ES"] .brand span{white-space:normal}@media(max-width:640px){.nav{min-height:66px}.locale-links{gap:8px}html[lang="es-ES"] .brand{max-width:100%}}

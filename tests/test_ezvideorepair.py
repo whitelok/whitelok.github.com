@@ -37,4 +37,23 @@ class ProductPageTests(unittest.TestCase):
                 self.assertFalse(href.endswith((".dmg",".pkg")))
             self.assertIn("https://github.com/whitelok/EZVideoRepair",html)
             self.assertIn("https://huggingface.co/whitelok/seedvr2-hybricprecision-3b",html)
+    def test_spanish_pages_keep_real_media_and_localized_navigation(self):
+        for name in ["ezvideorepair_es.html", "ezvideorepair-marketing_es.html"]:
+            html=(ROOT/name).read_text();page=Page(html)
+            self.assertIn('<html lang="es-ES">',html)
+            self.assertIn('EZ Restaurador de vídeos',html)
+            self.assertIn('ezvideorepair-privacy_es.html',html)
+            self.assertIn('interfaz en inglés',html)
+            self.assertIn('chino simplificado e inglés',html)
+            self.assertIn('repair-preview.mp4',html)
+            self.assertEqual(html.count('<figure>'),5)
+            for src in page.assets:self.assertTrue((ROOT/urlsplit(src).path).is_file(),src)
+            for link in page.links:
+                href=link.get('href','');url=urlsplit(href)
+                if href.startswith('#') and href!='#':self.assertIn(href[1:],page.ids)
+                elif href and not url.scheme:self.assertTrue((ROOT/url.path).exists(),href)
+    def test_existing_product_and_marketing_pages_expose_spanish(self):
+        for name in ['ezvideorepair.html','ezvideorepair_en.html','ezvideorepair-marketing.html','ezvideorepair-marketing_en.html']:
+            html=(ROOT/name).read_text()
+            self.assertIn('lang="es-ES">Español</a>',html)
 if __name__=="__main__":unittest.main()
