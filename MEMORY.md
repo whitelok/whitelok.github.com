@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-10-29（整理项目目录结构）
+> 最后更新：2026-11-07（奖项、专利及 SparseGear 媒体报道）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -323,3 +323,36 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-10-29：提交双语隐私政策页面
 - 用户要求推送当前改动，包含新增 ezvideorepair-privacy.html、ezvideorepair-privacy_en.html 及产品页页脚隐私链接；保留现有政策正文。
 - 同步产品 JSON 和共享模板中的隐私链接，防止下次生成丢失；提交前执行生成、回归测试和差异检查。
+
+### 2026-11-07：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
+
+### 2026-11-07：新增小红书 EXTRA MILE 奖
+- 在双语 JSON 的小红书奖项列表顶部添加 2026 第二赛季 EXTRA MILE 奖（英文：2026 Season 2 — EXTRA MILE Award），生成两版页面，奖项计数从 1 更新为 2。
+- 内容 check、build 与 git diff --check 均通过；已截图检查两版奖项显示与排版。未提交或推送。
+
+### 2026-11-07：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
+
+### 2026-11-07：工作经历专利独立折叠栏
+- 按用户要求，将小红书、腾讯经历中的专利从普通 bullet 移至奖项后的专利折叠组，沿用默认展开样式与自动计数。
+- 小红书列出中国专利申请 CN122845659A、CN122759393A（2 项）；腾讯保留 CN118446316A 原有文字（1 项）。中英文同步，并更新维护文档的专利添加说明。
+- check、build、专利归组/数量/无重复校验及 git diff --check 通过；两版截图排版检查通过。尚未提交或推送。
+
+### 2026-11-07：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
+
+### 2026-11-07：广州大学专利独立折叠栏
+- 用户确认仅以本次提供的 CN103295213A 为准，移除广州大学荣誉中的“中国专利 ×2”，在荣誉后新增专利折叠组，仅列该中国专利，计数为 1；荣誉计数相应为 4。中英文同步。
+- 双语 check、build、条目与数量校验、git diff --check 通过；已检查两版教育经历截图。尚未提交或推送。
+
+### 2026-11-07：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
+
+### 2026-11-07：新增 SparseGear 媒体报道
+- 将用户提供的 SparseGear 微信文章标题与链接添加到小红书 Press & Media / 媒体宣传列表顶部，中英文保留原始中文标题并标注微信公众号，计数由 9 更新为 10。
+- 双语 check、build、链接唯一性与计数检查、git diff --check 通过；两版截图排版检查通过。尚未提交或推送。
+
+### 2026-11-07：提交并推送奖项、专利及媒体更新
+- 用户授权将本次 EXTRA MILE 奖、小红书/腾讯/广州大学专利折叠栏、SparseGear 媒体报道及维护文档和操作记录一并提交并推送到 origin/master。
+- 提交前双语内容检查、生成页面一致性与差异检查通过；页面截图已在各次内容更新时验证。推送结果以 Git 命令回执为准。

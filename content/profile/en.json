@@ -141,10 +141,6 @@
         {
           "id": "bullet-4",
           "html": "Lead the team driving <b>AIGC inference optimization</b>, pushing toward <b>speed-of-light performance</b> across <b>GPU, NPU, PPU, and XPU</b> platforms."
-        },
-        {
-          "id": "bullet-5",
-          "html": "Filed patent application <b>CN122845659A</b>."
         }
       ],
       "tags_html": "\n          <span class=\"tag\">LLM Serving</span><span class=\"tag\">AIGC</span><span class=\"tag\">VLM</span>\n          <span class=\"tag\">Unified Training Framework</span><span class=\"tag\">GPU · NPU · XPU</span>\n        ",
@@ -224,8 +220,26 @@
           "summary_html": "Awards <span class=\"cnt\">{{count}}</span>",
           "items": [
             {
+              "id": "award-2026-season-2-extra-mile",
+              "html": "🏆 2026 Season 2 — <b>EXTRA MILE Award</b>"
+            },
+            {
               "id": "item-1",
               "html": "🏆 2025 Xiaohongshu Impact Challenge — <b>Business Breakthrough Award, Annual Champion</b>"
+            }
+          ]
+        },
+        {
+          "id": "patents",
+          "summary_html": "Patents <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "patent-cn122845659a",
+              "html": "Chinese patent application <b>CN122845659A</b>."
+            },
+            {
+              "id": "patent-cn122759393a",
+              "html": "Chinese patent application <b>CN122759393A</b>."
             }
           ]
         },
@@ -233,6 +247,10 @@
           "id": "group-3",
           "summary_html": "Press &amp; Media Coverage <span class=\"cnt\">{{count}} articles</span>",
           "items": [
+            {
+              "id": "press-sparsegear",
+              "html": "<a href=\"https://mp.weixin.qq.com/s/7anhf5KS7hhOUk_lQjo4gA\" target=\"_blank\" rel=\"noopener\">揭秘小红书自研稀疏训练引擎 SparseGear：面向搜广推模型 Scaling Up 的资源协同与 HBM-Friendly 架构</a><span class=\"src\">微信公众号</span>"
+            },
             {
               "id": "item-1",
               "html": "<a href=\"https://mp.weixin.qq.com/s/qRrZvL0aZzYI82djFSrLug\" target=\"_blank\" rel=\"noopener\">让 KV Cache「按头分家」：小红书 RedKnot 如何重做长文本推理新引擎</a><span class=\"src\">微信公众号</span>"
@@ -324,10 +342,6 @@
         {
           "id": "bullet-6",
           "html": "Served as <b>PCG C++ Committee Member</b> (Nov 2021 – Aug 2025): Tencent engineer promotion assessor; participated in planning Tencent's technical blueprint in AI/ML; code contributor to company-level infrastructure."
-        },
-        {
-          "id": "bullet-7",
-          "html": "Granted patent <b>CN118446316A</b>."
         }
       ],
       "tags_html": "\n          <span class=\"tag\">KsanaLLM</span><span class=\"tag\">Hunyuan</span><span class=\"tag\">HugeCTR</span>\n          <span class=\"tag\">Diffusion</span><span class=\"tag\">RecSys</span><span class=\"tag\">Federated Learning</span>\n        ",
@@ -369,6 +383,16 @@
             {
               "id": "item-6",
               "html": "⭐ 2020 Tencent Excellence in R&amp;D Award · 2020 Tencent Open Source Collaboration Award"
+            }
+          ]
+        },
+        {
+          "id": "patents",
+          "summary_html": "Patents <span class=\"cnt\">{{count}}</span>",
+          "items": [
+            {
+              "id": "patent-cn118446316a",
+              "html": "Granted patent <b>CN118446316A</b>."
             }
           ]
         }
@@ -534,10 +558,16 @@
             {
               "id": "item-4",
               "html": "Scholarship of Guangzhou University ×4"
-            },
+            }
+          ]
+        },
+        {
+          "id": "patents",
+          "summary_html": "Patents <span class=\"cnt\">{{count}}</span>",
+          "items": [
             {
-              "id": "item-5",
-              "html": "Chinese Patents ×2"
+              "id": "patent-cn103295213a",
+              "html": "Chinese patent <b>CN103295213A</b>."
             }
           ]
         },
