@@ -286,6 +286,14 @@
             {
               "id": "item-9",
               "html": "<a href=\"https://developer.nvidia.cn/blog/gr-inference-generative-recommendation-inference-system-design-performance-evaluation/\" target=\"_blank\" rel=\"noopener\">GR-Inference：面向生成式推荐的推理系统设计与性能评估</a><span class=\"src\">NVIDIA Developer</span>"
+            },
+            {
+              "id": "press-zhihu-pdl",
+              "html": "<a href=\"https://zhuanlan.zhihu.com/p/1993749188043888423\" target=\"_blank\" rel=\"noopener\">模型工程分享-搜广推推理低时延算子优化技巧 Programmatic Dependent Launch (PDL)</a><span class=\"src\">知乎</span>"
+            },
+            {
+              "id": "press-zhihu-cute-dsl",
+              "html": "<a href=\"https://zhuanlan.zhihu.com/p/1958539414352422756\" target=\"_blank\" rel=\"noopener\">模型工程分享-搜广推场景下CuTe DSL Dense部分算子性能优化实践</a><span class=\"src\">知乎</span>"
             }
           ]
         },

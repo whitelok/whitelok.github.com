@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-11-07（奖项、专利及 SparseGear 媒体报道）
+> 最后更新：2026-11-07（新增 PDL 与 CuTe DSL 知乎分享）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -356,3 +356,14 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-11-07：提交并推送奖项、专利及媒体更新
 - 用户授权将本次 EXTRA MILE 奖、小红书/腾讯/广州大学专利折叠栏、SparseGear 媒体报道及维护文档和操作记录一并提交并推送到 origin/master。
 - 提交前双语内容检查、生成页面一致性与差异检查通过；页面截图已在各次内容更新时验证。推送结果以 Git 命令回执为准。
+
+### 2026-11-07：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
+
+### 2026-11-07：追加 PDL 与 CuTe DSL 知乎分享
+- 按用户指定顺序，将 PDL 低时延算子优化与 CuTe DSL Dense 算子性能优化两篇知乎文章追加到小红书媒体列表底部；双语保留提供的原始标题和链接，来源标注知乎，计数由 10 更新为 12。
+- 双语 check、build、条目顺序/计数/链接唯一性与 git diff --check 通过，已检查两版截图排版。尚未提交或推送。
+
+### 2026-11-07：提交并推送两篇知乎分享
+- 用户授权将 PDL 与 CuTe DSL 两篇知乎分享、双语生成页面及操作记录提交并推送至 origin/master。
+- 提交前双语 check、生成一致性、文章顺序与计数、git diff --check 通过；推送结果以 Git 命令回执为准。
