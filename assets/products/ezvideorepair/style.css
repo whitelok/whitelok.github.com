@@ -13,15 +13,14 @@
 /* The product landing pages share one dark canvas across sections. */
 .product-page {
   color-scheme: dark;
-  --canvas: #0b0d14;
   --muted: #b6b8c8;
   --accent: #bdadff;
   --divider: #343745;
-  background: var(--canvas);
+  background: var(--product-canvas);
   color: #f3f4fa;
 }
-.product-page :is(.site-header, .hero, .preview-section, .trust, .workflow-section, .faq-section, footer) {
-  background: var(--canvas);
+.product-page :is(.site-header, main, main > section, footer) {
+  background: var(--product-canvas);
 }
 .product-page :is(.preview-note, .section-intro, .privacy p, .trust-stat span, .feature p, .workflow p,
   .requirements-grid dt, .questions details p, .closing p, .footer-row p, .footer-links, .footer-notice, .screen-caption) {
