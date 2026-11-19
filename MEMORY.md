@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-11-07（新增 PDL 与 CuTe DSL 知乎分享）
+> 最后更新：2026-11-19（整理页面源码并验证 URL）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -367,3 +367,10 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-11-07：提交并推送两篇知乎分享
 - 用户授权将 PDL 与 CuTe DSL 两篇知乎分享、双语生成页面及操作记录提交并推送至 origin/master。
 - 提交前双语 check、生成一致性、文章顺序与计数、git diff --check 通过；推送结果以 Git 命令回执为准。
+
+### 2026-11-19：整理页面源码并验证原有 URL
+- 将现有产品目录、EZVideoRepair 产品介绍、营销、隐私和支持页源码归入 src/pages/，按用途与语言分目录；src/routes.json 映射 13 个页面到原有根目录文件名。
+- 新增 scripts/build_pages.py，提供生成与 --check；原 build_ezvideorepair.py 和 build_ezvideorepair_es.py 命令接入相同发布逻辑。西班牙语改为直接维护完整页面源码。
+- 移除早期产品 JSON、占位符模板和替换翻译表，避免它们在构建时覆盖后续修改；更新产品测试和两份目录维护说明。
+- 核对 48 个公开 HTML 与资源文件在整理和构建前后逐字节一致，原有 15 个 HTML 地址和静态资源路径保留；临时本地 HTTP 服务验证根路径及 48 个文件 URL 全部返回 200。
+- 首页内容检查、13 页生成一致性检查、全部构建入口与 14 项回归测试通过。尚未提交或推送。

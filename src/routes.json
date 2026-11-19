@@ -1,0 +1,15 @@
+{
+  "products.html": "src/pages/catalog/zh.html",
+  "products_en.html": "src/pages/catalog/en.html",
+  "ezvideorepair.html": "src/pages/ezvideorepair/product/zh.html",
+  "ezvideorepair_en.html": "src/pages/ezvideorepair/product/en.html",
+  "ezvideorepair_es.html": "src/pages/ezvideorepair/product/es.html",
+  "ezvideorepair-marketing.html": "src/pages/ezvideorepair/marketing/zh.html",
+  "ezvideorepair-marketing_en.html": "src/pages/ezvideorepair/marketing/en.html",
+  "ezvideorepair-marketing_es.html": "src/pages/ezvideorepair/marketing/es.html",
+  "ezvideorepair-privacy.html": "src/pages/ezvideorepair/privacy/zh.html",
+  "ezvideorepair-privacy_en.html": "src/pages/ezvideorepair/privacy/en.html",
+  "ezvideorepair-privacy_es.html": "src/pages/ezvideorepair/privacy/es.html",
+  "ezvideorepair-support.html": "src/pages/ezvideorepair/support/zh.html",
+  "ezvideorepair-support_en.html": "src/pages/ezvideorepair/support/en.html"
+}

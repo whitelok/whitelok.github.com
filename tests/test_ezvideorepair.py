@@ -16,13 +16,12 @@ class Page(HTMLParser):
         if tag=="link" and attrs.get("rel")=="stylesheet":self.assets.append(attrs["href"])
 class ProductPageTests(unittest.TestCase):
     def test_bilingual_structure_and_sources_match(self):
-        zh=json.loads((ROOT/"content/ezvideorepair/zh.json").read_text())
-        en=json.loads((ROOT/"content/ezvideorepair/en.json").read_text())
-        self.assertEqual(zh.keys(),en.keys())
         a=Page((ROOT/"ezvideorepair.html").read_text());b=Page((ROOT/"ezvideorepair_en.html").read_text())
         self.assertEqual(a.structure,b.structure)
         self.assertEqual(a.ids,b.ids)
-        for field in ["features","workflow","requirements","faq"]:self.assertEqual(len(zh[field]),len(en[field]))
+        routes = json.loads((ROOT / "src/routes.json").read_text())
+        for destination, source in routes.items():
+            self.assertEqual((ROOT / destination).read_bytes(), (ROOT / source).read_bytes())
     def test_links_assets_and_no_placeholder_downloads(self):
         for name in ["ezvideorepair.html","ezvideorepair_en.html"]:
             html=(ROOT/name).read_text();page=Page(html)

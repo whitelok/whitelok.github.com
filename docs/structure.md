@@ -1,50 +1,64 @@
 # 项目目录与维护入口
 
-项目使用静态 HTML，可直接由 GitHub Pages 发布。根目录保留公开页面，内容、模板、资源和工具按用途归类。
+项目由个人主页和产品站点组成，使用静态 HTML 发布。
 
 ```text
 .
-├── index.html / index_zh.html           # 英文 / 中文个人主页（生成）
-├── products.html / products_en.html     # 中文 / 英文产品卡片目录（直接编辑）
-├── ezvideorepair.html                   # 中文产品介绍页（生成）
-├── ezvideorepair_en.html                # 英文产品介绍页（生成）
-├── favicon.svg / favicon.ico            # 站点图标，保留通用根路径
-├── og-cover.png                         # 主页分享图，保留已有公开地址
-├── robots.txt / sitemap.xml             # 搜索引擎入口
-├── MEMORY.md                           # 项目约定与操作历史
-├── assets/
-│   └── products/
-│       ├── catalog.css                 # 产品卡片目录样式
+├── *.html                         # 已有公开页面，文件名就是发布 URL
+├── favicon.svg / favicon.ico      # 站点图标
+├── og-cover.png                   # 首页分享图
+├── robots.txt / sitemap.xml       # 搜索引擎入口
+├── MEMORY.md                      # 项目约定与操作记录
+├── src/
+│   ├── routes.json                # 页面源码到公开 HTML 的对应清单
+│   └── pages/
+│       ├── catalog/               # 产品目录，zh.html / en.html
 │       └── ezvideorepair/
-│           ├── icon.png
-│           ├── app-zh.png / app-en.png
-│           ├── style.css
-│           └── page.js
-├── content/
-│   ├── profile/en.json / zh.json        # 双语个人主页内容
-│   └── ezvideorepair/en.json / zh.json  # 双语产品介绍内容
-├── templates/
-│   ├── profile/en.html / zh.html        # 个人主页结构、样式与交互
-│   └── ezvideorepair/page.html          # 产品介绍共享模板
+│           ├── product/           # 产品介绍，zh / en / es
+│           ├── marketing/         # 营销介绍，zh / en / es
+│           ├── privacy/           # 隐私政策，zh / en / es
+│           └── support/           # 支持信息，zh / en
+├── content/profile/               # 个人主页 en.json / zh.json
+├── templates/profile/             # 个人主页 en.html / zh.html 模板
+├── assets/products/
+│   ├── catalog.css                # 产品目录样式
+│   └── ezvideorepair/             # 产品样式、脚本、图标、截图与视频
 ├── scripts/
-│   ├── maintain.py                     # 个人主页导出 / 检查 / 生成
-│   └── build_ezvideorepair.py           # 产品介绍页生成
-├── tests/
-│   ├── test_maintain.py
-│   └── test_ezvideorepair.py
-└── docs/
-    ├── structure.md                    # 本文
-    ├── maintenance.md                  # 个人主页 JSON 维护指南
-    ├── ezvideorepair-product-page.md    # 产品介绍维护指南
-    └── superpowers/plans/              # 历史实施计划
+│   ├── maintain.py                # 个人主页检查、生成与导出
+│   ├── build_pages.py             # 按清单发布产品站点和目录
+│   ├── build_ezvideorepair.py      # 原有产品构建命令入口
+│   └── build_ezvideorepair_es.py   # 原有西班牙语构建命令入口
+├── tests/                         # 个人主页、产品站点回归检查
+└── docs/                          # 目录、维护指南及历史计划
 ```
 
-## 日常修改
+## 编辑与生成
 
-- **个人主页**：编辑 `content/profile/` 和 `templates/profile/`，运行 `python3 scripts/maintain.py check`，再运行 `python3 scripts/maintain.py build`。不要只改生成的首页。
-- **产品介绍**：编辑 `content/ezvideorepair/`、`templates/ezvideorepair/page.html` 和 `assets/products/ezvideorepair/`，运行 `python3 scripts/build_ezvideorepair.py`。
-- **产品目录**：直接同步编辑 `products.html`、`products_en.html`，共享样式位于 `assets/products/catalog.css`。
-- **完整验证**：运行 `python3 -m unittest discover -s tests -v`。
-- **本地预览**：在根目录运行 `python3 -m http.server 8000`，浏览 `http://localhost:8000/`。
+个人主页编辑 `content/profile/` 和 `templates/profile/`，运行以下命令。
 
-生成脚本入口和公开 HTML 地址保持不变。`maintain.py --content-dir` 仍接收直接包含 `en.json`、`zh.json` 的目录，默认目录现为 `content/profile/`。资源迁移后统一使用 `assets/products/`，没有保留旧 `product-assets/` 的副本。
+```bash
+python3 scripts/maintain.py check
+python3 scripts/maintain.py build
+```
+
+产品目录及产品各类页面编辑 `src/pages/` 下的对应语言源码，运行以下命令。
+
+```bash
+python3 scripts/build_pages.py
+python3 scripts/build_pages.py --check
+```
+
+完整回归检查与本地预览使用以下命令。
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 -m http.server 8000
+```
+
+## 发布地址
+
+根目录保留现有 15 个 HTML。个人主页由 `maintain.py` 维护，其余 13 页由 `src/routes.json` 映射。新增页面时向清单添加源码和目标文件的对应关系。
+
+根目录 HTML 和 `assets/` 是网站实际发布文件。`src/`、`content/`、`templates/` 是维护源码，页面中的相对链接需按生成后的根目录位置填写。favicon、分享图片和资源地址沿用现有路径。
+
+个人主页细节见 `docs/maintenance.md`，产品站点维护见 `docs/ezvideorepair-product-page.md`。
