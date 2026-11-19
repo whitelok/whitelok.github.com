@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-11-19（发布 EZVideoRepair Mac 安装包）
+> 最后更新：2026-11-19（开放产品卡片并精简三语说明）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -389,3 +389,6 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 
 ### 2026-11-19：发布 EZVideoRepair 0.0.1 (3)
 - 三语产品页改用站内 Mac DMG 下载，说明 RelayVSR、Apple Silicon、macOS 14+ 及安装步骤。原映像以 hdiutil 无损重压缩，发布包 50,412,501 字节，映像 CRC32 与原件相同。只读挂载核实 App 版本、构建号和 Applications 快捷方式；当前为临时签名，Gatekeeper 检查未通过。
+
+### 2026-11-19：开放产品卡片并精简三语说明
+- 中英文产品卡片分别链接到对应产品页；三语删除指定文案，保留安装步骤和 DMG 下载，内存文案统一为 8 GB 或更大。已核对链接、三语条目及生成一致性。
