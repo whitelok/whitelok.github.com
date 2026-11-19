@@ -96,11 +96,3 @@ python3 scripts/maintain.py check
 `export` 从两版 HTML 同时提取内容与模板，`--force` 明确允许覆盖旧 JSON 和模板。未给 `--force` 时遇到现有文件会拒绝覆盖。导出不会自动更新浏览器页面或运行 Git。
 
 模板中的 canonical、hreflang、语言属性和结构要按语言分别维护；布局修改同时更新两份模板。模板使用 `{{字段名}}` 占位符，不依赖 Jinja2。
-
-## 回归检查
-
-```bash
-python3 -m unittest discover -s tests -v
-```
-
-测试覆盖页面内容/结构/样式/脚本往返一致、双语新增论文计数、字段更新、结构错位/重复 ID 拦截、无效 HTML 不写入页面、预览无副作用及导出覆盖保护。

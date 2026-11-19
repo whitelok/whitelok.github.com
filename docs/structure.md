@@ -28,7 +28,6 @@
 │   ├── build_pages.py             # 按清单发布产品站点和目录
 │   ├── build_ezvideorepair.py      # 原有产品构建命令入口
 │   └── build_ezvideorepair_es.py   # 原有西班牙语构建命令入口
-├── tests/                         # 个人主页、产品站点回归检查
 └── docs/                          # 目录、维护指南及历史计划
 ```
 
@@ -48,10 +47,9 @@ python3 scripts/build_pages.py
 python3 scripts/build_pages.py --check
 ```
 
-完整回归检查与本地预览使用以下命令。
+本地预览使用以下命令。
 
 ```bash
-python3 -m unittest discover -s tests -v
 python3 -m http.server 8000
 ```
 
