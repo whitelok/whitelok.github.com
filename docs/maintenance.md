@@ -38,7 +38,7 @@
 | `education` | 教育经历数组，按显示顺序排列 |
 | `footer` | 页脚版权和联系链接 |
 
-工作经历包含 `heading_html`、`time_html`、`subtitle_html`、`bullets`、`groups`、`tags_html`。教育包含 `school_html`、`degree_html`、`year_html`、`groups`。
+工作经历包含 `heading_html`、`time_html`、`subtitle_html`、`bullets`、`groups`。教育包含 `school_html`、`degree_html`、`year_html`、`groups`。
 
 `groups` 是论文、奖项、媒体报道等折叠组，每个组包含 `id`、`summary_html`、`items`。`bullets` 和 `items` 中每条记录包含 `id` 与 `html`。
 

@@ -143,7 +143,6 @@
           "html": "Lead the team driving <b>AIGC inference optimization</b>, pushing toward <b>speed-of-light performance</b> across <b>GPU, NPU, PPU, and XPU</b> platforms."
         }
       ],
-      "tags_html": "\n          <span class=\"tag\">LLM Serving</span><span class=\"tag\">AIGC</span><span class=\"tag\">VLM</span>\n          <span class=\"tag\">Unified Training Framework</span><span class=\"tag\">GPU · NPU · XPU</span>\n        ",
       "groups": [
         {
           "id": "group-1",
@@ -352,7 +351,6 @@
           "html": "Served as <b>PCG C++ Committee Member</b> (Nov 2021 – Aug 2025): Tencent engineer promotion assessor; participated in planning Tencent's technical blueprint in AI/ML; code contributor to company-level infrastructure."
         }
       ],
-      "tags_html": "\n          <span class=\"tag\">KsanaLLM</span><span class=\"tag\">Hunyuan</span><span class=\"tag\">HugeCTR</span>\n          <span class=\"tag\">Diffusion</span><span class=\"tag\">RecSys</span><span class=\"tag\">Federated Learning</span>\n        ",
       "groups": [
         {
           "id": "group-1",
@@ -421,7 +419,6 @@
           "html": "Accelerated inference via <b>TVM</b> operator tuning and custom operator development for NVIDIA GPU &amp; Huawei NPU; built the <b>edge inference engine</b> on Autopilot for the Xiaomanlv (小蛮驴) autonomous logistics vehicle."
         }
       ],
-      "tags_html": "\n          <span class=\"tag\">TVM</span><span class=\"tag\">Model Compression</span><span class=\"tag\">NAS</span><span class=\"tag\">Edge Inference</span>\n        ",
       "groups": []
     },
     {
@@ -443,7 +440,6 @@
           "html": "Built automation projects GFE, GFN and COSMOS."
         }
       ],
-      "tags_html": "\n          <span class=\"tag\">TensorRT</span><span class=\"tag\">cuDNN</span><span class=\"tag\">CUDA</span><span class=\"tag\">INT8 / INT4</span>\n        ",
       "groups": []
     },
     {
@@ -457,7 +453,6 @@
           "html": "Developed various <b>Talaris system APIs</b> on the Vespone combining framework: Flask + Vespone + Thrift + Redis + MySQL."
         }
       ],
-      "tags_html": "",
       "groups": []
     },
     {
@@ -475,7 +470,6 @@
           "html": "Built an exclusive <b>distributed automated testing system</b> based on MCG's auto-testing framework — a 3-level architecture: <b>Django</b> (deployed on UWSGI + Nginx for user interaction) + <b>Celery</b> (scheduling tasks across hosts) + testing framework, with Redis cache and MySQL persistence."
         }
       ],
-      "tags_html": "",
       "groups": []
     }
   ],

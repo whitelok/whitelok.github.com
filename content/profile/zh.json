@@ -143,7 +143,6 @@
           "html": "领导团队推进 <b>AIGC 推理优化</b>，在 <b>GPU、NPU、PPU、XPU</b> 平台上追求极致（speed-of-light）性能。"
         }
       ],
-      "tags_html": "\n          <span class=\"tag\">LLM 推理</span><span class=\"tag\">AIGC</span><span class=\"tag\">VLM</span>\n          <span class=\"tag\">训推一体框架</span><span class=\"tag\">GPU · NPU · XPU</span>\n        ",
       "groups": [
         {
           "id": "group-1",
@@ -352,7 +351,6 @@
           "html": "担任 <b>PCG C++ 委员会委员</b>（2021.11 – 2025.08）：腾讯工程师晋升评审委员；参与腾讯 AI/ML 技术蓝图规划；为公司级基础设施贡献代码。"
         }
       ],
-      "tags_html": "\n          <span class=\"tag\">KsanaLLM</span><span class=\"tag\">混元</span><span class=\"tag\">HugeCTR</span>\n          <span class=\"tag\">扩散模型</span><span class=\"tag\">推荐系统</span><span class=\"tag\">联邦学习</span>\n        ",
       "groups": [
         {
           "id": "group-1",
@@ -421,7 +419,6 @@
           "html": "通过 <b>TVM</b> 算子调优与 NVIDIA GPU、华为 NPU 自定义算子开发加速推理；构建小蛮驴自动驾驶物流车 Autopilot <b>边缘推理引擎</b>。"
         }
       ],
-      "tags_html": "\n          <span class=\"tag\">TVM</span><span class=\"tag\">模型压缩</span><span class=\"tag\">NAS</span><span class=\"tag\">边缘推理</span>\n        ",
       "groups": []
     },
     {
@@ -443,7 +440,6 @@
           "html": "构建 GFE、GFN 与 COSMOS 自动化项目。"
         }
       ],
-      "tags_html": "\n          <span class=\"tag\">TensorRT</span><span class=\"tag\">cuDNN</span><span class=\"tag\">CUDA</span><span class=\"tag\">INT8 / INT4</span>\n        ",
       "groups": []
     },
     {
@@ -457,7 +453,6 @@
           "html": "基于 Vespone 组合框架开发 <b>Talaris 系统各类 API</b>：Flask + Vespone + Thrift + Redis + MySQL。"
         }
       ],
-      "tags_html": "",
       "groups": []
     },
     {
@@ -475,7 +470,6 @@
           "html": "基于 MCG 自动化测试框架，为 PVL 团队搭建专属<b>分布式自动化测试系统</b>——三层架构：<b>Django</b>（部署于 UWSGI + Nginx 与用户交互）+ <b>Celery</b>（跨主机任务调度）+ 测试框架，Redis 缓存与 MySQL 持久化。"
         }
       ],
-      "tags_html": "",
       "groups": []
     }
   ],

@@ -177,8 +177,6 @@ def export(root, force=False):
                     record['subtitle_html'] = doc.inside(subtitle) if subtitle else ''
                     ul = next(n for n in item.children if n.tag == 'ul')
                     record['bullets'] = [{'id': f'bullet-{j + 1}', 'html': value} for j, value in enumerate(list_items(doc, ul))]
-                    tags = next((n for n in item.children if n.has('tag-row')), None)
-                    record['tags_html'] = doc.inside(tags) if tags else ''
                 record['groups'] = groups(doc, item)
                 data[section].append(record)
         template = doc.source
@@ -237,7 +235,7 @@ def validate_pair(en, zh):
                     for item in group['items']:
                         if not isinstance(item['html'], str):
                             raise ValueError('item html must be a string')
-                fields = ['heading_html', 'time_html', 'tags_html', 'subtitle_html'] if section == 'experience' else ['school_html', 'degree_html', 'year_html']
+                fields = ['heading_html', 'time_html', 'subtitle_html'] if section == 'experience' else ['school_html', 'degree_html', 'year_html']
                 for field in fields:
                     if not isinstance(entry[field], str):
                         raise ValueError(f'{entry["id"]}.{field}: expected a string')
@@ -273,8 +271,6 @@ def render_section(data, section):
             output += '        <ul>\n'
             output += ''.join('          <li>' + b['html'] + '</li>\n' for b in entry['bullets'])
             output += '        </ul>\n' + render_groups(entry['groups'])
-            if entry['tags_html']:
-                output += '        <div class="tag-row">' + entry['tags_html'] + '</div>\n'
         else:
             output += '      <div class="card reveal">\n'
             for key, cls in [('school_html', 'school'), ('degree_html', 'deg'), ('year_html', 'yr')]:
