@@ -293,6 +293,10 @@
             {
               "id": "press-zhihu-cute-dsl",
               "html": "<a href=\"https://zhuanlan.zhihu.com/p/1958539414352422756\" target=\"_blank\" rel=\"noopener\">模型工程分享-搜广推场景下CuTe DSL Dense部分算子性能优化实践</a><span class=\"src\">知乎</span>"
+            },
+            {
+              "id": "press-aws-recommendation-harness",
+              "html": "<a href=\"https://aws.amazon.com/cn/blogs/china/practice-recommendation-model-harness-design-implement/\" target=\"_blank\" rel=\"noopener\">小红书推荐系统的Agentic实践：针对推荐模型自迭代的Harness设计与实现</a><span class=\"src\">AWS 官方博客</span>"
             }
           ]
         },

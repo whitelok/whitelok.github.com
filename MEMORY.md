@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-11-19（突出本地修复的隐私说明）
+> 最后更新：2026-11-20（新增小红书 AWS 媒体文章）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -409,3 +409,7 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 - 删除「让修复留在本地」标题末尾的句号。
 - 删除中文产品页主标题「就在你的 Mac 上」末尾的句号。
 - 统一三语产品页标题和栏目短语的句号用法，保留正文断句和 FAQ 问号。
+
+### 2026-11-20：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
+- 小红书媒体报道列表末尾新增 AWS 官方博客的推荐模型自迭代文章，两版各 13 篇。
