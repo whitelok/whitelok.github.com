@@ -35,3 +35,63 @@
   .questions details, .shot-grid img, footer) { border-color: var(--divider); }
 .product-page .dark-button { background: #8c73ff; color: #0c0822; }
 .product-page .dark-button:hover { background: #a18cff; }
+
+/* Full-length restoration comparison and separate in-app recording. */
+.demo-comparison, .demo-recording {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+}
+.demo-media video {
+  border: 1px solid var(--divider);
+  object-fit: contain;
+}
+.demo-media #lyrebird-video { aspect-ratio: 4 / 3; }
+.demo-choices p, .demo-recording p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.demo-choices .demo-specs {
+  color: #f3f4fa;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.demo-choices .demo-location { margin: 4px 0 20px; }
+.demo-versions { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 12px; }
+.demo-versions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid #57586a;
+  border-radius: 8px;
+  color: #deddea;
+  font-size: .9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.demo-versions a:hover { border-color: var(--accent); }
+.demo-versions a[aria-current="true"] {
+  background: #c2b1ff;
+  color: #1a112d;
+  border-color: #c2b1ff;
+}
+.demo-choices .demo-note { font-size: .875rem; }
+.demo-recording {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr);
+  margin-top: clamp(40px, 6vw, 80px);
+  border-top: 1px solid var(--divider);
+  padding-top: clamp(28px, 4vw, 56px);
+}
+.demo-recording h3 { margin: 0 0 14px; font-size: clamp(1.45rem, 2.3vw, 2rem); line-height: 1.25; }
+.demo-credit, .demo-error { color: var(--muted); font-size: .875rem; line-height: 1.7; }
+.demo-credit { margin: 24px 0 0; }
+.demo-credit a, .demo-error a { color: var(--accent); text-decoration: underline; text-underline-offset: .18em; }
+@media (max-width: 760px) {
+  .demo-comparison, .demo-recording { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .demo-choices .demo-location { margin-bottom: 12px; }
+  .demo-versions { margin-top: 14px; }
+}
