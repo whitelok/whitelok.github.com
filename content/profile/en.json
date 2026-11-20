@@ -296,7 +296,7 @@
             },
             {
               "id": "press-aws-recommendation-harness",
-              "html": "<a href=\"https://aws.amazon.com/cn/blogs/china/practice-recommendation-model-harness-design-implement/\" target=\"_blank\" rel=\"noopener\">小红书推荐系统的Agentic实践：针对推荐模型自迭代的Harness设计与实现</a><span class=\"src\">AWS 官方博客</span>"
+              "html": "<a href=\"https://aws.amazon.com/cn/blogs/china/practice-recommendation-model-harness-design-implement/\" target=\"_blank\" rel=\"noopener\">Designing a Research Agent Harness for Automated Recommender Model Optimization at Xiaohongshu</a><span class=\"src\">AWS 官方博客</span>"
             }
           ]
         },

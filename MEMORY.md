@@ -413,3 +413,6 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-11-20：通过 JSON 生成双语页面
 - 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
 - 小红书媒体报道列表末尾新增 AWS 官方博客的推荐模型自迭代文章，两版各 13 篇。
+
+### 2026-11-20：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
