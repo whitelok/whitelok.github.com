@@ -43,7 +43,7 @@
 <meta property="og:image:width" content="1300">
 <meta property="og:image:height" content="832">
 <link rel="canonical" href="https://whitelok.github.io/ezvideorepair.html">
-<link rel="icon" href="assets/products/ezvideorepair/icon.png"><link rel="stylesheet" href="assets/products/ezvideorepair/style.css?v=20261121-flume">
+<link rel="icon" href="assets/products/ezvideorepair/icon.png"><link rel="stylesheet" href="assets/products/ezvideorepair/style.css?v=20261121-flume-four">
 <link rel="alternate" hreflang="zh-CN" href="https://whitelok.github.io/ezvideorepair.html"><link rel="alternate" hreflang="en" href="https://whitelok.github.io/ezvideorepair_en.html"><link rel="alternate" hreflang="es-ES" href="https://whitelok.github.io/ezvideorepair_es.html"><link rel="alternate" hreflang="fr" href="https://whitelok.github.io/ezvideorepair_fr.html"><link rel="alternate" hreflang="x-default" href="https://whitelok.github.io/ezvideorepair.html"></head>
 <body class="product-page">
 <a class="skip" href="#main">跳转到正文 ↓</a>
@@ -75,29 +75,29 @@
     <p class="demo-credit">实验影像由美国地质调查局（USGS）摄于 1999 年 9 月 22 日，记录水流通过受侵蚀沉积层的过程。 <a href="https://pubs.usgs.gov/of/2007/1315/" hreflang="en">查看 USGS 原始记录（英文）</a></p>
     <p class="demo-credit"><a href="assets/products/ezvideorepair/usgs-flume/ui-demo-multilingual.mp4">观看中、英、西、法四语演示（MP4）</a></p>
     <section class="restoration-comparison" id="comparison" aria-labelledby="comparison-title">
-    <h2 id="comparison-title">同一段琴鸟影像，四种修复结果</h2>
+    <h2 id="comparison-title">同一段水槽影像，四种修复结果</h2>
     <div class="demo-comparison">
       <div class="demo-media">
-        <video id="lyrebird-video" controls muted playsinline preload="metadata" width="384" height="288" aria-label="琴鸟原片与修复版本对比" poster="assets/products/ezvideorepair/lyrebird/poster.jpg" src="assets/products/ezvideorepair/lyrebird/original.mp4">
-          <a href="assets/products/ezvideorepair/lyrebird/original.mp4">直接打开 MP4 文件</a>
+        <video id="restoration-video" controls muted playsinline preload="metadata" width="640" height="480" aria-label="水槽实验原片与四种修复结果" poster="assets/products/ezvideorepair/usgs-flume/comparison/poster.jpg" src="assets/products/ezvideorepair/usgs-flume/comparison/original.mp4">
+          <a href="assets/products/ezvideorepair/usgs-flume/comparison/original.mp4">直接打开 MP4 文件</a>
         </video>
-        <p class="demo-error" role="status" hidden>此视频暂时无法在页面中播放。 <a href="assets/products/ezvideorepair/lyrebird/original.mp4">直接打开 MP4 文件</a></p>
+        <p class="demo-error" role="status" hidden>此视频暂时无法在页面中播放。 <a href="assets/products/ezvideorepair/usgs-flume/comparison/original.mp4">直接打开 MP4 文件</a></p>
       </div>
       <div class="demo-choices">
-        <p class="demo-specs">30 秒 · 384 × 288 原片 · 25 帧/秒</p>
-        <p class="demo-location">1996 年 9 月，澳大利亚拉明顿国家公园</p>
-        <p>播放时切换版本，或暂停在同一帧，比较鸟羽和林地的细节。</p>
+        <p class="demo-specs">30.03 秒 · 原片 640 × 480 · 约 29.97 帧/秒</p>
+        <p class="demo-location">美国俄勒冈州 · 1999 年 9 月 22 日</p>
+        <p>暂停在同一帧，对比水面纹理、栏杆边缘和画面中的计时数字；也可以在播放中切换，看水流在运动中是什么效果。</p>
         <div class="demo-versions" role="group" aria-label="选择视频版本">
-            <a href="assets/products/ezvideorepair/lyrebird/original.mp4" aria-controls="lyrebird-video" aria-current="true">原片</a>
-            <a href="assets/products/ezvideorepair/lyrebird/v1.mp4" aria-controls="lyrebird-video">V1</a>
-            <a href="assets/products/ezvideorepair/lyrebird/v1-int8.mp4" aria-controls="lyrebird-video">V1 INT8</a>
-            <a href="assets/products/ezvideorepair/lyrebird/v2.mp4" aria-controls="lyrebird-video">V2</a>
-            <a href="assets/products/ezvideorepair/lyrebird/v2-int8.mp4" aria-controls="lyrebird-video">V2 INT8</a>
+            <a href="assets/products/ezvideorepair/usgs-flume/comparison/original.mp4" aria-controls="restoration-video" aria-current="true">原片</a>
+            <a href="assets/products/ezvideorepair/usgs-flume/comparison/v1-bf16.mp4" aria-controls="restoration-video">V1 BF16</a>
+            <a href="assets/products/ezvideorepair/usgs-flume/comparison/v1-int8.mp4" aria-controls="restoration-video">V1 INT8</a>
+            <a href="assets/products/ezvideorepair/usgs-flume/comparison/v2-bf16.mp4" aria-controls="restoration-video">V2 BF16</a>
+            <a href="assets/products/ezvideorepair/usgs-flume/comparison/v2-int8.mp4" aria-controls="restoration-video">V2 INT8</a>
         </div>
-        <p class="demo-note">两个 INT8 版本仅供演示。</p>
+        <p class="demo-note">四个版本均修复了原片的全部 900 帧。V1 输出为 682 × 512，V2 输出为 1280 × 960。</p>
       </div>
     </div>
-    <p class="demo-credit">原作 <a href="https://commons.wikimedia.org/wiki/File:Albert%27s_Lyrebird_OR.ogv" lang="en">Albert’s Lyrebird OR</a> 由 Aviceda 拍摄。我们截取原作第 7 至 37 秒，移除声音并转为 MP4，制作了四个修复版本及封面图。原作及上述改编均采用 <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/" lang="en">CC BY-SA 3.0</a> 许可。</p>
+    <p class="demo-credit">原始影像由美国地质调查局（USGS）拍摄。演示截取了水流实验中的约 30 秒，移除了音轨。<a href="https://pubs.usgs.gov/of/2007/1315/videos/1999/09-22-1999.mp4">观看 USGS 原片</a> · <a href="https://pubs.usgs.gov/of/2007/1315/" lang="en">USGS 实验档案（英文）</a></p>
     </section>
   </div>
 </section>
@@ -115,5 +115,5 @@
 <section class="closing section container"><img src="assets/products/ezvideorepair/icon.png" width="72" height="72" alt=""><h2>让修复留在本地</h2><p>从预览到导出，你的视频和照片都在自己的 Mac 上处理，无需上传。修复后的作品由你决定是否分享。</p><a class="button dark-button" href="/release/ezvideorepair/EZVideoRepair-0.0.5-AppleSilicon.dmg" download>下载 Mac 版（DMG） <span aria-hidden="true">↓</span></a></section>
 </main>
 <footer><div class="container footer-row"><div><strong>EZ视频修复助手</strong><p>功能干净的纯本地视频修复工具</p></div><div class="footer-links"><a href="mailto:whitelok@gmail.com?subject=EZVideoRepair%20%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88">邮件反馈问题</a><a href="ezvideorepair-support.html">使用支持</a><a href="ezvideorepair-marketing.html">产品介绍</a><a href="ezvideorepair-privacy.html">隐私政策</a><a href="https://whitelok.github.io/" target="_blank" rel="noopener noreferrer">作者主页 ↗</a></div></div><p class="container footer-notice">修复结果因素材而异。</p></footer>
-<script src="assets/products/ezvideorepair/page.js?v=20261121-flume" defer></script>
+<script src="assets/products/ezvideorepair/page.js?v=20261121-flume-four" defer></script>
 </body></html>

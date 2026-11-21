@@ -10,7 +10,7 @@
   const demo = document.getElementById('preview');
   if (!demo) return;
 
-  const player = demo.querySelector('#lyrebird-video');
+  const player = demo.querySelector('#restoration-video');
   const choices = demo.querySelector('.demo-versions');
 
   for (const video of demo.querySelectorAll('video')) {

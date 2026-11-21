@@ -47,7 +47,7 @@
   border: 1px solid var(--divider);
   object-fit: contain;
 }
-.demo-media #lyrebird-video { aspect-ratio: 4 / 3; }
+.demo-media #restoration-video { aspect-ratio: 4 / 3; }
 .demo-choices p, .demo-recording p {
   margin: 0;
   color: var(--muted);

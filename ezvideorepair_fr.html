@@ -47,7 +47,7 @@
 <meta property="og:image:height" content="832">
 <link rel="canonical" href="https://whitelok.github.io/ezvideorepair_fr.html">
 <link rel="icon" href="assets/products/ezvideorepair/icon.png">
-<link rel="stylesheet" href="assets/products/ezvideorepair/style.css?v=20261121-flume">
+<link rel="stylesheet" href="assets/products/ezvideorepair/style.css?v=20261121-flume-four">
 <link rel="alternate" hreflang="zh-CN" href="https://whitelok.github.io/ezvideorepair.html">
 <link rel="alternate" hreflang="en" href="https://whitelok.github.io/ezvideorepair_en.html">
 <link rel="alternate" hreflang="es-ES" href="https://whitelok.github.io/ezvideorepair_es.html">
@@ -105,29 +105,29 @@
     <p class="demo-credit">Les images du canal proviennent de l’expérience du 22 septembre 1999, au cours de laquelle l’USGS a filmé de l’eau s’écoulant sur un lit de sédiments érodé. <a href="https://pubs.usgs.gov/of/2007/1315/" hreflang="en">Consulter les archives vidéo de l’USGS (en anglais)</a>.</p>
     <p class="demo-credit"><a href="assets/products/ezvideorepair/usgs-flume/ui-demo-multilingual.mp4">Voir la démonstration en chinois, en anglais, en espagnol et en français (MP4)</a></p>
     <section class="restoration-comparison" id="comparison" aria-labelledby="comparison-title">
-    <h2 id="comparison-title">Un oiseau-lyre, quatre restaurations</h2>
+    <h2 id="comparison-title">Un même essai en canal, quatre restaurations</h2>
     <div class="demo-comparison">
       <div class="demo-media">
-        <video id="lyrebird-video" controls muted playsinline preload="metadata" width="384" height="288" aria-label="Vidéo de l’oiseau-lyre, avant et après restauration" poster="assets/products/ezvideorepair/lyrebird/poster.jpg" src="assets/products/ezvideorepair/lyrebird/original.mp4">
-          <a href="assets/products/ezvideorepair/lyrebird/original.mp4">Ouvrir le fichier MP4</a>
+        <video id="restoration-video" controls muted playsinline preload="metadata" width="640" height="480" aria-label="Images du canal expérimental de l’USGS avant et après restauration" poster="assets/products/ezvideorepair/usgs-flume/comparison/poster.jpg" src="assets/products/ezvideorepair/usgs-flume/comparison/original.mp4">
+          <a href="assets/products/ezvideorepair/usgs-flume/comparison/original.mp4">Ouvrir le fichier MP4</a>
         </video>
-        <p class="demo-error" role="status" hidden>Impossible de lire la vidéo sur cette page. <a href="assets/products/ezvideorepair/lyrebird/original.mp4">Ouvrir le fichier MP4</a></p>
+        <p class="demo-error" role="status" hidden>Impossible de lire la vidéo sur cette page. <a href="assets/products/ezvideorepair/usgs-flume/comparison/original.mp4">Ouvrir le fichier MP4</a></p>
       </div>
       <div class="demo-choices">
-        <p class="demo-specs">30 secondes · Original en 384 × 288 pixels · 25 images/s</p>
-        <p class="demo-location">Parc national de Lamington, Australie · Septembre 1996</p>
-        <p>Passez d’une version à l’autre pendant la lecture ou faites une pause sur la même image pour comparer les détails du plumage et du sol de la forêt.</p>
+        <p class="demo-specs">30,03 secondes · Original de 640 × 480 pixels · 29,97 images/s</p>
+        <p class="demo-location">Oregon, États-Unis · 22 septembre 1999</p>
+        <p>Arrêtez la lecture sur la même image pour comparer la texture de l’eau, les rambardes et les chiffres de l’horloge. Passez d’une version à l’autre pendant la lecture pour observer l’eau en mouvement.</p>
         <div class="demo-versions" role="group" aria-label="Choisir une version de la vidéo">
-          <a href="assets/products/ezvideorepair/lyrebird/original.mp4" aria-controls="lyrebird-video" aria-current="true">Original</a>
-          <a href="assets/products/ezvideorepair/lyrebird/v1.mp4" aria-controls="lyrebird-video">V1</a>
-          <a href="assets/products/ezvideorepair/lyrebird/v1-int8.mp4" aria-controls="lyrebird-video">V1 INT8</a>
-          <a href="assets/products/ezvideorepair/lyrebird/v2.mp4" aria-controls="lyrebird-video">V2</a>
-          <a href="assets/products/ezvideorepair/lyrebird/v2-int8.mp4" aria-controls="lyrebird-video">V2 INT8</a>
+          <a href="assets/products/ezvideorepair/usgs-flume/comparison/original.mp4" aria-controls="restoration-video" aria-current="true">Original</a>
+          <a href="assets/products/ezvideorepair/usgs-flume/comparison/v1-bf16.mp4" aria-controls="restoration-video">V1 BF16</a>
+          <a href="assets/products/ezvideorepair/usgs-flume/comparison/v1-int8.mp4" aria-controls="restoration-video">V1 INT8</a>
+          <a href="assets/products/ezvideorepair/usgs-flume/comparison/v2-bf16.mp4" aria-controls="restoration-video">V2 BF16</a>
+          <a href="assets/products/ezvideorepair/usgs-flume/comparison/v2-int8.mp4" aria-controls="restoration-video">V2 INT8</a>
         </div>
-        <p class="demo-note">Les deux versions INT8 sont présentées uniquement à titre de démonstration.</p>
+        <p class="demo-note">Chaque version restaure les 900 images de l’extrait. La sortie est de 682 × 512 pixels avec V1 et de 1280 × 960 avec V2.</p>
       </div>
     </div>
-    <p class="demo-credit">Aviceda a filmé la vidéo originale, <a href="https://commons.wikimedia.org/wiki/File:Albert%27s_Lyrebird_OR.ogv" lang="en">Albert’s Lyrebird OR</a>. Nous en avons extrait les secondes 7 à 37, supprimé le son et converti l’extrait en MP4. La vidéo d’origine, cet extrait, ses quatre restaurations et l’image de couverture de l’oiseau-lyre sont diffusés sous licence <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.</p>
+    <p class="demo-credit">Images originales du Service géologique des États-Unis (USGS). Cet extrait sans son présente environ 30 secondes de l’essai. <a href="https://pubs.usgs.gov/of/2007/1315/videos/1999/09-22-1999.mp4">Voir la vidéo originale</a> · <a href="https://pubs.usgs.gov/of/2007/1315/" lang="en">Archives de l’USGS (en anglais)</a></p>
     </section>
   </div>
 </section>
@@ -218,6 +218,6 @@
   </div>
   <p class="container footer-notice">Les résultats varient selon la qualité du fichier source.</p>
 </footer>
-<script src="assets/products/ezvideorepair/page.js?v=20261121-flume" defer></script>
+<script src="assets/products/ezvideorepair/page.js?v=20261121-flume-four" defer></script>
 </body>
 </html>
