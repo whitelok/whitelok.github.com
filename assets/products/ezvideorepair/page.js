@@ -12,7 +12,6 @@
 
   const player = demo.querySelector('#lyrebird-video');
   const choices = demo.querySelector('.demo-versions');
-  if (!player || !choices) return;
 
   for (const video of demo.querySelectorAll('video')) {
     const error = video.parentElement.querySelector('.demo-error');
@@ -24,6 +23,8 @@
     video.addEventListener('loadstart', () => { error.hidden = true; });
     if (video.error) showError();
   }
+
+  if (!player || !choices) return;
 
   let selected = choices.querySelector('[aria-current]');
   let pending = null;
