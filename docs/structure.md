@@ -14,7 +14,7 @@
 │   └── pages/
 │       ├── catalog/               # 产品目录，zh.html / en.html
 │       └── ezvideorepair/
-│           ├── product/           # 产品介绍，zh / en / es
+│           ├── product/           # 产品介绍，zh / en / es / fr
 │           ├── marketing/         # 营销介绍，zh / en / es
 │           ├── privacy/           # 隐私政策，zh / en / es
 │           └── support/           # 支持信息，zh / en
@@ -55,7 +55,7 @@ python3 -m http.server 8000
 
 ## 发布地址
 
-根目录保留现有 15 个 HTML。个人主页由 `maintain.py` 维护，其余 13 页由 `src/routes.json` 映射。新增页面时向清单添加源码和目标文件的对应关系。
+个人主页由 `maintain.py` 维护，其余页面由 `src/routes.json` 映射。新增页面时向清单添加源码和目标文件的对应关系。
 
 根目录 HTML 和 `assets/` 是网站实际发布文件。`src/`、`content/`、`templates/` 是维护源码，页面中的相对链接需按生成后的根目录位置填写。favicon、分享图片和资源地址沿用现有路径。
 
