@@ -234,11 +234,11 @@
           "items": [
             {
               "id": "patent-cn122845659a",
-              "html": "Chinese patent application <b>CN122845659A</b>."
+              "html": "<b>CN122845659A</b> · Request processing method, apparatus, device, and medium"
             },
             {
               "id": "patent-cn122759393a",
-              "html": "Chinese patent application <b>CN122759393A</b>."
+              "html": "<b>CN122759393A</b> · Data processing method and system"
             }
           ]
         },
@@ -402,7 +402,7 @@
           "items": [
             {
               "id": "patent-cn118446316a",
-              "html": "Granted patent <b>CN118446316A</b>."
+              "html": "<b>CN118446316A</b> · Model inference method, apparatus, computer equipment, and computer-readable storage medium"
             }
           ]
         }
@@ -573,7 +573,7 @@
           "items": [
             {
               "id": "patent-cn103295213a",
-              "html": "Chinese patent <b>CN103295213A</b>."
+              "html": "<b>CN103295213A</b> · Image stabilization algorithm based on object tracking"
             }
           ]
         },

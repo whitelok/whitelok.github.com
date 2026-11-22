@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-11-21（四语工作台与水槽实录同步）
+> 最后更新：2026-11-22（更新双语专利名称）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -444,3 +444,7 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 四语产品页的 USGS 水槽全片对比
 - 四个产品页的比较播放器共用 assets/products/ezvideorepair/usgs-flume/comparison/ 下的原片、四个全片修复和原片封面。素材为 1999 年 9 月 22 日的 USGS 水槽实验，来源链接在每个语言页面中。
 - 原片 640 × 480，900 帧，30000/1001 fps，30.03 秒。V1 BF16 和 INT8 导出为 682 × 512，V2 BF16 和 INT8 导出为 1280 × 960。官网文件在全部 900 个画面时间戳上对齐，显示比例为 4:3。操作实录仍单独演示前 5 秒。
+
+### 2026-11-22：通过 JSON 生成双语页面
+- 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
+- 两版首页的四项专利统一显示公开号及名称，移除编号前的描述。
