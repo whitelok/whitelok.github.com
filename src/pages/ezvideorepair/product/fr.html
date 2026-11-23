@@ -38,7 +38,7 @@
   "description": "Restaurez vos vidéos et photos sur un Mac avec puce Apple. Comparez un aperçu de deux secondes avant de traiter un extrait ou toute la vidéo.",
   "operatingSystem": "macOS 14+",
   "softwareVersion": "0.0.6",
-  "downloadUrl": "https://whitelok.github.io/release/ezvideorepair/EZVideoRepair-0.0.6-AppleSilicon.dmg",
+  "downloadUrl": "https://whitelok.github.io/release/ezvideorepair/EZVideoRepair-0.0.6-AppleSilicon.dmg?rev=8b0abfa",
   "applicationCategory": "MultimediaApplication",
   "screenshot": "https://whitelok.github.io/assets/products/ezvideorepair/usgs-flume/screens/fr/workbench.jpg"
 }
@@ -76,10 +76,10 @@
       <div class="hero-intro">
         <p>Choisissez deux secondes de vidéo pour juger du résultat avant de restaurer un extrait ou la vidéo entière. Vous pouvez aussi restaurer une photo.</p>
         <div class="actions">
-          <a class="button primary" href="/release/ezvideorepair/EZVideoRepair-0.0.6-AppleSilicon.dmg" download>Télécharger pour Mac (DMG) <span aria-hidden="true">↓</span></a>
+          <a class="button primary" href="/release/ezvideorepair/EZVideoRepair-0.0.6-AppleSilicon.dmg?rev=8b0abfa" download>Télécharger pour Mac (DMG) <span aria-hidden="true">↓</span></a>
           <a class="button secondary" href="#demo-fr">Voir la démonstration en français</a>
         </div>
-        <p class="availability">Version 0.0.6 (build 7). Pour les Mac avec puce Apple sous macOS 14 ou une version ultérieure. Ouvrez le DMG et faites glisser EZVideoRepair dans le dossier Applications. L’interface est disponible en français, en chinois simplifié, en anglais et en espagnol.</p>
+        <p class="availability">Version 0.0.6 (build 7), mise à jour le <time datetime="2026-11-23">23 novembre 2026</time>. Pour les Mac avec puce Apple sous macOS 14 ou une version ultérieure. Ouvrez le DMG et faites glisser EZVideoRepair dans le dossier Applications. L’interface est disponible en français, en chinois simplifié, en anglais et en espagnol.</p>
       </div>
     </div>
     <div class="app-frame"><img class="app-screen" src="assets/products/ezvideorepair/usgs-flume/screens/fr/workbench.jpg" width="1300" height="832" alt="Interface en français montrant côte à côte la vidéo du canal de l’USGS et sa version restaurée." fetchpriority="high">
@@ -158,10 +158,10 @@
   <h2>Les fonctions de restauration</h2>
   <p class="section-intro">Importez vos fichiers, examinez un aperçu et choisissez ce que vous voulez exporter.</p>
   <div class="feature-grid">
-    <article class="feature"><span class="number">01</span><h3>Évaluer le résultat</h3><p>Générez un aperçu de deux secondes à partir de la position de lecture. Vous pourrez ensuite décider de restaurer toute la vidéo.</p></article>
+    <article class="feature"><span class="number">01</span><h3>Évaluer le résultat</h3><p>Prévisualisez deux secondes à partir du passage de votre choix. Quand EZVR Flash V1 restaure un aperçu en 1080p par blocs, il conserve la synchronisation d’origine, même si le son commence avant l’image.</p></article>
     <article class="feature"><span class="number">02</span><h3>Choisir la durée</h3><p>Traitez la vidéo entière ou limitez la restauration au passage qui vous intéresse.</p></article>
     <article class="feature"><span class="number">03</span><h3>Restaurer vidéos et photos</h3><p>Prévisualisez un extrait d’une vidéo horizontale ou verticale. Ouvrez aussi une photo pour examiner les détails après restauration.</p></article>
-    <article class="feature"><span class="number">04</span><h3>Reprendre un projet</h3><p>Rouvrez un projet enregistré pour retrouver vos réglages et les résultats déjà obtenus.</p></article>
+    <article class="feature"><span class="number">04</span><h3>Reprendre un projet</h3><p>Rouvrez un projet enregistré pour visionner la vidéo restaurée ou reprendre à partir des images sauvegardées qui correspondent aux réglages actuels.</p></article>
     <article class="feature"><span class="number">05</span><h3>Réutiliser un résultat</h3><p>Si le fichier source et les réglages sont identiques, l’application réutilise le résultat existant pour éviter de refaire le calcul.</p></article>
     <article class="feature"><span class="number">06</span><h3>Suivre les téléchargements</h3><p>Les fichiers de configuration se téléchargent en arrière-plan. Vous pouvez suivre la progression, mettre le téléchargement en pause et le reprendre plus tard.</p></article>
   </div>
@@ -195,7 +195,7 @@
       <details><summary>Quand V1 INT8 utilise-t-il le Neural Engine ?</summary><p>Sur un M4 Pro, EZVR Flash V1 INT8 peut désormais répartir la restauration vidéo entre le Neural Engine et le GPU. Ce mode nécessite macOS 26.7.1 ou une version 26.x ultérieure, au moins 24 Go de mémoire unifiée et au moins 8 Gio de mémoire libre ou récupérable au démarrage de la tâche. Utilisez le mode standard avec l’option « Harmonisation des couleurs » activée et une vidéo de 640 × 480 pixels carrés, sans rotation. Lors de la première utilisation compatible, l’application crée un cache local d’environ 2,71 Go à partir des poids installés.</p></details>
       <details><summary>Que change le mode d’économie de mémoire ?</summary><p>Les modèles V1 et V2, en INT8 ou BF16, peuvent lire leurs poids sur le SSD couche par couche. V1 nécessite un graphe d’inférence compatible. Lors d’un essai avec V2 INT8 sur un Mac M4 Pro doté de 24 Go, ce mode a réduit le pic de mémoire de 12,13 Go à 8,96 Go pour un extrait de 30 secondes. Le temps de traitement est passé de 366 à 379 secondes. Ce mode est désactivé par défaut.</p></details>
       <details><summary>Comment sont traitées les différentes tailles d’image ?</summary><p>V1 retire les marges ajoutées pendant le traitement et conserve les bandes noires présentes dans l’original. Avec un graphe d’inférence carré de 512 × 512 pixels, V1 peut traiter les grandes photos et vidéos par blocs qui se chevauchent. V2 utilise des blocs lorsque l’image vidéo est trop grande pour être traitée en une seule fois. Le traitement par blocs accepte jusqu’à 4 096 pixels par côté et 9 437 184 pixels par image.</p></details>
-      <details><summary>Où télécharger l’application ?</summary><p><a href="/release/ezvideorepair/EZVideoRepair-0.0.6-AppleSilicon.dmg" download>Téléchargez la version Mac (DMG)</a>, ouvrez le fichier et faites glisser EZVideoRepair dans le dossier Applications. Vous pouvez aussi <a href="/release/ezvideorepair/EZVideoRepair-0.0.5-AppleSilicon.dmg" download>télécharger la version précédente (0.0.5)</a>.</p></details>
+      <details><summary>Que se passe-t-il si V1 INT8 passe au GPU seul ?</summary><p>Si V1 INT8 cesse d’utiliser le Neural Engine et poursuit la restauration avec le GPU seul (MPS), l’application cherche d’abord une vidéo déjà terminée avec MPS pour la même tâche. Elle peut aussi reprendre à partir des images sauvegardées avec MPS. Si elle ne trouve ni vidéo ni images correspondantes, elle repart de la première image.</p></details><details><summary>Où télécharger l’application ?</summary><p><a href="/release/ezvideorepair/EZVideoRepair-0.0.6-AppleSilicon.dmg?rev=8b0abfa" download>Téléchargez la version Mac (DMG)</a>, ouvrez le fichier et faites glisser EZVideoRepair dans le dossier Applications. Vous pouvez aussi <a href="/release/ezvideorepair/EZVideoRepair-0.0.5-AppleSilicon.dmg" download>télécharger la version précédente (0.0.5)</a>.</p></details>
     </div>
   </div>
 </section>
@@ -203,7 +203,7 @@
   <img src="assets/products/ezvideorepair/icon.png" width="72" height="72" alt="">
   <h2>Vos fichiers restent sur votre Mac</h2>
   <p>De l’aperçu à l’exportation, votre Mac traite vos vidéos et vos photos sur place. Vous choisissez ensuite de partager ou de conserver le résultat.</p>
-  <a class="button dark-button" href="/release/ezvideorepair/EZVideoRepair-0.0.6-AppleSilicon.dmg" download>Télécharger pour Mac (DMG) <span aria-hidden="true">↓</span></a>
+  <a class="button dark-button" href="/release/ezvideorepair/EZVideoRepair-0.0.6-AppleSilicon.dmg?rev=8b0abfa" download>Télécharger pour Mac (DMG) <span aria-hidden="true">↓</span></a>
 </section>
 </main>
 <footer>
