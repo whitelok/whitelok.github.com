@@ -103,3 +103,27 @@
 }
 #flume-recording { aspect-ratio: 16 / 9; }
 .restoration-comparison { margin-top: clamp(56px, 8vw, 96px); }
+
+/* Arabic text needs connected glyphs and enough room above and below the baseline. */
+html[dir="rtl"] .product-page :is(h1, h2, h3, .brand, .eyebrow) {
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+html[dir="rtl"] .product-page :is(.locale-links, .nav-links) {
+  margin-left: 0;
+  margin-inline-start: auto;
+}
+html[dir="rtl"] .product-page .skip {
+  left: auto;
+  inset-inline-start: 20px;
+}
+
+@media (max-width: 900px) {
+  html:has(body.product-page) { scroll-padding-top: 7rem; }
+  .product-page .nav { padding-block: 8px; gap: 8px 16px; }
+  .product-page .locale-links { gap: 4px 6px; }
+  .product-page .language { padding: 5px 8px; }
+}
+@media (max-width: 380px) {
+  html:has(body.product-page) { scroll-padding-top: 8.5rem; }
+}
