@@ -1,9 +1,33 @@
 """Publish maintained static page sources to their existing public URLs."""
 import argparse
 import json
+from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+class DemoVideo(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.sources = []
+
+    def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if tag == 'video' and attributes.get('id') == 'flume-recording':
+            src = attributes.get('src') or ''
+            self.sources.append(src.split('?', 1)[0].split('#', 1)[0].removeprefix('/'))
+
+
+def check_product_demo(source, data):
+    expected = f'assets/products/ezvideorepair/usgs-flume/ui-demo-{source.stem}.mp4'
+    video = DemoVideo()
+    video.feed(data.decode('utf-8'))
+    video.close()
+    if video.sources != [expected]:
+        raise ValueError(f'{source}: expected the primary demo video to use {expected}')
+    if not (ROOT / expected).is_file():
+        raise ValueError(f'{source}: missing demo file {expected}')
 
 
 def build(check=False, product_only=False, spanish_only=False):
@@ -14,7 +38,10 @@ def build(check=False, product_only=False, spanish_only=False):
             continue
         if spanish_only and not destination.endswith('_es.html'):
             continue
+        source = Path(source)
         pages[destination] = (ROOT / source).read_bytes()
+        if check and source.parent == Path('src/pages/ezvideorepair/product'):
+            check_product_demo(source, pages[destination])
 
     if check:
         stale = [name for name, data in pages.items() if not (ROOT / name).is_file() or (ROOT / name).read_bytes() != data]
