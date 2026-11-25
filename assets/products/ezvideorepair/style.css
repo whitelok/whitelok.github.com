@@ -127,3 +127,6 @@ html[dir="rtl"] .product-page .skip {
 @media (max-width: 380px) {
   html:has(body.product-page) { scroll-padding-top: 8.5rem; }
 }
+
+.product-page .privacy p + p { margin-block-start: .65em; }
+.product-page .privacy p a { text-decoration: underline; text-underline-offset: .18em; }

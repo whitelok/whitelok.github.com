@@ -2,7 +2,7 @@
 
 > 用途：供后续 vibe coding 会话复用。包含任务背景、技术经验、设计规范、用户偏好、内容数据源。
 > 产物：`index.html`（英文版）+ `index_zh.html`（中文版，内容一致全翻译）+ `avatar.png`（LinkedIn 头像抠图，当前版本已从页面移除但文件保留）。语言切换为导航栏右上角小胶囊按钮 `.lang-switch`（中文 ⇄ English，12px，勿放回 hero）。
-> 最后更新：2026-11-22（更新双语专利名称）
+> 最后更新：2026-11-25（EZVideoRepair 官网自签名版发布）
 
 ## ⚠️ 第一规则（用户明确要求）
 
@@ -448,3 +448,7 @@ nav（毛玻璃，KL logo + 语言切换；顶部 Experience/Education/Contact �
 ### 2026-11-22：通过 JSON 生成双语页面
 - 运行 scripts/maintain.py build，双语结构及 HTML 检查通过，更新 index.html 与 index_zh.html；工作经历 6 项、教育 2 项。具体修改见 content/profile/en.json 和 content/profile/zh.json 的 Git 差异。
 - 两版首页的四项专利统一显示公开号及名称，移除编号前的描述。
+
+## 2026-11-25 · EZVideoRepair 官网下载
+
+官网 0.0.7（8）自签名安装包的 SHA-256 为 `b966c04f4c2621078f78d1bfab6e41e85709466914ccc05c3df3837be2515e24`。六语下载入口、默认关闭的使用统计说明、设置截图和隐私页已同步。Mac App Store 版不包含 Google Analytics SDK。六种语言的下载链接和隐私页已在桌面和窄屏布局核对。
