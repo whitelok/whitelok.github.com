@@ -14,9 +14,9 @@
 │   └── pages/
 │       ├── catalog/               # 产品目录，zh.html / en.html
 │       └── ezvideorepair/
-│           ├── product/           # 产品介绍，zh / en / es / fr / ar / ja / de
+│           ├── product/           # 产品介绍，zh / zh-hant / en / es / fr / ar / ja / de
 │           ├── marketing/         # 营销介绍，zh / en / es
-│           ├── privacy/           # 隐私政策，zh / en / es / fr / ar / ja / de
+│           ├── privacy/           # 隐私政策，zh / zh-hant / en / es / fr / ar / ja / de
 │           └── support/           # 支持信息，zh / en
 ├── content/profile/               # 个人主页 en.json / zh.json
 ├── templates/profile/             # 个人主页 en.html / zh.html 模板

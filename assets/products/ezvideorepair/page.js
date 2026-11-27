@@ -7,6 +7,20 @@
 })();
 
 (() => {
+  const language = document.getElementById('product-language');
+  if (!language) return;
+
+  language.addEventListener('change', () => window.location.assign(language.value));
+  const nav = language.closest('nav');
+  nav.querySelector('.language-fallback').hidden = true;
+  language.closest('label').hidden = false;
+  // A history navigation can restore the selection made on the page we just left.
+  window.addEventListener('pageshow', () => {
+    language.selectedIndex = language.querySelector('option[selected]').index;
+  });
+})();
+
+(() => {
   const demo = document.getElementById('preview');
   if (!demo) return;
 

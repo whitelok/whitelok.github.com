@@ -32,14 +32,15 @@
   "description": "Restaurieren Sie Videos und Fotos mit KI auf Ihrem Mac mit Apple Silicon. Original und Ergebnis bleiben auf dem Gerät. Mit einem lokalen Modell arbeiten Sie auch offline.",
   "operatingSystem": "macOS 14+",
   "softwareVersion": "0.0.7",
-  "downloadUrl": "https://whitelok.github.io/release/ezvideorepair/EZVideoRepair-0.0.7-AppleSilicon.dmg?rev=eb47183e3bde",
+  "downloadUrl": "https://whitelok.github.io/release/ezvideorepair/EZVideoRepair-0.0.7-AppleSilicon.dmg?rev=5d1552748bda",
   "applicationCategory": "MultimediaApplication",
   "screenshot": "https://whitelok.github.io/assets/products/ezvideorepair/usgs-flume/screens/de/workbench.jpg?rev=20261127"
 }
 </script>
 <link rel="canonical" href="https://whitelok.github.io/ezvideorepair_de.html">
-<link rel="icon" href="assets/products/ezvideorepair/icon.png"><link rel="stylesheet" href="assets/products/ezvideorepair/style.css?v=20261127-locales">
-<link rel="alternate" hreflang="zh-CN" href="https://whitelok.github.io/ezvideorepair.html"><link rel="alternate" hreflang="en" href="https://whitelok.github.io/ezvideorepair_en.html"><link rel="alternate" hreflang="es-ES" href="https://whitelok.github.io/ezvideorepair_es.html"><link rel="alternate" hreflang="fr" href="https://whitelok.github.io/ezvideorepair_fr.html"><link rel="alternate" hreflang="ar" href="https://whitelok.github.io/ezvideorepair_ar.html">
+<link rel="icon" href="assets/products/ezvideorepair/icon.png"><link rel="stylesheet" href="assets/products/ezvideorepair/style.css?v=20261127-language-menu">
+<link rel="alternate" hreflang="zh-Hans" href="https://whitelok.github.io/ezvideorepair.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://whitelok.github.io/ezvideorepair_zh-hant.html"><link rel="alternate" hreflang="en" href="https://whitelok.github.io/ezvideorepair_en.html"><link rel="alternate" hreflang="es-ES" href="https://whitelok.github.io/ezvideorepair_es.html"><link rel="alternate" hreflang="fr" href="https://whitelok.github.io/ezvideorepair_fr.html"><link rel="alternate" hreflang="ar" href="https://whitelok.github.io/ezvideorepair_ar.html">
 <link rel="alternate" hreflang="ja" href="https://whitelok.github.io/ezvideorepair_ja.html">
 <link rel="alternate" hreflang="de" href="https://whitelok.github.io/ezvideorepair_de.html">
 <link rel="alternate" hreflang="x-default" href="https://whitelok.github.io/ezvideorepair.html"></head>
@@ -49,14 +50,27 @@
   <nav class="container nav" aria-label="Produktnavigation">
     <a href="#" class="brand"><img src="assets/products/ezvideorepair/icon.png" alt="" width="38" height="38"><span>EZVideoRepair</span></a>
     <div class="nav-links"><a href="#features">Funktionen</a><a href="#workflow">Anleitung</a></div>
-    <div class="locale-links" role="group" aria-label="Sprache wählen">
-      <a class="language" href="ezvideorepair.html" lang="zh-CN">简体中文</a>
-      <a class="language" href="ezvideorepair_en.html" lang="en">English</a>
-      <a class="language" href="ezvideorepair_es.html" lang="es-ES">Español</a>
-      <a class="language" href="ezvideorepair_fr.html" lang="fr">Français</a>
-      <a class="language" href="ezvideorepair_ar.html" lang="ar" dir="rtl">العربية</a>
-      <a class="language" href="ezvideorepair_ja.html" lang="ja">日本語</a>
-    </div>
+    <label class="language-picker" hidden>
+  <span class="visually-hidden">Sprache wählen</span>
+  <select id="product-language">
+    <option value="ezvideorepair.html" lang="zh-Hans" dir="ltr">简体中文</option>
+    <option value="ezvideorepair_zh-hant.html" lang="zh-Hant" dir="ltr">繁體中文</option>
+    <option value="ezvideorepair_en.html" lang="en" dir="ltr">English</option>
+    <option value="ezvideorepair_es.html" lang="es-ES" dir="ltr">Español</option>
+    <option value="ezvideorepair_fr.html" lang="fr" dir="ltr">Français</option>
+    <option value="ezvideorepair_ar.html" lang="ar" dir="rtl">العربية</option>
+    <option value="ezvideorepair_ja.html" lang="ja" dir="ltr">日本語</option>
+    <option value="ezvideorepair_de.html" lang="de" dir="ltr" selected>Deutsch</option>
+  </select>
+</label>
+<details class="language-fallback"><summary><span class="visually-hidden">Sprache wählen · </span>Deutsch</summary><div class="locale-links" role="group" aria-label="Sprache wählen">
+      <a class="language" href="ezvideorepair.html" lang="zh-Hans" hreflang="zh-Hans">简体中文</a> <a class="language" href="ezvideorepair_zh-hant.html" lang="zh-Hant" hreflang="zh-Hant">繁體中文</a>
+      <a class="language" href="ezvideorepair_en.html" lang="en" hreflang="en">English</a>
+      <a class="language" href="ezvideorepair_es.html" lang="es-ES" hreflang="es-ES">Español</a>
+      <a class="language" href="ezvideorepair_fr.html" lang="fr" hreflang="fr">Français</a>
+      <a class="language" href="ezvideorepair_ar.html" lang="ar" hreflang="ar" dir="rtl">العربية</a>
+      <a class="language" href="ezvideorepair_ja.html" lang="ja" hreflang="ja">日本語</a>
+    </div></details>
   </nav>
 </header>
 <main id="main">
@@ -68,7 +82,7 @@
       <div class="hero-intro">
         <p>Entdecken Sie Details in alten Familienvideos und Fotos neu. Vergleichen Sie Original und Ergebnis direkt auf Ihrem Mac. Von der Vorschau bis zum Export bleiben Ihre Aufnahmen auf dem Gerät.</p>
         <div class="actions">
-          <a class="button primary" href="/release/ezvideorepair/EZVideoRepair-0.0.7-AppleSilicon.dmg?rev=eb47183e3bde" download>Für Mac laden (DMG) <span aria-hidden="true">↓</span></a>
+          <a class="button primary" href="/release/ezvideorepair/EZVideoRepair-0.0.7-AppleSilicon.dmg?rev=5d1552748bda" download>Für Mac laden (DMG) <span aria-hidden="true">↓</span></a>
           <a class="button secondary" href="#demo-de">Deutsche Demo ansehen</a>
         </div>
         <p class="availability">Version 0.0.7<br>
@@ -169,7 +183,7 @@
   <img src="assets/products/ezvideorepair/icon.png" width="72" height="72" alt="">
   <h2>Sie entscheiden, was Sie teilen</h2>
   <p>Speichern Sie das restaurierte Video oder Foto in einem Ordner Ihrer Wahl. Behalten Sie es für sich oder teilen Sie es mit Ihrer Familie.</p>
-  <a class="button dark-button" href="/release/ezvideorepair/EZVideoRepair-0.0.7-AppleSilicon.dmg?rev=eb47183e3bde" download>Für Mac laden (DMG) <span aria-hidden="true">↓</span></a>
+  <a class="button dark-button" href="/release/ezvideorepair/EZVideoRepair-0.0.7-AppleSilicon.dmg?rev=5d1552748bda" download>Für Mac laden (DMG) <span aria-hidden="true">↓</span></a>
 </section>
 </main>
 <footer><div class="container footer-row">
@@ -182,5 +196,5 @@
     <a href="https://whitelok.github.io/" hreflang="en" target="_blank" rel="noopener noreferrer">Über den Entwickler (Englisch)</a>
   </div>
 </div><p class="container footer-notice">Das Ergebnis hängt vom Ausgangsmaterial ab.</p></footer>
-<script src="assets/products/ezvideorepair/page.js?v=20261125-flume" defer></script>
+<script src="assets/products/ezvideorepair/page.js?v=20261127-language-menu" defer></script>
 </body></html>
