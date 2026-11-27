@@ -124,8 +124,12 @@ html[dir="rtl"] .product-page .skip {
   .product-page .locale-links { gap: 4px 6px; }
   .product-page .language { padding: 5px 8px; }
 }
-@media (max-width: 380px) {
+@media (max-width: 480px) {
   html:has(body.product-page) { scroll-padding-top: 8.5rem; }
+}
+
+@media (max-width: 640px) {
+  .product-page .feature:has(> h3:first-child) { display: block; }
 }
 
 .product-page .privacy p + p { margin-block-start: .65em; }
